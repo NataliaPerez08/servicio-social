@@ -50,13 +50,15 @@ temp_f=features
 #feature_names = data['feature_names']
 feature_names = ['wavelength','reflectance']
 
+lista = [i for i in range(25) for _ in range(5)]
 
-labels = list(range(125)) + list(range(125))
+
+labels = np.concatenate((lista, lista))
 features=np.concatenate((features, features))
-print(labels)
-print(len(labels))
-print(features)
-print(len(features))
+#print(labels)
+#print(len(labels))
+#print(features)
+#print(len(features))
 #temp_l=labels
 #features=temp_f
 #labels=np.concatenate((labels, labels), axis=None)
@@ -69,11 +71,11 @@ train, test, train_labels, test_labels = train_test_split(
 GNBclf = GaussianNB()
 
 model = GNBclf.fit(train, train_labels)
-print(len(model.classes_))
+#print(len(model.classes_))
 test=features
 preds = GNBclf.predict(test)
 print(preds)
-print(show_differences(preds, labels))
+#print(show_differences(preds, labels))
 
 
 #print(train)
