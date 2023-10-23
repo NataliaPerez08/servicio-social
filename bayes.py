@@ -37,10 +37,6 @@ for f in archivos:
     tmp = np.array(dev_y)
     features.append(tmp)
 
-print(len(specs))
-print(len(specs_df))
-len(features)
-
 def show_differences(list1, list2):
   differences = {}
   for i in range(len(list1)):
@@ -53,25 +49,23 @@ def show_differences(list1, list2):
 temp_f=features
 #feature_names = data['feature_names']
 feature_names = ['wavelength','reflectance']
-labels = np.arange(125)
+
+
+labels = list(range(125)) + list(range(125))
+features=np.concatenate((features, features))
+print(labels)
+print(len(labels))
+print(features)
+print(len(features))
 #temp_l=labels
 #features=temp_f
-labels=np.concatenate((labels, labels), axis=None)
-features=np.concatenate((labels, labels), axis=None)
+#labels=np.concatenate((labels, labels), axis=None)
+#features=np.concatenate((labels, labels), axis=None)
 
 
-print(len(labels))
-print(len(features))
 train, test, train_labels, test_labels = train_test_split(
    features,labels,test_size = 1, random_state = 22
 )
-
-#print(train)
-#print(test)
-#print(train_labels)
-#print(test_labels)
-
-
 GNBclf = GaussianNB()
 
 model = GNBclf.fit(train, train_labels)
@@ -80,3 +74,11 @@ test=features
 preds = GNBclf.predict(test)
 print(preds)
 print(show_differences(preds, labels))
+
+
+#print(train)
+#print(test)
+#print(train_labels)
+#print(test_labels)
+
+
