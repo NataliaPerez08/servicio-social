@@ -72,7 +72,8 @@ GNBclf = GaussianNB()
 
 model = GNBclf.fit(train, train_labels)
 #print(len(model.classes_))
-test=features
+test=features[0:125]
+
 preds = GNBclf.predict(test)
 print(preds)
 #print(show_differences(preds, labels))
