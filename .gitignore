@@ -47,3 +47,4 @@ target/
 
 #env
 ss/bin/
+ss/*
