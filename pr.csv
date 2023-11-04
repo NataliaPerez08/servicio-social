@@ -1,6 +1,17 @@
 Base,Etiqueta,Pigmento,Marca,Numero,Aglutinado,Mezcla,Notas,Ruta
-C1,A1,Ocre de mina inglés,KremerR,40191,Aceite de linaza,No, 
-C1,A2,Ocre de mina inglés,KremerR,40191,No,yema de huevo,"",
-C1,A3,Ocre de mina inglés,KremerR,40191,No,"yema de huevo,aceite de linaza","como aglutinantes se coloco en tres capas. Las capas tienen buen poder cubriente",Base,Etiqueta,Pigmento,Marca,Numero,Aglutinado,Mezcla,Notas,Ruta
+C1,A1,Ocre de mina inglés,KremerR,40191,Aceite de linaza,No,posee buen poder cubriente,
+C1,A2,Ocre de mina inglés,KremerR,40191,No,yema de huevo,posee buen poder cubriente,
+C1,A3,Ocre de mina inglés,KremerR,40191,No,"yema de huevo,aceite de linaza",como aglutinantes se coloco en tres capas. Las capas tienen buen poder cubriente,
+C1,A4,Ocre de mina ingles,Kremer,40191,con cola de conejo,No,posee buen poder cubriente ya que se aplico una sola capa uniforme,
+C1,A5,Ocre de mina ingles,Kermer,40191,"almaciga, aceite de linaza",no,Como agluyinantes posee buen poder cubriente. La aplicacion cuesta trabajo debido a la consistencia pegajosa,
 
-a,a,a,a,a,a,a,a,a
+C1,B1,Oropimente,Molido en el LDOA,No,No,aceite de linaza,Se coloco en una capa.La capa aplicada quedo uniforme,
+C1,B2,Oropimente,molido en el LDOA,No,yema de huevo,No,La capa quedo uniforma,
+C1,B3,Oropimente,molido en el LDOA,No,"Yema de huevo,aceite de linaza",No,Necesito de mucho tiempo para quedar completamene molido,
+C1,B4,Oropimente,molido en el LDOA,no,no,con cola de conejo,"Se aplica en una sola capa. En la capa se aprecian concentraciones del material. La capa se raspo con bisturi para retirar el sellado, se sell� con cola y el dibujo se transfirio por estarcido.",
+C1,B5,Oropimente ,Molido en el LDOA,No,"almaciga,aceite de linaza",no,Se necesito de mucho tiempo para moler el pigmento,
+
+C1,C1,Amarillo de plomo esta�o,Kremer tipo II,10120,aceite de linaza,no,"se coloco en dos aplicaciones,sin embargo se aprecia poco poder cubriente",
+C1,C2,Amarillo de plomo esta�o,Kremer tipo II,10120,no,yema de huevo,"Se aplico en dos capas, de las cuales la segunda es uniforme y cubriente. El dibujo no sellado se corre. La mezcla posee poco poder cubriente",
+
+C2,A1,Ocre claro,fawn ochre Kremer,40241,aceite de linaza,no,"se coloco en dos capas sucesivas, dejando que secara la primera ",

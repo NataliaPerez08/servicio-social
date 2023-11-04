@@ -53,15 +53,21 @@ while opt==1:
     print("Notas: ")
     notas=input()
 
-    print("Ruta relativa: ")
-    ruta=input()
+    #print("Ruta relativa: ")
+    #ruta=input()
+    ruta=""
 
+
+    pigmento.lower()
+    marca.lower()
+    aglutinado.lower()
+    mezcla.lower()
+    notas.lower()
+    ruta.lower()
     tmp_spec = {'Base': base, 'Etiqueta':etiqueta,'Pigmento':pigmento,'Marca':marca,'Numero':numero,'Aglutinado':aglutinado,'Mezcla':mezcla,'Notas':notas,'Ruta':ruta}
-
-    print("1. Para ingresar más datos, 2.Para salir")
-    opt=input()
-
     capas.append(tmp_spec)
+    print("1. Para ingresar más datos, 2.Para salir")
+    opt=int(input())
 
 with open('pr.csv', 'a') as csvfile:
     fieldnames = ['Base','Etiqueta','Pigmento','Marca','Numero','Aglutinado','Mezcla','Notas','Ruta']

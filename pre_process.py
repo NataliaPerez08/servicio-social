@@ -110,7 +110,7 @@ interval=dar_intervalo(450,2151)
 
 table=archivos_txt[8]
 specs_df=process_table(table,interval)
-print_table(specs_df,table.base)
+#print_table(specs_df,table.base)
 
 #for atxt in archivos_txt:
 #    print(atxt)
