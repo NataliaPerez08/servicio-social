@@ -1,5 +1,8 @@
 import os
 from specdal import Collection, Spectrum, read
+from matplotlib import pyplot as plt
+import pandas as pd
+import numpy as np
 
 class Spec:
     # Carbonato/Yeso de la forma Y1 o C1
@@ -20,8 +23,8 @@ class Spec:
 
 class Tabla:
     base=""
-    # Capas lista de Spec(s)
-    capas=list()
+    # Rutas de la forma {etiqueta:ruta}
+    rutas=[]
     def __init__(self,base):
         self.base=base
     def __str__(self):
@@ -29,34 +32,48 @@ class Tabla:
 
 
 
+def process_spectrum_txt():
+    datadir = "Espectros_FORS_2/Tablas 2"
+    tablas = list()
+    archivos=list()
+    for f in os.listdir(datadir):
+        tablas.append(f)
+    tablas.sort()
+    i=0
+    t=tablas[i]
+    while i < len(tablas):
+        dirT =datadir+"/"+t
+        tabla_rep = Tabla(t)
+        specs=[]
+        for ft in os.listdir(dirT):
+            path=dirT+"/"+ft
+            specs.append(path)
+        specs.sort()
+        tabla_rep.rutas=specs
+        archivos.append(tabla_rep)
+        i+=1
+    return archivos
 
-datadir = "Espectros_FORS_2/Tablas 1"
-tablas = list()
-archivos=list()
+def dar_intervalo(inicio,fin):
+    return [inicio-350,fin-350]
 
-for f in os.listdir(datadir):
-    tablas.append(f)
-tablas.sort()
+def process_table(table,interval):
+    specs_df = []
+    features = []
+    archivos = table.rutas
+    ini=interval[0]
+    fin=interval[1]
+    for f in archivos:
+        data = pd.read_csv(f,delimiter='\t')
+        title =str(f)[:-4]
+        dev_x = data.columns[0][ini:fin]
+        dev_y = data.columns[1][ini:fin]
+        specs_df.append(data)
+        tmp = np.array(dev_y)
+        features.append(tmp)
+    return specs_df
 
-i=0
-
-t=tablas[i]
-
-dirT =datadir+"/"+t
-specs = list()
-
-tabla_rep = Tabla(t)
-for ft in os.listdir(dirT):
-    etiq=ft[0:2] 
-    path=dirT+"/"+ft
-    s = Spectrum(filepath=path)
-    df=s.measurement.to_frame()
-    tmp_spec = Spec(t,etiq,df,path)
-    specs.append(tmp_spec)
-tabla_rep.capas=specs
-
-archivos.insert(tabla_rep)
-
-
-
+archivos_txt=process_spectrum_txt()
+interval=dar_intervalo(450,2151)
+process_table(archivos_txt[0],interval)
 
