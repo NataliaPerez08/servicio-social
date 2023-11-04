@@ -84,36 +84,35 @@ def extract_features(archivos_txt,interval):
     return features
 
 def print_table(specs_df,tabla):
+    cont=0
     etiquetas = ['A1','A2','A3','A4','A5',
              'B1','B2','B3','B4','B5',
              'C1','C2','C3','C4','C5',
              'D1','D2','D3','D4','D5',
-             'E1','E2','E3','E4','E5',
-            ]
-    cont = 0
-    aux = 0
+             'E1','E2','E3','E4','E5',]
     for f in specs_df:
         x=f.columns[0]
         y=f.columns[1]
         dev_x = f[x].to_numpy()
         dev_y = f[y].to_numpy()
         plt.plot(dev_x, dev_y)
-        aux+=1
-        if aux == 5:
-            aux=0
-            plt.xlabel('Wavelength')
-            plt.ylabel('Reflectance')
-            t = tabla,etiquetas[cont]
-            plt.title(t)
-            plt.show()
-            cont+=1
+        plt.xlabel('Wavelength')
+        plt.ylabel('Reflectance')
+        t = tabla,etiquetas[cont]
+        plt.title(t)
+        plt.show()
+        cont+=1
+    
 
 archivos_txt=process_spectrum_txt()
-#interval=dar_intervalo(450,2151)
+interval=dar_intervalo(450,2151)
 #features = extract_features(archivos_txt,interval)
 
-#specs_df=process_table(archivos_txt[8],interval)
-#print_table(specs_df,archivos_txt[8].base)
+table=archivos_txt[8]
+specs_df=process_table(table,interval)
+print_table(specs_df,table.base)
 
-for atxt in archivos_txt:
-    print(atxt)
+#for atxt in archivos_txt:
+#    print(atxt)
+#    for ar in atxt.rutas:
+#        print(ar)
