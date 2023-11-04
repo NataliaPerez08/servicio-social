@@ -40,8 +40,8 @@ def process_spectrum_txt():
         tablas.append(f)
     tablas.sort()
     i=0
-    t=tablas[i]
     while i < len(tablas):
+        t=tablas[i]
         dirT =datadir+"/"+t
         tabla_rep = Tabla(t)
         specs=[]
@@ -59,21 +59,61 @@ def dar_intervalo(inicio,fin):
 
 def process_table(table,interval):
     specs_df = []
-    features = []
     archivos = table.rutas
     ini=interval[0]
     fin=interval[1]
     for f in archivos:
         data = pd.read_csv(f,delimiter='\t')
-        title =str(f)[:-4]
         dev_x = data.columns[0][ini:fin]
         dev_y = data.columns[1][ini:fin]
         specs_df.append(data)
         tmp = np.array(dev_y)
-        features.append(tmp)
     return specs_df
 
-archivos_txt=process_spectrum_txt()
-interval=dar_intervalo(450,2151)
-process_table(archivos_txt[0],interval)
+def extract_features(archivos_txt,interval):
+    features = []
+    ini=interval[0]
+    fin=interval[1]
+    for f_txt in archivos_txt:
+        for f in f_txt.rutas:
+            data = pd.read_csv(f,delimiter='\t')
+            dev_x = data.columns[0][ini:fin]
+            dev_y = data.columns[1][ini:fin]
+            tmp = np.array(dev_y)
+            features.append(tmp)
+    return features
 
+def print_table(specs_df,tabla):
+    etiquetas = ['A1','A2','A3','A4','A5',
+             'B1','B2','B3','B4','B5',
+             'C1','C2','C3','C4','C5',
+             'D1','D2','D3','D4','D5',
+             'E1','E2','E3','E4','E5',
+            ]
+    cont = 0
+    aux = 0
+    for f in specs_df:
+        x=f.columns[0]
+        y=f.columns[1]
+        dev_x = f[x].to_numpy()
+        dev_y = f[y].to_numpy()
+        plt.plot(dev_x, dev_y)
+        aux+=1
+        if aux == 5:
+            aux=0
+            plt.xlabel('Wavelength')
+            plt.ylabel('Reflectance')
+            t = tabla,etiquetas[cont]
+            plt.title(t)
+            plt.show()
+            cont+=1
+
+archivos_txt=process_spectrum_txt()
+#interval=dar_intervalo(450,2151)
+#features = extract_features(archivos_txt,interval)
+
+#specs_df=process_table(archivos_txt[8],interval)
+#print_table(specs_df,archivos_txt[8].base)
+
+for atxt in archivos_txt:
+    print(atxt)
