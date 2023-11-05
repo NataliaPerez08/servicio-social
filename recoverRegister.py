@@ -1,13 +1,14 @@
 import csv
-from pre_process import process_spectrum_txt
+from pre_process import process_spectrum_txt,print_spec
+import pandas as pd
+import numpy as np
 
-"""
 registro=set()
 with open('pr.csv') as f:
     reader = csv.DictReader(f)
     for row in reader:
         registro.add(str(row))
-"""
+
        
 
 archivos_txt=process_spectrum_txt()
@@ -19,20 +20,31 @@ def encuentra_spec(base,etiqueta):
              'D1','D2','D3','D4','D5',
              'E1','E2','E3','E4','E5',]
     ind=etiquetas.index(etiqueta)
-    print(ind)
     for atxt in archivos_txt:
         b=atxt.base[6:]
         if b in base:
-            print("Encontre la tabla")
-            print(atxt.rutas[ind])
+            ruta=atxt.rutas[ind]
+    return ruta
 
+def process_spec(file):
+    data = pd.read_csv(file,delimiter='\t')
+    return data
 
-"""
-base=set()
+n_regs=[]
 for r in registro:
-    etiquetas_presentes=set()
     ev = eval(r)
-    base.add(row['Base'])
-    print(ev['Etiqueta'])
-"""
-encuentra_spec('C1','A1')
+    base=ev['Base']
+    etiqueta=ev['Etiqueta']
+    ruta=encuentra_spec(base,etiqueta)
+    ev['Ruta']=ruta
+    df = process_spec(ruta)
+    ev['Dataframe']=df
+    n_regs.append(ev)
+
+print(n_regs[0])
+
+specs_df=n_regs[0]['Dataframe']
+etiqueta=n_regs[0]['Etiqueta']
+base=n_regs[0]['Base']
+
+print_spec(specs_df,etiqueta,base)

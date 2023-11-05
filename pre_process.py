@@ -102,7 +102,19 @@ def print_table(specs_df,tabla):
         plt.title(t)
         plt.show()
         cont+=1
-    
+
+def print_spec(specs_df,etiqueta,base):
+    x=specs_df.columns[0]
+    y=specs_df.columns[1]
+    dev_x = specs_df[x].to_numpy()
+    dev_y = specs_df[y].to_numpy()
+    plt.plot(dev_x, dev_y)
+    plt.xlabel('Wavelength')
+    plt.ylabel('Reflectance')
+    t = base,etiqueta
+    plt.title(t)
+    plt.show()
+
 
 archivos_txt=process_spectrum_txt()
 interval=dar_intervalo(450,2151)
