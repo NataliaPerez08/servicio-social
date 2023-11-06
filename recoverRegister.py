@@ -26,25 +26,49 @@ def encuentra_spec(base,etiqueta):
             ruta=atxt.rutas[ind]
     return ruta
 
-def process_spec(file):
+def pget_df_from_txt(file):
     data = pd.read_csv(file,delimiter='\t')
     return data
 
-n_regs=[]
-for r in registro:
-    ev = eval(r)
-    base=ev['Base']
-    etiqueta=ev['Etiqueta']
-    ruta=encuentra_spec(base,etiqueta)
-    ev['Ruta']=ruta
-    df = process_spec(ruta)
-    ev['Dataframe']=df
-    n_regs.append(ev)
+def process_registers():
+    n_regs=[]
+    for r in registro:
+        ev = eval(r)
+        base=ev['Base']
+        etiqueta=ev['Etiqueta']
+        ruta=encuentra_spec(base,etiqueta)
+        ev['Ruta']=ruta
+        df = pget_df_from_txt(ruta)
+        ev['Dataframe']=df
+        n_regs.append(ev)
+    return n_regs
 
-print(n_regs[0])
+#print(n_regs[0])
+#specs_df=n_regs[0]['Dataframe']
+#etiqueta=n_regs[0]['Etiqueta']
+#base=n_regs[0]['Base']
 
-specs_df=n_regs[0]['Dataframe']
-etiqueta=n_regs[0]['Etiqueta']
-base=n_regs[0]['Base']
+#print_spec(specs_df,etiqueta,base)
 
-print_spec(specs_df,etiqueta,base)
+print(".: Buscar registro :.")
+
+print("1. Por base e etiqueta \n 2. Aglutianante")
+entrada = int(input())
+
+if entrada==1:
+    print("Dar base, por ejemplo C1")
+    i_base=input()
+    print("Dar etiqueta, por ejemplo B3")
+    i_etiq=input()
+elif entrada==2:
+    print("Da aglutinante")
+
+n_regs = process_registers()
+
+for elem in n_regs:
+    e_base=elem['Base']
+    e_etiqueta=elem['Etiqueta']
+    #if e_base == i_base:
+        #print("Encontre la base")
+    if i_etiq == elem['Aglutinado']:
+        print(elem['Aglutinado'])

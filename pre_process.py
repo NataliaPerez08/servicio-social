@@ -115,7 +115,6 @@ def print_spec(specs_df,etiqueta,base):
     plt.title(t)
     plt.show()
 
-
 archivos_txt=process_spectrum_txt()
 interval=dar_intervalo(450,2151)
 #features = extract_features(archivos_txt,interval)
