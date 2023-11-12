@@ -58,6 +58,7 @@ entrada = int(input())
 
 i_base=""
 i_etiq=""
+i_aglutinante=""
 if entrada==1:
     print("Dar base, por ejemplo C1:")
     i_base=input()

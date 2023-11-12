@@ -2,7 +2,8 @@ import csv
 class Spec:
     # Carbonato/Yeso de la forma Y1 o C1
     base="" 
-    # Etiqueta de la forma A1,A2
+    # Etiqueta de la forma A1,A21
+    
     etiqueta=""
     pigmento=""
     marca=""#Marca o molido:
