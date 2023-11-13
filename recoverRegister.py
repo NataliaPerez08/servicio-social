@@ -26,7 +26,7 @@ def encuentra_spec(base,etiqueta):
             ruta=atxt.rutas[ind]
     return ruta
 
-def pget_df_from_txt(file):
+def get_df_from_txt(file):
     data = pd.read_csv(file,delimiter='\t')
     return data
 
@@ -38,7 +38,7 @@ def process_registers():
         etiqueta=ev['Etiqueta']
         ruta=encuentra_spec(base,etiqueta)
         ev['Ruta']=ruta
-        df = pget_df_from_txt(ruta)
+        df = get_df_from_txt(ruta)
         ev['Dataframe']=df
         n_regs.append(ev)
     return n_regs
