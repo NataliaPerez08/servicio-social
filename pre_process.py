@@ -1,5 +1,5 @@
 import os
-from specdal import Collection, Spectrum, read
+from specdal import Spectrum
 from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
@@ -54,6 +54,28 @@ def process_spectrum_txt():
         i+=1
     return archivos
 
+def process_spectrum_asd():
+    datadir = "Espectros_FORS_2/Tablas 1"
+    tablas = list()
+    archivos=list()
+    for f in os.listdir(datadir):
+        tablas.append(f)
+    tablas.sort()
+    i=0
+    while i < len(tablas):
+        t=tablas[i]
+        dirT =datadir+"/"+t
+        tabla_rep = Tabla(t)
+        specs=[]
+        for ft in os.listdir(dirT):
+            path=dirT+"/"+ft
+            specs.append(path)
+        specs.sort()
+        tabla_rep.rutas=specs
+        archivos.append(tabla_rep)
+        i+=1
+    return archivos
+
 def dar_intervalo(inicio,fin):
     return [inicio-350,fin-350]
 
@@ -69,6 +91,22 @@ def process_table(table,interval):
         specs_df.append(data)
         tmp = np.array(dev_y)
     return specs_df
+
+def process_asd_table(table,interval):
+    specs_df = []
+    archivos = table.rutas
+    ini=interval[0]
+    fin=interval[1]
+    for f in archivos:
+       # data = pd.read_csv(f,delimiter='\t')
+        data = specdal.Spectrum(filepath=f)
+        #data_blanco = a131.measurement
+        #dev_x = data.columns[0][ini:fin]
+        #dev_y = data.columns[1][ini:fin]
+        #specs_df.append(data)
+        #tmp = np.array(dev_y)
+    return specs_df
+
 
 def extract_features(archivos_txt,interval):
     features = []
@@ -119,8 +157,14 @@ archivos_txt=process_spectrum_txt()
 interval=dar_intervalo(450,2151)
 #features = extract_features(archivos_txt,interval)
 
-table=archivos_txt[8]
-specs_df=process_table(table,interval)
+#table=archivos_txt[8]
+#specs_df=process_table(table,interval)
+#print_table(specs_df,table.base)
+
+archivos_asd=process_spectrum_asd()
+table=archivos_asd[8]
+
+specs_df=process_asd_table(table,interval)
 #print_table(specs_df,table.base)
 
 #for atxt in archivos_txt:
