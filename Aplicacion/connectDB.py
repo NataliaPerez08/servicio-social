@@ -15,10 +15,10 @@ connection = sqlite3.connect(database_file)
 # Crea el cursor para ejecutar las consultas
 cursor = connection.cursor()
 # Ejecuta una insercion
-cursor.execute("INSERT INTO registro_espectros VALUES (10, 10, 10, 10, 10, 10, 10, 10)")
+#cursor.execute("INSERT INTO registro_espectros VALUES (10, 10, 10, 10, 10, 10, 10, 10)")
 
 # Confirma la insercion
-connection.commit()
+#connection.commit()
 
 # Ejecuta una consulta
 cursor.execute("SELECT * FROM registro_espectros")
