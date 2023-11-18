@@ -1,0 +1,14 @@
+
+CREATE TABLE IF NOT EXISTS registro_espectros (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    carpeta TEXT,
+    tabla TEXT,
+    espectro BLOB
+)
+
+
+CREATE TABLE IF NOT EXISTS registro_carpetas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    carpeta TEXT
+)
+
