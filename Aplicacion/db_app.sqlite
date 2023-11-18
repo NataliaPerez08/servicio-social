@@ -1,14 +1,24 @@
+-- FILEPATH: /c:/Users/nataa/Documents/servicio-social/Aplicacion/db_app.sqlite
+
+-- Create the database file
+CREATE DATABASE IF NOT EXISTS db_app;
 
 CREATE TABLE IF NOT EXISTS registro_espectros (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_regitro INTEGER PRIMARY KEY AUTOINCREMENT,
     carpeta TEXT,
     tabla TEXT,
-    espectro BLOB
-)
+    espectro TEXT,
+    pigmento TEXT,
+    aglutinante TEXT,
+    base_preparacion TEXT,
+    comentarios TEXT
+);
 
 
-CREATE TABLE IF NOT EXISTS registro_carpetas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    carpeta TEXT
-)
+CREATE TABLE IF NOT EXISTS registro_espectro (
+    id_espectro INTEGER PRIMARY KEY AUTOINCREMENT,
+    wavelenght REAL,
+    reflectance REAL,
+    FOREIGN KEY (id_espectro) REFERENCES registro_carpeta (carpeta)
+);
 
