@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout 
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea
 from PyQt5.QtCore import QSize    
 from control import controlador_busqueda
 # Vista de la aplicacion
@@ -61,17 +61,22 @@ class HelloWindow(QMainWindow):
         #lResultados.setAlignment(QtCore.Qt.AlignCenter)
         #boxLayout.addWidget(lResultados)
 
-        groupBox = QtWidgets.QGroupBox("Resultados")
-        vbox = QtWidgets.QVBoxLayout()
-        groupBox.setLayout(vbox)
-       
+        scroll = QScrollArea()
+        scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        scroll.adjustSize()
+        scroll.setWidgetResizable(True)
+        scrollContent = QWidget(scroll)
+        scrollLayout = QVBoxLayout(scrollContent)
+        scrollContent.setLayout(scrollLayout)
+        scroll.setWidget(scrollContent)
+        
      
         # Se crea el boton para buscar
         self.button = QtWidgets.QPushButton('Buscar', self)
         boxLayout.addWidget(self.button)
         # Se conecta el boton con la funcion que busca
-        self.button.clicked.connect(lambda: self.buscar(self.textbox.text(),vbox))
-        boxLayout.addWidget(groupBox)
+        self.button.clicked.connect(lambda: self.buscar(self.textbox.text(),scroll))
+        boxLayout.addWidget(scroll)
         
 
 
@@ -80,16 +85,20 @@ class HelloWindow(QMainWindow):
         
 
     # Funcion para buscar el espectro en la base de datos usando el buscador 
-    def buscar(self,text, vbox):
+    def buscar(self,text, box):
         resultados = controlador_busqueda(self.filtros)
         # Imprime bonito el resultado de la busqueda en una tabla
+        text = ""
+        label = QtWidgets.QLabel(text)
+        label.setScaledContents(True)
+        box.setWidget(label)
         print(len(resultados))
         for i in range(len(resultados)):
-            label = QtWidgets.QLabel("")
-            label.setScaledContents(True)
             for j in range(len(resultados[i])):
-                label.setText(label.text()+"\t"+str(resultados[i][j]))
-            vbox.addWidget(label)
+                text+=str(resultados[i][j])+" "
+            text+= "\n"
+        label = QtWidgets.QLabel(text)
+        box.setWidget(label)
 
 
     # Funcion para agregar un filtro a la lista de filtros
