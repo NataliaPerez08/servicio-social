@@ -2,7 +2,8 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QGridLayout, QWidget
 from PyQt5.QtCore import QSize    
-
+from control import controlador_busqueda
+# Vista de la aplicacion
 class HelloWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -59,10 +60,6 @@ class HelloWindow(QMainWindow):
         # Imprime bonito los filtros aplicados
         self.button.clicked.connect(lambda: self.lfiltros.setText("Filtros: "+str(self.filtros).replace("{","").replace("}","").replace("'","").replace(",","\n")))
 
-        
-    
-
-
         # Se crea el boton para buscar
         self.button = QtWidgets.QPushButton('Buscar', self)
         gridLayout.addWidget(self.button, 2, 0)
@@ -73,12 +70,11 @@ class HelloWindow(QMainWindow):
 
     # Funcion para buscar el espectro en la base de datos usando el buscador 
     def buscar(self,text):
-        print("Buscando espectro",text, " ", self.filtros) 
+        controlador_busqueda(self.filtros)
 
     # Funcion para agregar un filtro a la lista de filtros
     def onChanged(self, llave, text):
         self.filtros.update({llave: text})
-        print("Filtros:", self.filtros)
         return self.filtros
         
 
