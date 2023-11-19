@@ -52,7 +52,7 @@ class HelloWindow(QMainWindow):
         self.lfiltros.setAlignment(QtCore.Qt.AlignTop)
         boxLayout.addWidget(self.lfiltros)
 
-        self.button.clicked.connect(lambda: self.onChanged(cbfiltro.currentText(), self.textbox.text()))
+        self.button.clicked.connect(lambda: self.agregarFiltro(cbfiltro.currentText(), self.textbox.text()))
         # Imprime bonito los filtros aplicados
         self.button.clicked.connect(lambda: self.lfiltros.setText("Filtros: "+str(self.filtros).replace("{","").replace("}","").replace("'","").replace(",","\n")))
 
@@ -71,12 +71,6 @@ class HelloWindow(QMainWindow):
         self.button.clicked.connect(lambda: self.buscar(self.textbox.text(),scroll))
         boxLayout.addWidget(scroll)
         
-
-
-
-
-        
-
     # Funcion para buscar el espectro en la base de datos usando el buscador 
     def buscar(self,text, box):
         resultados = controlador_busqueda(self.filtros)
@@ -87,19 +81,28 @@ class HelloWindow(QMainWindow):
         boxWidget.setLayout(boxLayout2)
 
         label = QtWidgets.QLabel("")
-        label.setText(str(n_resultados)+"Resultados")
         for i in range(len(resultados)):
             # limpia resultado
             resultado = str(resultados[i]).replace("(","").replace(")","").replace(",","").replace("'","")
-            label = QtWidgets.QLabel(resultado)
-            boxLayout2.addWidget(label)
+            button = QtWidgets.QPushButton(resultado)
+            button.clicked.connect(lambda: self.seleccionar(resultados[i]))
+            boxLayout2.addWidget(button)
         box.setWidget(boxWidget)
 
     # Funcion para agregar un filtro a la lista de filtros
-    def onChanged(self, llave, text):
+    def agregarFiltro(self, llave, text):
         self.filtros.update({llave: text})
         return self.filtros
-        
+
+    # Funcion para dar el espectro seleccionado
+    def seleccionar(self, text):
+        # Crea la ventana para mostrar el espectro
+        self.ventana = QtWidgets.QWidget()
+        self.ventana.setWindowTitle("Espectro")
+        self.ventana.show()
+        # Imprime el espectro
+        print(text)
+        return text
 
 
         
