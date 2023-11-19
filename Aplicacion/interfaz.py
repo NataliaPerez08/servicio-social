@@ -56,13 +56,7 @@ class HelloWindow(QMainWindow):
         # Imprime bonito los filtros aplicados
         self.button.clicked.connect(lambda: self.lfiltros.setText("Filtros: "+str(self.filtros).replace("{","").replace("}","").replace("'","").replace(",","\n")))
 
-        # Crear una label para los resultados
-        #lResultados = QtWidgets.QLabel("Resultados: ")
-        #lResultados.setAlignment(QtCore.Qt.AlignCenter)
-        #boxLayout.addWidget(lResultados)
-
         scroll = QScrollArea()
-        scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         scroll.adjustSize()
         scroll.setWidgetResizable(True)
         scrollContent = QWidget(scroll)
@@ -70,7 +64,6 @@ class HelloWindow(QMainWindow):
         scrollContent.setLayout(scrollLayout)
         scroll.setWidget(scrollContent)
         
-     
         # Se crea el boton para buscar
         self.button = QtWidgets.QPushButton('Buscar', self)
         boxLayout.addWidget(self.button)
@@ -87,19 +80,20 @@ class HelloWindow(QMainWindow):
     # Funcion para buscar el espectro en la base de datos usando el buscador 
     def buscar(self,text, box):
         resultados = controlador_busqueda(self.filtros)
-        # Imprime bonito el resultado de la busqueda en una tabla
-        text = ""
-        label = QtWidgets.QLabel(text)
-        label.setScaledContents(True)
-        box.setWidget(label)
-        print(len(resultados))
-        for i in range(len(resultados)):
-            for j in range(len(resultados[i])):
-                text+=str(resultados[i][j])+" "
-            text+= "\n"
-        label = QtWidgets.QLabel(text)
-        box.setWidget(label)
+        n_resultados = len(resultados)
+        # Create layout and add widgets
+        boxWidget = QWidget()
+        boxLayout2 = QVBoxLayout()
+        boxWidget.setLayout(boxLayout2)
 
+        label = QtWidgets.QLabel("")
+        label.setText(str(n_resultados)+"Resultados")
+        for i in range(len(resultados)):
+            # limpia resultado
+            resultado = str(resultados[i]).replace("(","").replace(")","").replace(",","").replace("'","")
+            label = QtWidgets.QLabel(resultado)
+            boxLayout2.addWidget(label)
+        box.setWidget(boxWidget)
 
     # Funcion para agregar un filtro a la lista de filtros
     def onChanged(self, llave, text):
