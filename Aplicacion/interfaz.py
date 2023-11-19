@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QLabel, QGridLayout, QWidget
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout 
 from PyQt5.QtCore import QSize    
 from control import controlador_busqueda
 # Vista de la aplicacion
@@ -16,18 +16,13 @@ class HelloWindow(QMainWindow):
         centralWidget = QWidget(self)          
         self.setCentralWidget(centralWidget)   
 
-        gridLayout = QGridLayout(self)     
-        centralWidget.setLayout(gridLayout)  
-
-        title = QLabel("Registros de Espectros FORS", self) 
-        title.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft) 
-        gridLayout.addWidget(title, 0, 0)
+        boxLayout = QVBoxLayout(self)
+        centralWidget.setLayout(boxLayout)
 
         #  Selecciona entre los filtros disponibles
         lfiltro = QLabel("Buscar por: ", self)
-        lfiltro.setAlignment(QtCore.Qt.AlignCenter)
-        # Inserta el label en la ventana en la esquina superior izquierda debajo del titulo
-        gridLayout.addWidget(lfiltro, 3, 0)
+        lfiltro.setAlignment(QtCore.Qt.AlignTop)
+        boxLayout.addWidget(lfiltro)
 
 
         # Selecciona entre los filtros disponibles
@@ -38,39 +33,62 @@ class HelloWindow(QMainWindow):
         cbfiltro.addItem("Pigmento")
         cbfiltro.addItem("Aglutinante")
         cbfiltro.addItem("Base de preparacion")
-        gridLayout.addWidget(cbfiltro, 1, 0)
+        lfiltro.setAlignment(QtCore.Qt.AlignTop)
+        boxLayout.addWidget(cbfiltro)
 
         # Para cada filtro se debe crear un campo de texto para ingresar el filtro
         # y un boton para agregarlo a la lista de filtros
         # Se crea el campo de texto
         self.textbox = QtWidgets.QLineEdit(self)
-        gridLayout.addWidget(self.textbox, 1, 1)
+        boxLayout.addWidget(self.textbox)
         # Se crea el boton
         self.button = QtWidgets.QPushButton('Agregar', self)
-        gridLayout.addWidget(self.button, 1, 2)
+        boxLayout.addWidget(self.button)
 
 
         # Se conecta el boton con la funcion que agrega el filtro
         # Presenta los filtros aplicados
         self.lfiltros = QtWidgets.QLabel("Filtros: ")
-        self.lfiltros.setAlignment(QtCore.Qt.AlignCenter)
-        gridLayout.addWidget(self.lfiltros, 2, 1)
+        self.lfiltros.setAlignment(QtCore.Qt.AlignTop)
+        boxLayout.addWidget(self.lfiltros)
 
         self.button.clicked.connect(lambda: self.onChanged(cbfiltro.currentText(), self.textbox.text()))
         # Imprime bonito los filtros aplicados
         self.button.clicked.connect(lambda: self.lfiltros.setText("Filtros: "+str(self.filtros).replace("{","").replace("}","").replace("'","").replace(",","\n")))
 
+        # Crear una label para los resultados
+        lResultados = QtWidgets.QLabel("Resultados: ")
+        #lResultados.setAlignment(QtCore.Qt.AlignCenter)
+        #boxLayout.addWidget(lResultados)
+
         # Se crea el boton para buscar
         self.button = QtWidgets.QPushButton('Buscar', self)
-        gridLayout.addWidget(self.button, 2, 0)
+        boxLayout.addWidget(self.button)
         # Se conecta el boton con la funcion que busca
-        self.button.clicked.connect(self.buscar)
+        self.button.clicked.connect(lambda: self.buscar(self.textbox.text(),lResultados))
+        
+        #groupBox = QtWidgets.QGroupBox("Resultados")
+        #boxLayout.addWidget(groupBox)
+        #vbox = QtWidgets.QVBoxLayout()
+        #groupBox.setLayout(vbox)
+        #vbox.addWidget(lResultados)
+
+
+
 
         
 
     # Funcion para buscar el espectro en la base de datos usando el buscador 
-    def buscar(self,text):
-        controlador_busqueda(self.filtros)
+    def buscar(self,text, label):
+        label.setText("")
+        resultados = controlador_busqueda(self.filtros)
+        # Imprime bonito el resultado de la busqueda en una tabla
+        print(len(resultados))
+        for i in range(len(resultados)):
+            for j in range(len(resultados[i])):
+                label.setText(label.text()+"\t"+str(resultados[i][j]))
+            #label.setText(label.text()+"\n"+str(resultados[i]))
+
 
     # Funcion para agregar un filtro a la lista de filtros
     def onChanged(self, llave, text):
