@@ -1,8 +1,9 @@
 import os
-from specdal import Spectrum
 from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
+import scipy as sp
+import specdal as specdal
 
 class Spec:
     # Carbonato/Yeso de la forma Y1 o C1
@@ -79,32 +80,27 @@ def process_spectrum_asd():
 def dar_intervalo(inicio,fin):
     return [inicio-350,fin-350]
 
-def process_table(table,interval):
+def process_table(table):
     specs_df = []
     archivos = table.rutas
-    ini=interval[0]
-    fin=interval[1]
     for f in archivos:
         data = pd.read_csv(f,delimiter='\t')
-        dev_x = data.columns[0][ini:fin]
-        dev_y = data.columns[1][ini:fin]
         specs_df.append(data)
-        tmp = np.array(dev_y)
     return specs_df
 
-def process_asd_table(table,interval):
+def process_asd_table(table):
     specs_df = []
     archivos = table.rutas
-    ini=interval[0]
-    fin=interval[1]
     for f in archivos:
-       # data = pd.read_csv(f,delimiter='\t')
         data = specdal.Spectrum(filepath=f)
-        #data_blanco = a131.measurement
-        #dev_x = data.columns[0][ini:fin]
-        #dev_y = data.columns[1][ini:fin]
-        #specs_df.append(data)
-        #tmp = np.array(dev_y)
+        data_wl = data.measurement
+        print(data_wl)
+        # create pandas dataframe
+        df = pd.DataFrame(columns=['Wavelength','reflectance'])
+        df['Wavelength'] = data_wl.index
+        df['reflectance'] = data_wl.values
+
+        specs_df.append(df)
     return specs_df
 
 
@@ -155,17 +151,16 @@ def print_spec(specs_df,etiqueta,base):
 
 archivos_txt=process_spectrum_txt()
 interval=dar_intervalo(450,2151)
-#features = extract_features(archivos_txt,interval)
+#features = extract_features(archivos_txt)
 
-#table=archivos_txt[8]
-#specs_df=process_table(table,interval)
+table=archivos_txt[8]
+#specs_df=process_table(table)
 #print_table(specs_df,table.base)
 
 archivos_asd=process_spectrum_asd()
 table=archivos_asd[8]
-
-specs_df=process_asd_table(table,interval)
-#print_table(specs_df,table.base)
+specs_df=process_asd_table(table)
+print_table(specs_df,table.base)
 
 #for atxt in archivos_txt:
 #    print(atxt)

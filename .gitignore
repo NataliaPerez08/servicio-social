@@ -48,3 +48,6 @@ target/
 #env
 ss/bin/
 ss/*
+
+env_ss/bin/
+env_ss/*

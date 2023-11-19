@@ -95,15 +95,21 @@ class HelloWindow(QMainWindow):
         return self.filtros
 
     # Funcion para dar el espectro seleccionado
-    def seleccionar(self, text):
+    def seleccionar(self, espectro):
         # Crea la ventana para mostrar el espectro
         self.ventana = QtWidgets.QWidget()
         self.ventana.setWindowTitle("Espectro")
-        self.ventana.show()
+        self.ventana.setMinimumSize(QSize(640, 480))
+        
         # Imprime el espectro
-        print(text)
-        return text
+        boxLayout2 = QVBoxLayout(self.ventana)
+        self.ventana.setLayout(boxLayout2)
+        text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
+        self.ltexto = QtWidgets.QLabel(text)
+        boxLayout2.addWidget(self.ltexto)
 
+        self.ventana.show()
+        print(text)
 
         
 
