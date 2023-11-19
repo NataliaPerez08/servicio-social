@@ -57,21 +57,22 @@ class HelloWindow(QMainWindow):
         self.button.clicked.connect(lambda: self.lfiltros.setText("Filtros: "+str(self.filtros).replace("{","").replace("}","").replace("'","").replace(",","\n")))
 
         # Crear una label para los resultados
-        lResultados = QtWidgets.QLabel("Resultados: ")
+        #lResultados = QtWidgets.QLabel("Resultados: ")
         #lResultados.setAlignment(QtCore.Qt.AlignCenter)
         #boxLayout.addWidget(lResultados)
 
+        groupBox = QtWidgets.QGroupBox("Resultados")
+        vbox = QtWidgets.QVBoxLayout()
+        groupBox.setLayout(vbox)
+       
+     
         # Se crea el boton para buscar
         self.button = QtWidgets.QPushButton('Buscar', self)
         boxLayout.addWidget(self.button)
         # Se conecta el boton con la funcion que busca
-        self.button.clicked.connect(lambda: self.buscar(self.textbox.text(),lResultados))
+        self.button.clicked.connect(lambda: self.buscar(self.textbox.text(),vbox))
+        boxLayout.addWidget(groupBox)
         
-        #groupBox = QtWidgets.QGroupBox("Resultados")
-        #boxLayout.addWidget(groupBox)
-        #vbox = QtWidgets.QVBoxLayout()
-        #groupBox.setLayout(vbox)
-        #vbox.addWidget(lResultados)
 
 
 
@@ -79,15 +80,16 @@ class HelloWindow(QMainWindow):
         
 
     # Funcion para buscar el espectro en la base de datos usando el buscador 
-    def buscar(self,text, label):
-        label.setText("")
+    def buscar(self,text, vbox):
         resultados = controlador_busqueda(self.filtros)
         # Imprime bonito el resultado de la busqueda en una tabla
         print(len(resultados))
         for i in range(len(resultados)):
+            label = QtWidgets.QLabel("")
+            label.setScaledContents(True)
             for j in range(len(resultados[i])):
                 label.setText(label.text()+"\t"+str(resultados[i][j]))
-            #label.setText(label.text()+"\n"+str(resultados[i]))
+            vbox.addWidget(label)
 
 
     # Funcion para agregar un filtro a la lista de filtros
