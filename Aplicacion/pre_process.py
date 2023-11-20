@@ -118,12 +118,12 @@ def extract_features(archivos_txt,interval):
     return features
 
 def print_table(specs_df,tabla):
-    cont=0
     etiquetas = ['A1','A2','A3','A4','A5',
              'B1','B2','B3','B4','B5',
              'C1','C2','C3','C4','C5',
              'D1','D2','D3','D4','D5',
-             'E1','E2','E3','E4','E5',]
+             'E1','E2','E3','E4','E5']
+    cont=0
     for f in specs_df:
         x=f.columns[0]
         y=f.columns[1]
@@ -150,17 +150,17 @@ def print_spec(specs_df,etiqueta,base):
     plt.show()
 
 archivos_txt=process_spectrum_txt()
-interval=dar_intervalo(450,2151)
 #features = extract_features(archivos_txt)
 
-table=archivos_txt[8]
+#table=archivos_txt[8]
 #specs_df=process_table(table)
+#print_spec(specs_df[0],'A1',table.base)
 #print_table(specs_df,table.base)
 
-archivos_asd=process_spectrum_asd()
-table=archivos_asd[8]
-specs_df=process_asd_table(table)
-print_table(specs_df,table.base)
+#archivos_asd=process_spectrum_asd()
+#table=archivos_asd[8]
+#specs_df=process_asd_table(table)
+#print_table(specs_df,table.base)
 
 #for atxt in archivos_txt:
 #    print(atxt)

@@ -1,3 +1,4 @@
+from calendar import c
 import sqlite3
 # Modelo de la aplicación
 # Funcion para crear la tabla de registro_espectros 
@@ -39,7 +40,7 @@ def create_table_registro_espectro():
     cursor = connection.cursor()
 
     # Crea la tabla de registro de espectros
-    cursor.execute("CREATE TABLE registro_espectro (Espectro text, Carpeta text, Tabla text, Pigmento text, Aglutinante text, Base_de_preparacion text)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS registro_espectro (Espectro text,  wavelenght text, reflectance text)")
     # Confirma la creacion de la tabla
     connection.commit()
 

@@ -50,30 +50,7 @@ def process_registers():
 
 #print_spec(specs_df,etiqueta,base)
 
-print(".: Buscar registro :.")
-
-print("1. Por base e etiqueta \n 2. Aglutianante")
-entrada = int(input())
-
-
-i_base=""
-i_etiq=""
-i_aglutinante=""
-if entrada==1:
-    print("Dar base, por ejemplo C1:")
-    i_base=input()
-    print("Dar etiqueta, por ejemplo B3:")
-    i_etiq=input()
-elif entrada==2:
-    print("Da aglutinante")
-    i_aglutinante=input()
-
-n_regs = process_registers()
-
-for elem in n_regs:
-    e_base=elem['Base']
-    e_etq=elem['Etiqueta']
-    if e_base == i_base and e_etq == i_etiq:
-        print_spec(elem['Dataframe'],elem['Etiqueta'],elem['Base'])
-    if i_aglutinante == elem['Aglutinado']:
-        print_spec(elem['Dataframe'],elem['Etiqueta'],elem['Base'])
+#print(".: Buscar registro :.")
+#ruta=encuentra_spec('C1','A1')
+#print(ruta)
+#print_spec(get_df_from_txt(ruta),'A1','C1')
