@@ -89,8 +89,10 @@ class HelloWindow(QMainWindow):
             label = QtWidgets.QLabel(resultado)
             qitem = QListWidgetItem(resultado)
             boxWidget.addItem(qitem)
-            #button.clicked.connect(lambda: self.seleccionar(resultado))
         box.setWidget(boxWidget)
+
+        # Se conecta el boton con la funcion que selecciona el espectro
+        boxWidget.itemClicked.connect(lambda: self.seleccionar(boxWidget.currentItem().text()))
 
     # Funcion para agregar un filtro a la lista de filtros
     def agregarFiltro(self, llave, text):
@@ -108,25 +110,25 @@ class HelloWindow(QMainWindow):
         boxLayout2 = QVBoxLayout(self.ventana)
         self.ventana.setLayout(boxLayout2)
         print(espectro)
-        #carpeta = espectro[0]
-        #tabla = espectro[1]
-        #espectro_name = espectro[2]
-        #pigmento = espectro[3]
-        #aglutinante = espectro[4]
-        #base = espectro[5]
+        split_espectro = espectro.split()
+        carpeta = split_espectro[0]
+        tabla = split_espectro[1]
+        espectro_name = split_espectro[2]
+        pigmento = split_espectro[3]
+        aglutinante = split_espectro[4]
+        base = split_espectro[5]
 
-
-       # boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta))
-        #boxLayout2.addWidget(QtWidgets.QLabel("Tabla: "+tabla))
-        #boxLayout2.addWidget(QtWidgets.QLabel("Espectro: "+espectro_name))
-        #boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
-        #boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
-        #boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
+        boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta))
+        boxLayout2.addWidget(QtWidgets.QLabel("Tabla: "+tabla))
+        boxLayout2.addWidget(QtWidgets.QLabel("Espectro: "+espectro_name))
+        boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
+        boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
+        boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
         #text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
         #print(text)
-        #print("Espectro: "+espectro_name)   
-        #imprimir_spec(carpeta,tabla,espectro_name)
-       # self.ventana.show()
+        print("Espectro: "+espectro_name)   
+        imprimir_spec(carpeta,tabla,espectro_name)
+        self.ventana.show()
         
 
 def create():
