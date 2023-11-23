@@ -1,7 +1,7 @@
 from math import e, pi
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea, QListWidget, QListWidgetItem
 from PyQt5.QtCore import QSize    
 from control import controlador_busqueda
 from controlSpec import imprimir_spec
@@ -78,7 +78,7 @@ class HelloWindow(QMainWindow):
         resultados = controlador_busqueda(self.filtros)
         n_resultados = len(resultados)
         # Create layout and add widgets
-        boxWidget = QWidget()
+        boxWidget = QListWidget()
         boxLayout2 = QVBoxLayout()
         boxWidget.setLayout(boxLayout2)
 
@@ -86,9 +86,10 @@ class HelloWindow(QMainWindow):
         for i in range(len(resultados)):
             # limpia resultado
             resultado = str(resultados[i]).replace("(","").replace(")","").replace(",","").replace("'","")
-            button = QtWidgets.QPushButton(resultado)
-            button.clicked.connect(lambda: self.seleccionar(resultados[i]))
-            boxLayout2.addWidget(button)
+            label = QtWidgets.QLabel(resultado)
+            qitem = QListWidgetItem(resultado)
+            boxWidget.addItem(qitem)
+            #button.clicked.connect(lambda: self.seleccionar(resultado))
         box.setWidget(boxWidget)
 
     # Funcion para agregar un filtro a la lista de filtros
@@ -106,22 +107,26 @@ class HelloWindow(QMainWindow):
         # Imprime el espectro
         boxLayout2 = QVBoxLayout(self.ventana)
         self.ventana.setLayout(boxLayout2)
-        carpeta = espectro[0]
-        tabla = espectro[1]
-        espectro_name = espectro[2]
-        pigmento = espectro[3]
-        aglutinante = espectro[4]
-        base = espectro[5]
+        print(espectro)
+        #carpeta = espectro[0]
+        #tabla = espectro[1]
+        #espectro_name = espectro[2]
+        #pigmento = espectro[3]
+        #aglutinante = espectro[4]
+        #base = espectro[5]
 
-        boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta))
-        boxLayout2.addWidget(QtWidgets.QLabel("Tabla: "+tabla))
-        boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
-        boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
-        boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
-        text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
-        self.ventana.show()
-        print(text)
-        imprimir_spec(carpeta,tabla,espectro_name)
+
+       # boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta))
+        #boxLayout2.addWidget(QtWidgets.QLabel("Tabla: "+tabla))
+        #boxLayout2.addWidget(QtWidgets.QLabel("Espectro: "+espectro_name))
+        #boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
+        #boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
+        #boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
+        #text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
+        #print(text)
+        #print("Espectro: "+espectro_name)   
+        #imprimir_spec(carpeta,tabla,espectro_name)
+       # self.ventana.show()
         
 
 def create():

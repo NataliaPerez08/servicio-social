@@ -2,7 +2,7 @@ import csv
 from math import e
 import re
 import specdal 
-from pre_process import process_spectrum_tabla2,print_spec,process_spectrum_tabla1,process_spectrum_tablaY4
+from pre_process import print_spec
 import pandas as pd
 
 registro=set()

@@ -127,6 +127,7 @@ def print_spec(specs_df,ruta):
     etiqueta=ruta.split('/')[2]
     base= ruta.split('/')[1]
     print(ruta.split('/'))
+    print("punto")
     if len(ruta.split('/')) > 3:
         tabla= ruta.split('/')[3]
     else:
