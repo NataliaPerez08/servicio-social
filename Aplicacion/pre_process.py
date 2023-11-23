@@ -1,11 +1,7 @@
-from operator import le
 import os
-import re
 from matplotlib import pyplot as plt
 from matplotlib.pylab import f
 import pandas as pd
-import numpy as np
-import scipy as sp
 import specdal as specdal
 
 class Spec:

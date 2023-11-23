@@ -19,3 +19,13 @@ def imprimir_spec(carpeta,tabla,espectro):
     elif ext == 'asd':
         df=get_df_from_asd(ruta)
     print_spec(df,ruta)
+
+def get_df(carpeta,tabla,espectro):
+    ruta=obten_spec(carpeta,tabla,espectro)
+    ext=ruta[-3:]
+    if ext == 'txt':
+        df=get_df_from_txt(ruta)
+    elif ext == 'asd':
+        df=get_df_from_asd(ruta)
+    return df
+    

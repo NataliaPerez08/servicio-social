@@ -1,10 +1,13 @@
-from math import e, pi
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea, QListWidget, QListWidgetItem
 from PyQt5.QtCore import QSize    
 from control import controlador_busqueda
-from controlSpec import imprimir_spec
+from controlSpec import imprimir_spec,get_df
+
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.figure import Figure
+
 # Vista de la aplicacion
 class HelloWindow(QMainWindow):
     def __init__(self):
@@ -106,7 +109,7 @@ class HelloWindow(QMainWindow):
         self.ventana.setWindowTitle("Espectro")
         self.ventana.setMinimumSize(QSize(640, 480))
         
-        # Imprime el espectro
+        # Imprime info el espectro
         boxLayout2 = QVBoxLayout(self.ventana)
         self.ventana.setLayout(boxLayout2)
         print(espectro)
@@ -124,12 +127,33 @@ class HelloWindow(QMainWindow):
         boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
         boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
         boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
+
+        self.ventana.show()
+
         #text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
         #print(text)
-        print("Espectro: "+espectro_name)   
-        imprimir_spec(carpeta,tabla,espectro_name)
-        self.ventana.show()
+        # Plot espectro
+        #get_df(carpeta,tabla,espectro_name)
+        #imprimir_spec(carpeta,tabla,espectro_name)
+        # Include the matplotlib figure
         
+      
+        self.figure = Figure()
+        self.canvas = FigureCanvasQTAgg(self.figure)
+        boxLayout2.addWidget(self.canvas)
+        self.ax = self.figure.add_subplot(111)
+        df = get_df(carpeta,tabla,espectro_name)
+        x=df.columns[0]
+        y=df.columns[1]
+        dev_x = df[x].to_numpy()
+        dev_y = df[y].to_numpy()
+        self.ax.plot(dev_x, dev_y)
+        self.ax.set_title("Espectro")
+        self.ax.set_xlabel("Longitud de onda")
+        self.ax.set_ylabel("Reflectancia")
+        self.ax.grid()
+        self.canvas.draw()
+        self.ventana.show()
 
 def create():
     app = QtWidgets.QApplication(sys.argv)
