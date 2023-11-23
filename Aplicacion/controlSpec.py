@@ -1,5 +1,3 @@
-from math import e
-from operator import le
 from recoverRegister import get_df_from_asd,get_df_from_txt
 from pre_process import print_spec
 
@@ -19,6 +17,5 @@ def imprimir_spec(carpeta,tabla,espectro):
     if ext == 'txt':
         df=get_df_from_txt(ruta)
     elif ext == 'asd':
-        
         df=get_df_from_asd(ruta)
     print_spec(df,ruta)
