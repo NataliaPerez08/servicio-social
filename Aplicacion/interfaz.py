@@ -1,9 +1,10 @@
-from math import e
+from math import e, pi
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea
 from PyQt5.QtCore import QSize    
 from control import controlador_busqueda
+from controlSpec import imprimir_spec
 # Vista de la aplicacion
 class HelloWindow(QMainWindow):
     def __init__(self):
@@ -107,20 +108,26 @@ class HelloWindow(QMainWindow):
         self.ventana.setLayout(boxLayout2)
         carpeta = espectro[0]
         tabla = espectro[1]
-        pigmento = espectro[2]
-        aglutinante = espectro[3]
-        base = espectro[4]
+        espectro_name = espectro[2]
+        pigmento = espectro[3]
+        aglutinante = espectro[4]
+        base = espectro[5]
 
-        boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta+" "+"Tabla: "+tabla))
+        boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta))
+        boxLayout2.addWidget(QtWidgets.QLabel("Tabla: "+tabla))
         boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
         boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
         boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
         text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
         self.ventana.show()
         print(text)
+        imprimir_spec(carpeta,tabla,espectro_name)
+        
 
 def create():
     app = QtWidgets.QApplication(sys.argv)
     mainWin = HelloWindow()
     mainWin.show()
     sys.exit( app.exec_() )
+
+create()

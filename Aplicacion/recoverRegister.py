@@ -11,8 +11,6 @@ with open('pr.csv') as f:
     for row in reader:
         registro.add(str(row))
 
-       
-
 def encuentra_spec_txt(base,etiqueta):
     archivos_txt=process_spectrum_tabla2()
     etiquetas = ['A1','A2','A3','A4','A5',
