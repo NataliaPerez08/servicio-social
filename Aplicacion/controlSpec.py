@@ -9,7 +9,6 @@ def obten_spec(carpeta,tabla,espectro):
         if tabla=='Y4':
             return "Espectros_FORS_2/Y4/"+espectro
         else:
-            etiqueta=espectro[:2].upper()
             return "Espectros_FORS_2/Tablas 1/"+tabla+"/"+espectro
     elif carpeta == 'Tablas2':
         return "Espectros_FORS_2/Tablas 2/"+espectro
