@@ -103,20 +103,6 @@ def process_asd_table(table):
         specs_df.append(df)
     return specs_df
 
-
-def extract_features(archivos_txt,interval):
-    features = []
-    ini=interval[0]
-    fin=interval[1]
-    for f_txt in archivos_txt:
-        for f in f_txt.rutas:
-            data = pd.read_csv(f,delimiter='\t')
-            dev_x = data.columns[0][ini:fin]
-            dev_y = data.columns[1][ini:fin]
-            tmp = np.array(dev_y)
-            features.append(tmp)
-    return features
-
 def print_table(specs_df,tabla):
     etiquetas = ['A1','A2','A3','A4','A5',
              'B1','B2','B3','B4','B5',

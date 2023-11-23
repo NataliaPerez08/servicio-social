@@ -11,39 +11,6 @@ with open('pr.csv') as f:
     for row in reader:
         registro.add(str(row))
 
-def encuentra_spec_txt(base,etiqueta):
-    archivos_txt=process_spectrum_tabla2()
-    etiquetas = ['A1','A2','A3','A4','A5',
-             'B1','B2','B3','B4','B5',
-             'C1','C2','C3','C4','C5',
-             'D1','D2','D3','D4','D5',
-             'E1','E2','E3','E4','E5',]
-    ind=etiquetas.index(etiqueta)
-    for atxt in archivos_txt:
-        b=atxt.base[6:]
-        if b in base:
-            ruta=atxt.rutas[ind]
-    return ruta
-
-def encuentra_ruta_spec_Y4(nombre):
-    datadir = "Espectros_FORS_2/Y4/"+nombre
-    return datadir
-
-def encuentra_spec_asd(base,etiqueta):
-    archivos_asd=process_spectrum_tabla1()
-    etiquetas = ['A1','A2','A3','A4','A5',
-             'B1','B2','B3','B4','B5',
-             'C1','C2','C3','C4','C5',
-             'D1','D2','D3','D4','D5',
-             'E1','E2','E3','E4','E5',]
-    ind=etiquetas.index(etiqueta)
-    for aasd in archivos_asd:
-        b=aasd.base
-        if b == base:
-            ruta=aasd.rutas[ind]
-            return ruta
-    return None
-
 def get_df_from_txt(file):
     data = pd.read_csv(file,delimiter='\t')
     return data
