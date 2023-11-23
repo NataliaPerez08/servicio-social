@@ -1,7 +1,8 @@
 import csv
+from math import e
 import re
 import specdal 
-from pre_process import process_spectrum_txt,print_spec,process_spectrum_asd
+from pre_process import process_spectrum_tabla2,print_spec,process_spectrum_tabla1,process_spectrum_tablaY4
 import pandas as pd
 
 registro=set()
@@ -11,10 +12,9 @@ with open('pr.csv') as f:
         registro.add(str(row))
 
        
-archivos_txt=process_spectrum_txt()
-archivos_asd=process_spectrum_asd()
 
 def encuentra_spec_txt(base,etiqueta):
+    archivos_txt=process_spectrum_tabla2()
     etiquetas = ['A1','A2','A3','A4','A5',
              'B1','B2','B3','B4','B5',
              'C1','C2','C3','C4','C5',
@@ -27,7 +27,12 @@ def encuentra_spec_txt(base,etiqueta):
             ruta=atxt.rutas[ind]
     return ruta
 
+def encuentra_ruta_spec_Y4(nombre):
+    datadir = "Espectros_FORS_2/Y4/"+nombre
+    return datadir
+
 def encuentra_spec_asd(base,etiqueta):
+    archivos_asd=process_spectrum_tabla1()
     etiquetas = ['A1','A2','A3','A4','A5',
              'B1','B2','B3','B4','B5',
              'C1','C2','C3','C4','C5',
@@ -73,15 +78,21 @@ def process_registers_txt():
 #specs_df=n_regs[0]['Dataframe']
 #etiqueta=n_regs[0]['Etiqueta']
 #base=n_regs[0]['Base']
-
 #print_spec(specs_df,etiqueta,base)
 
-print(".: Buscar registro :.")
-ruta=encuentra_spec_txt('C1','A1')
-print(ruta)
-print_spec(get_df_from_txt(ruta),ruta)
+def ejemplos():
+    print(".: Buscar registro Tablas 1:.")
+    ruta=encuentra_spec_asd('C1','A1')
+    print(ruta)
+    print_spec(get_df_from_asd(ruta),ruta)
 
-#print(".: Buscar registro :.")
-#ruta=encuentra_spec_asd('C1','A1')
-#print(ruta)
-#print_spec(get_df_from_asd(ruta),ruta)
+    print(".: Buscar registro Tablas 2:.")
+    ruta=encuentra_spec_txt('C1','B1')
+    print(ruta)
+    print_spec(get_df_from_txt(ruta),ruta)
+
+
+    print(".: Buscar registro Tabla Y4:.")
+    ruta=encuentra_ruta_spec_Y4('Tablay400125.asd.txt')
+    print(ruta)
+    print_spec(get_df_from_txt(ruta),ruta)

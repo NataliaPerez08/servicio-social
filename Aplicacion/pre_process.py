@@ -1,5 +1,8 @@
+from operator import le
 import os
+import re
 from matplotlib import pyplot as plt
+from matplotlib.pylab import f
 import pandas as pd
 import numpy as np
 import scipy as sp
@@ -32,40 +35,36 @@ class Tabla:
         return str(self.base)
 
 
-
-def process_spectrum_txt():
+# Funcion que procesa los espectros de la carpeta Tablas 2 (txt)
+def process_spectrum_tabla2():
     datadir = "Espectros_FORS_2/Tablas 2"
-    tablas = list()
-    archivos=list()
-    for f in os.listdir(datadir):
-        tablas.append(f)
-    tablas.sort()
-    i=0
-    while i < len(tablas):
-        t=tablas[i]
-        dirT =datadir+"/"+t
-        tabla_rep = Tabla(t)
-        specs=[]
-        for ft in os.listdir(dirT):
-            path=dirT+"/"+ft
-            specs.append(path)
-        specs.sort()
-        tabla_rep.rutas=specs
-        archivos.append(tabla_rep)
-        i+=1
-    return archivos
+    return process_spectrum(datadir)
 
-def process_spectrum_asd():
+# Funcion que procesa los espectros de la carpeta Tablas 1 (asd)
+def process_spectrum_tabla1():
     datadir = "Espectros_FORS_2/Tablas 1"
-    tablas = list()
+    return process_spectrum(datadir)
+
+# Funcion que procesa los espectros de la carpeta Tablas Y4 (txt)
+def process_spectrum_tablaY4():
+    datadir = "Espectros_FORS_2/Y4"
     archivos=list()
     for f in os.listdir(datadir):
+        archivos.append(datadir+"/"+f)
+    archivos.sort()
+    return archivos
+
+# Funcion que extrae los espectros de la carpeta especificada
+def process_spectrum(directorio):
+    tablas = list()
+    archivos=list()
+    for f in os.listdir(directorio):
         tablas.append(f)
     tablas.sort()
     i=0
     while i < len(tablas):
         t=tablas[i]
-        dirT =datadir+"/"+t
+        dirT =directorio+"/"+t
         tabla_rep = Tabla(t)
         specs=[]
         for ft in os.listdir(dirT):
@@ -77,10 +76,12 @@ def process_spectrum_asd():
         i+=1
     return archivos
 
+# Devuelve el intervalo de longitudes de onda para el espectro
 def dar_intervalo(inicio,fin):
     return [inicio-350,fin-350]
 
-def process_table(table):
+# Obtiene los espectros de la tabla especificada
+def process_txt_table(table):
     specs_df = []
     archivos = table.rutas
     for f in archivos:
@@ -138,9 +139,12 @@ def print_table(specs_df,tabla):
 
 def print_spec(specs_df,ruta):
     etiqueta=ruta.split('/')[2]
-    tabla= ruta.split('/')[3].split('.')[0]
     base= ruta.split('/')[1]
-    print(tabla)
+    print(ruta.split('/'))
+    if len(ruta.split('/')) > 3:
+        tabla= ruta.split('/')[3]
+    else:
+        tabla=''
     x=specs_df.columns[0]
     y=specs_df.columns[1]
     dev_x = specs_df[x].to_numpy()
@@ -152,22 +156,12 @@ def print_spec(specs_df,ruta):
     plt.title(t)
     plt.show()
 
-#archivos_txt=process_spectrum_txt()
-#archivos_asd=process_spectrum_asd()
-
-#features = extract_features(archivos_txt)
-
-#table=archivos_txt[8]
-#specs_df=process_table(table)
-#print_spec(specs_df[0],'A1',table.base)
-#print_table(specs_df,table.base)
-
-#table=archivos_asd[8]
-#print(table)
-#specs_df=process_asd_table(table)
-#print_table(specs_df,table.base)
-
+#archivos_txt=process_spectrum_tabla2()
 #for atxt in archivos_txt:
 #    print(atxt)
 #    for ar in atxt.rutas:
 #        print(ar)
+
+#archivosY4 = process_spectrum_tablaY4()
+#for a in archivosY4:
+#    print(a)

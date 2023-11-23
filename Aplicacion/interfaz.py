@@ -1,3 +1,4 @@
+from math import e
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea
@@ -104,16 +105,21 @@ class HelloWindow(QMainWindow):
         # Imprime el espectro
         boxLayout2 = QVBoxLayout(self.ventana)
         self.ventana.setLayout(boxLayout2)
-        text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
-        self.ltexto = QtWidgets.QLabel(text)
-        boxLayout2.addWidget(self.ltexto)
+        carpeta = espectro[0]
+        tabla = espectro[1]
+        pigmento = espectro[2]
+        aglutinante = espectro[3]
+        base = espectro[4]
 
+        boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta+" "+"Tabla: "+tabla))
+        boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
+        boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
+        boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
+        text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
         self.ventana.show()
         print(text)
 
-        
-
-if __name__ == "__main__":
+def create():
     app = QtWidgets.QApplication(sys.argv)
     mainWin = HelloWindow()
     mainWin.show()

@@ -1,7 +1,7 @@
 from calendar import c
 from math import e
 from connectDB import consulta_db
-from recoverRegister import encuentra_spec, get_df_from_txt
+from recoverRegister import get_df_from_txt, encuentra_spec_txt
 
 # Controlador de la aplicacion
 
@@ -28,7 +28,7 @@ def controlador_nuevo_espectro(filtros):
 
 # Construye consulta para la insercion de un nuevo espectro
 def controlador_nuevo_espectro_txt(tabla,etiqueta):
-    ruta = encuentra_spec(tabla,etiqueta)
+    ruta = encuentra_spec_txt(tabla,etiqueta)
     df = get_df_from_txt(ruta)
     espectro = df.columns[1]
     x=df.columns[0]
