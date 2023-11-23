@@ -53,5 +53,4 @@ def controlador_recuperar_espectro(id):
     #return resultados
 
 #controlador_nuevo_espectro_txt('C1','A1')
-
-controlador_recuperar_espectro('A100000.asd')
+#controlador_recuperar_espectro('A100000.asd')

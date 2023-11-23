@@ -94,7 +94,6 @@ def process_asd_table(table):
     for f in archivos:
         data = specdal.Spectrum(filepath=f)
         data_wl = data.measurement
-        print(data_wl)
         # create pandas dataframe
         df = pd.DataFrame(columns=['Wavelength','reflectance'])
         df['Wavelength'] = data_wl.index
@@ -137,7 +136,11 @@ def print_table(specs_df,tabla):
         plt.show()
         cont+=1
 
-def print_spec(specs_df,etiqueta,base):
+def print_spec(specs_df,ruta):
+    etiqueta=ruta.split('/')[2]
+    tabla= ruta.split('/')[3].split('.')[0]
+    base= ruta.split('/')[1]
+    print(tabla)
     x=specs_df.columns[0]
     y=specs_df.columns[1]
     dev_x = specs_df[x].to_numpy()
@@ -145,11 +148,13 @@ def print_spec(specs_df,etiqueta,base):
     plt.plot(dev_x, dev_y)
     plt.xlabel('Wavelength')
     plt.ylabel('Reflectance')
-    t = base,etiqueta
+    t = base,etiqueta,tabla
     plt.title(t)
     plt.show()
 
-archivos_txt=process_spectrum_txt()
+#archivos_txt=process_spectrum_txt()
+#archivos_asd=process_spectrum_asd()
+
 #features = extract_features(archivos_txt)
 
 #table=archivos_txt[8]
@@ -157,8 +162,8 @@ archivos_txt=process_spectrum_txt()
 #print_spec(specs_df[0],'A1',table.base)
 #print_table(specs_df,table.base)
 
-#archivos_asd=process_spectrum_asd()
 #table=archivos_asd[8]
+#print(table)
 #specs_df=process_asd_table(table)
 #print_table(specs_df,table.base)
 
