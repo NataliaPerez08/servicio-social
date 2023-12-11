@@ -137,7 +137,6 @@ class HelloWindow(QMainWindow):
         #imprimir_spec(carpeta,tabla,espectro_name)
         # Include the matplotlib figure
         
-      
         self.figure = Figure()
         self.canvas = FigureCanvasQTAgg(self.figure)
         boxLayout2.addWidget(self.canvas)

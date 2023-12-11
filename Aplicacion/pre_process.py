@@ -76,48 +76,6 @@ def process_spectrum(directorio):
 def dar_intervalo(inicio,fin):
     return [inicio-350,fin-350]
 
-# Obtiene los espectros de la tabla especificada
-def process_txt_table(table):
-    specs_df = []
-    archivos = table.rutas
-    for f in archivos:
-        data = pd.read_csv(f,delimiter='\t')
-        specs_df.append(data)
-    return specs_df
-
-def process_asd_table(table):
-    specs_df = []
-    archivos = table.rutas
-    for f in archivos:
-        data = specdal.Spectrum(filepath=f)
-        data_wl = data.measurement
-        # create pandas dataframe
-        df = pd.DataFrame(columns=['Wavelength','reflectance'])
-        df['Wavelength'] = data_wl.index
-        df['reflectance'] = data_wl.values
-
-        specs_df.append(df)
-    return specs_df
-
-def print_table(specs_df,tabla):
-    etiquetas = ['A1','A2','A3','A4','A5',
-             'B1','B2','B3','B4','B5',
-             'C1','C2','C3','C4','C5',
-             'D1','D2','D3','D4','D5',
-             'E1','E2','E3','E4','E5']
-    cont=0
-    for f in specs_df:
-        x=f.columns[0]
-        y=f.columns[1]
-        dev_x = f[x].to_numpy()
-        dev_y = f[y].to_numpy()
-        plt.plot(dev_x, dev_y)
-        plt.xlabel('Wavelength')
-        plt.ylabel('Reflectance')
-        t = tabla,etiquetas[cont]
-        plt.title(t)
-        plt.show()
-        cont+=1
 
 def print_spec(specs_df,ruta):
     etiqueta=ruta.split('/')[2]
