@@ -1,0 +1,1 @@
+feature_names = ['wavelength','reflectance','pigmento','aglutinante','base']

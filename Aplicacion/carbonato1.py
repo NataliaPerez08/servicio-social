@@ -1,3 +1,4 @@
+from operator import le
 import os
 import pre_process as pp
 import recoverRegister as rr
@@ -13,6 +14,7 @@ Ancorca o gualda (marca ZecchiR, Reseda luteola, sp.) (C1:E1-E5) (Y1:E1-E5)
 """
 
 def obtener_carbonato_C1_tablas_1():
+    dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path'])
     # Info de Tabla 1
     dir = "Espectros_FORS_2/Tablas 1/C1"
     archivos=list()
@@ -26,22 +28,107 @@ def obtener_carbonato_C1_tablas_1():
     ancorca_sennelier = list()
     ancorca_zecchi = list()
     
+    
     for f in archivos:
         if f[0]=="A":
             df = rr.get_df_from_asd(dir+"/"+f)
-            ocre_mina_ingles.append(df)
+            # crear dataframe
+            dataframe['wavelength'] = df['Wavelength']
+            dataframe['reflectance'] = df['reflectance']
+            dataframe['pigmento'] = "Ocre de mina inglés"
+            if f[1] == '1':
+                dataframe['aglutinante'] = "Aceite de linaza"
+            elif f[1] == '2':
+                dataframe['aglutinante'] = "Yema de huevo"
+            elif f[1] == '3':
+                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+            elif f[1] == '4':
+                dataframe['aglutinante'] = "Cola de conejo"
+            elif f[1] == '5':
+                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+            dataframe['base'] = "Carbonato de calcio"
+            dataframe['path'] = dir+"/"+f
+
+            ocre_mina_ingles.append(dataframe)
         elif f[0]=="B":
             df = rr.get_df_from_asd(dir+"/"+f)
-            oropimente.append(df)
+            # crear dataframe
+            dataframe['wavelength'] = df['Wavelength']
+            dataframe['reflectance'] = df['reflectance']
+            dataframe['pigmento'] = "Ocre de mina inglés"
+
+            if f[1] == '1':
+                dataframe['aglutinante'] = "Aceite de linaza"
+            elif f[1] == '2':
+                dataframe['aglutinante'] = "Yema de huevo"
+            elif f[1] == '3':
+                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+            elif f[1] == '4':
+                dataframe['aglutinante'] = "Cola de conejo"
+            elif f[1] == '5':
+                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+
+            dataframe['base'] = "Carbonato de calcio"
+            dataframe['path'] = dir+"/"+f   
+            oropimente.append(dataframe)
+
         elif f[0]=="C":
             df = rr.get_df_from_asd(dir+"/"+f)
-            amarillo_plomo_estano.append(df)
+            # crear dataframe
+            dataframe['wavelength'] = df['Wavelength']
+            dataframe['reflectance'] = df['reflectance']
+            dataframe['pigmento'] = "Ocre de mina inglés"
+            if f[1] == '1':
+                dataframe['aglutinante'] = "Aceite de linaza"
+            elif f[1] == '2':
+                dataframe['aglutinante'] = "Yema de huevo"
+            elif f[1] == '3':
+                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+            elif f[1] == '4':
+                dataframe['aglutinante'] = "Cola de conejo"
+            elif f[1] == '5':
+                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+            dataframe['base'] = "Carbonato de calcio"
+            dataframe['path'] = dir+"/"+f
+            amarillo_plomo_estano.append(dataframe)
         elif f[0]=="D":
             df = rr.get_df_from_asd(dir+"/"+f)
-            ancorca_sennelier.append(df)
+            # crear dataframe
+            dataframe['wavelength'] = df['Wavelength']
+            dataframe['reflectance'] = df['reflectance']
+            dataframe['pigmento'] = "Ocre de mina inglés"
+            if f[1] == '1':
+                dataframe['aglutinante'] = "Aceite de linaza"
+            elif f[1] == '2':
+                dataframe['aglutinante'] = "Yema de huevo"
+            elif f[1] == '3':
+                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+            elif f[1] == '4':
+                dataframe['aglutinante'] = "Cola de conejo"
+            elif f[1] == '5':
+                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+            dataframe['base'] = "Carbonato de calcio"
+            dataframe['path'] = dir+"/"+f
+            ancorca_sennelier.append(dataframe)
         elif f[0]=="E":
             df = rr.get_df_from_asd(dir+"/"+f)
-            ancorca_zecchi.append(df)
+            # crear dataframe
+            dataframe['wavelength'] = df['Wavelength']
+            dataframe['reflectance'] = df['reflectance']
+            dataframe['pigmento'] = "Ocre de mina inglés"
+            if f[1] == '1':
+                dataframe['aglutinante'] = "Aceite de linaza"
+            elif f[1] == '2':
+                dataframe['aglutinante'] = "Yema de huevo"
+            elif f[1] == '3':
+                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+            elif f[1] == '4':
+                dataframe['aglutinante'] = "Cola de conejo"
+            elif f[1] == '5':
+                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+            dataframe['base'] = "Carbonato de calcio"
+            dataframe['path'] = dir+"/"+f
+            ancorca_zecchi.append(dataframe)
     
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,ancorca_sennelier,ancorca_zecchi]
 
@@ -70,9 +157,30 @@ def obtener_carbonato_C1_tablas_2():
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,ancorca_sennelier,ancorca_zecchi]
 
 def obtener_dframes(lista):
+    dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path'])
     dframes = list()
+    j = 0
     for l in lista:
-        dframes.append(rr.get_df_from_txt(l))
+        df = rr.create_df_from_txt(l)
+        # crear dataframe
+        dataframe['wavelength'] = df['Wavelength']
+        dataframe['reflectance'] = df['reflectance']
+        dataframe['pigmento'] = "Ocre de mina inglés"
+        if j in range(0,5):
+            dataframe['aglutinante'] = "Aceite de linaza"
+        elif j in range(5,10):
+            dataframe['aglutinante'] = "Yema de huevo"
+        elif j in range(10,15):
+            dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+        elif j in range(15,20):
+            dataframe['aglutinante'] = "Cola de conejo"
+        elif j in range(20,25):
+            dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+        
+        dataframe['path'] = l
+        dataframe['base'] = "Carbonato de calcio"
+        dframes.append(dataframe)
+        j+=1
     return dframes
 
 
@@ -85,11 +193,3 @@ def obtener_carbonato_C1():
     ancorca_sennelier = tabla1[3]+tabla2[3]
     ancorca_zecchi = tabla1[4]+tabla2[4]
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,ancorca_sennelier,ancorca_zecchi]
-
-print("Obteniendo carbonato C1")
-carbonato_C1 = obtener_carbonato_C1()
-print(len(carbonato_C1[0]))
-
-ocre = carbonato_C1[0]
-for o in ocre:
-    pp.print_spec_from_df(o,"Ocre de mina inglés")
