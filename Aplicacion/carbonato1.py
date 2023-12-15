@@ -1,4 +1,3 @@
-from operator import le
 import os
 import pre_process as pp
 import recoverRegister as rr
