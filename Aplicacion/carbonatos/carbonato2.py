@@ -1,5 +1,5 @@
+from operator import le
 import os
-import pre_process as pp
 import recoverRegister as rr
 import pandas as pd
 """
@@ -33,7 +33,7 @@ def obtener_carbonato_C2_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Ocre claro"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
@@ -53,7 +53,7 @@ def obtener_carbonato_C2_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Sombra tostada de Chipre"
 
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
@@ -75,7 +75,7 @@ def obtener_carbonato_C2_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Ocre oscuro Siena"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
@@ -94,7 +94,7 @@ def obtener_carbonato_C2_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Siena tostada"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
@@ -113,7 +113,7 @@ def obtener_carbonato_C2_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Betún de Judea"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
@@ -139,23 +139,23 @@ def obtener_carbonato_C2_tablas_2():
     archivos.sort()
     
     tmp = archivos[0:5]
-    ocre_claro= obtener_dframes(tmp)
+    ocre_claro= obtener_dframes(tmp,"Ocre claro")
 
     tmp = archivos[5:10]
-    sombra_tostada_de_Chipre = obtener_dframes(tmp)
+    sombra_tostada_de_Chipre = obtener_dframes(tmp,"Sombra tostada de Chipre")
 
     tmp = archivos[10:15]
-    ocre_oscuro_Siena = obtener_dframes(tmp)
+    ocre_oscuro_Siena = obtener_dframes(tmp,"Ocre oscuro Siena")
 
     tmp = archivos[15:20]
-    siena_tostada = obtener_dframes(tmp)
+    siena_tostada = obtener_dframes(tmp,"Siena tostada")
 
     tmp = archivos[20:25]
-    betun_de_Judea = obtener_dframes(tmp)
+    betun_de_Judea = obtener_dframes(tmp,"Betún de Judea")
 
     return [ocre_claro,sombra_tostada_de_Chipre,ocre_oscuro_Siena,siena_tostada,betun_de_Judea]
 
-def obtener_dframes(lista):
+def obtener_dframes(lista,pigmento):
     dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path'])
     dframes = list()
     j = 0
@@ -164,7 +164,7 @@ def obtener_dframes(lista):
         # crear dataframe
         dataframe['wavelength'] = df['Wavelength']
         dataframe['reflectance'] = df['reflectance']
-        dataframe['pigmento'] = "Ocre de mina inglés"
+        dataframe['pigmento'] = pigmento
         if j in range(0,5):
             dataframe['aglutinante'] = "Aceite de linaza"
         elif j in range(5,10):
@@ -192,3 +192,6 @@ def obtener_carbonato_C2():
     siena_tostada = tabla1[3]+tabla2[3]
     betun_de_Judea = tabla1[4]+tabla2[4]
     return [ocre_claro,sombra_tostada_de_Chipre,ocre_oscuro_Siena,siena_tostada,betun_de_Judea]
+
+ocre_claro = obtener_carbonato_C2_tablas_2()[0]
+print(ocre_claro)
