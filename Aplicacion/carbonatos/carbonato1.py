@@ -6,11 +6,13 @@ import pandas as pd
 """
 Pigmentos:
 (Tabla 1)
-Ocre de mina inglés (marca KremerR, n. 40191) (C1: A1-A5) (C7:A1) (Y1:A1-A5) (Y4:A1)
+Ocre de mina ingles (marca KremerR, n. 40191) (C1: A1-A5) (C7:A1) (Y1:A1-A5) (Y4:A1)
 Oropimente (molido en el LDOA)	(C1: B1-B5) (Y1:B1-B5)
 Amarillo de plomo estaño (tipo II, marca KremerR, n. 10120) (C1: C1-C5) (Y1:C1-C5)
 Ancorca (marca SennelierR, Reseda luteola, sp.) (C1:D1-D5)
 Ancorca o gualda (marca ZecchiR, Reseda luteola, sp.) (C1:E1-E5) (Y1:E1-E5)
+
+Carpeta,Tabla,Espectro,Pigmento,Aglutinante,Base de preparación
 """
 
 def obtener_carbonato_C1_tablas_1():
@@ -28,13 +30,14 @@ def obtener_carbonato_C1_tablas_1():
     ancorca_zecchi = list()
     
     for f in archivos:
-        dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path'])
+        dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro'])
+
         if f[0]=="A":
             df = rr.get_df_from_asd(dir+"/"+f)
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Ocre de mina ingles"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
@@ -47,6 +50,10 @@ def obtener_carbonato_C1_tablas_1():
                 dataframe['aglutinante'] = "Almáciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
+
+            dataframe['carpeta'] = "Tablas1"
+            dataframe['tabla'] = "C1"
+            dataframe['espectro'] = f
 
             ocre_mina_ingles.append(dataframe)
         elif f[0]=="B":
@@ -69,6 +76,9 @@ def obtener_carbonato_C1_tablas_1():
 
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f   
+            dataframe['carpeta'] = "Tablas1"
+            dataframe['tabla'] = "C1"
+            dataframe['espectro'] = f
             oropimente.append(dataframe)
 
         elif f[0]=="C":
@@ -89,6 +99,9 @@ def obtener_carbonato_C1_tablas_1():
                 dataframe['aglutinante'] = "Almáciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
+            dataframe['carpeta'] = "Tablas1"
+            dataframe['tabla'] = "C1"
+            dataframe['espectro'] = f
             amarillo_plomo_estano.append(dataframe)
         elif f[0]=="D":
             df = rr.get_df_from_asd(dir+"/"+f)
@@ -108,6 +121,9 @@ def obtener_carbonato_C1_tablas_1():
                 dataframe['aglutinante'] = "Almáciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
+            dataframe['carpeta'] = "Tablas1"
+            dataframe['tabla'] = "C1"
+            dataframe['espectro'] = f
             ancorca_sennelier.append(dataframe)
         elif f[0]=="E":
             df = rr.get_df_from_asd(dir+"/"+f)
@@ -127,6 +143,9 @@ def obtener_carbonato_C1_tablas_1():
                 dataframe['aglutinante'] = "Almáciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
+            dataframe['carpeta'] = "Tablas1"
+            dataframe['tabla'] = "C1"
+            dataframe['espectro'] = f
             ancorca_zecchi.append(dataframe)
     
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,ancorca_sennelier,ancorca_zecchi]
@@ -140,7 +159,7 @@ def obtener_carbonato_C1_tablas_2():
     archivos.sort()
     
     tmp = archivos[0:5]
-    ocre_mina_ingles = obtener_dframes(tmp,"Ocre de mina inglés")
+    ocre_mina_ingles = obtener_dframes(tmp,"Ocre de mina ingles")
 
     tmp = archivos[5:10]
     oropimente = obtener_dframes(tmp,"Oropimente")
@@ -158,14 +177,17 @@ def obtener_carbonato_C1_tablas_2():
 def obtener_dframes(lista,pigmento):
     dframes = list()
     for l in lista:
-        dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path'])
+        dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro'])
         df = rr.create_df_from_txt(l)
         # crear dataframe
         dataframe['wavelength'] = df['Wavelength']
         dataframe['reflectance'] = df['reflectance']
         dataframe['pigmento'] = pigmento
-        dataframe['path'] = l.split("/")[-1]
+        dataframe['path'] = l
         dataframe['base'] = "Carbonato de calcio"
+        dataframe['carpeta'] = "Tablas2"
+        dataframe['tabla'] = "C1"
+        dataframe['espectro'] = l.split("/")[-1]
         dframes.append(dataframe)
 
     dframes[0]['aglutinante'] = "Aceite de linaza"
@@ -188,6 +210,8 @@ def obtener_carbonato_C1():
     ancorca_zecchi = tabla1[4]+tabla2[4]
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,ancorca_sennelier,ancorca_zecchi]
 
-ocre_mina_ingles = obtener_carbonato_C1_tablas_1()[0]
-for o in ocre_mina_ingles:
-    print(o)
+
+ocre_mina_ingles = obtener_carbonato_C1()
+for f in ocre_mina_ingles:
+    for o in f:
+        print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
