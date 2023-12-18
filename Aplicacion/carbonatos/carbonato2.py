@@ -213,7 +213,17 @@ def obtener_carbonato_C2():
     betun_de_Judea = tabla1[4]+tabla2[4]
     return [ocre_claro,sombra_tostada_de_Chipre,ocre_oscuro_Siena,siena_tostada,betun_de_Judea]
 
-ocre_mina_ingles = obtener_carbonato_C2()
-for f in ocre_mina_ingles:
-    for o in f:
-        print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
+def contenar_c1():
+    ejemplares_c2 = obtener_carbonato_C2()
+    ocre_claro = ejemplares_c2[0]
+    sombra_tostada_de_Chipre = ejemplares_c2[1]
+    ocre_oscuro_Siena = ejemplares_c2[2]
+    siena_tostada = ejemplares_c2[3]
+    betun_de_Judea = ejemplares_c2[4]
+    return ocre_claro+sombra_tostada_de_Chipre+ocre_oscuro_Siena+siena_tostada+betun_de_Judea
+
+def imprimir():
+    ocre_mina_ingles = obtener_carbonato_C2()
+    for f in ocre_mina_ingles:
+        for o in f:
+            print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])

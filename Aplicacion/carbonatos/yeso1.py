@@ -214,7 +214,8 @@ def obtener_yeso_Y1():
     ancorca_zecchi = tabla1[4]+tabla2[4]
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,gualda,ancorca_zecchi]
 
-ocre_mina_ingles = obtener_yeso_Y1()
-for f in ocre_mina_ingles:
-    for o in f:
-        print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
+def imprimir():
+    ocre_mina_ingles = obtener_yeso_Y1()
+    for f in ocre_mina_ingles:
+        for o in f:
+            print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])

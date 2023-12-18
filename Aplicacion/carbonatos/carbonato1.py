@@ -210,8 +210,17 @@ def obtener_carbonato_C1():
     ancorca_zecchi = tabla1[4]+tabla2[4]
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,ancorca_sennelier,ancorca_zecchi]
 
+def contenar_c1():
+    ejemplares_c1 = obtener_carbonato_C1()
+    ocre_mina_ingles = ejemplares_c1[0]
+    oropimente = ejemplares_c1[1]
+    amarillo_plomo_estano = ejemplares_c1[2]
+    ancorca_sennelier = ejemplares_c1[3]
+    ancorca_zecchi = ejemplares_c1[4]
+    return ocre_mina_ingles+oropimente+amarillo_plomo_estano+ancorca_sennelier+ancorca_zecchi
 
-ocre_mina_ingles = obtener_carbonato_C1()
-for f in ocre_mina_ingles:
-    for o in f:
-        print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
+def imprimir():
+    ocre_mina_ingles = obtener_carbonato_C1()
+    for f in ocre_mina_ingles:
+        for o in f:
+            print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
