@@ -5,8 +5,11 @@ import carbonatos.carbonato1 as c1
 import carbonatos.carbonato2 as c2
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, precision_score
+from sklearn.metrics import explained_variance_score
 
 
 feature_names = ['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro']
@@ -96,4 +99,42 @@ def get_GNB(ejemplares):
     #View confusion matrix
     confusion_matrix(y_test, y_pred)
 
-get_GNB(ejemplares_c1)
+def get_linear_regression(ejemplares):
+    X,y = get_X_y_Tabla(ejemplares)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
+
+    # Create Linear Regression object
+    LRclf = LinearRegression()
+    # Train model
+    model = LRclf.fit(X, y)
+
+    # Make predictions
+    y_pred =  LRclf.predict(X_test)
+    print(y_test)
+    print(y_pred)
+
+    # View accuracy score
+    accuracy = explained_variance_score(y_test, y_pred)
+    print("Precisión del modelo:", accuracy)
+
+def get_logistic_Regression(ejemplares):
+    X,y = get_X_y_Tabla(ejemplares)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
+
+    # Create Logistic Regression object
+    LRclf = LogisticRegression(penalty='l2',solver='lbfgs', max_iter=10500)
+    # Train model
+    model = LRclf.fit(X, y)
+
+    # Make predictions
+    y_pred =  LRclf.predict(X_test)
+    print(y_test)
+    print(y_pred)
+
+    # View accuracy score
+    accuracy = accuracy_score(y_test, y_pred)
+    print("Precisión del modelo:", accuracy)
+    print(precision_score(y_test, y_pred, average='macro', zero_division=0))
+
+print("LogisticRegression")
+get_logistic_Regression(ejemplares_c1)
