@@ -7,7 +7,7 @@ Pigmentos:
 (Tabla 1)
 Bermellon	(C6: A1-A5)
 Cochinilla (C6: B1:B5)
-Azurita (C6: C1:C5)
+Azurita (C6: C6:C5)
 Amarillo de plomo estaño (C6: D1-D5)
 Blanco de plomo.Kremer (C6: E1-E5)	
 
@@ -196,7 +196,7 @@ def obtener_dframes(lista,pigmento):
         dataframe['path'] = l
         dataframe['base'] = "Carbonato de calcio"
         dataframe['carpeta'] = "Tablas2"
-        dataframe['tabla'] = "C1"
+        dataframe['tabla'] = "C6"
         dataframe['espectro'] = l.split("/")[-1]
         dframes.append(dataframe)
 
