@@ -1,5 +1,4 @@
 import os
-from matplotlib.pylab import f
 import recoverRegister as rr
 import pandas as pd
 """

@@ -54,7 +54,7 @@ def obtener_dframes(lista,pigmento):
         dframes.append(dataframe)
 
     dframes[0]['aglutinante'] = "Aceite de linaza"
-    dframes[1]['aglutinante'] = "Aceite de nuez "
+    dframes[1]['aglutinante'] = "Aceite de nuez"
     dframes[2]['aglutinante'] = "Yema de huevo y aceite de linaza"
     dframes[3]['aglutinante'] = "Cola de conejo"
     dframes[4]['aglutinante'] = "Almáciga y aceite de linaza"
