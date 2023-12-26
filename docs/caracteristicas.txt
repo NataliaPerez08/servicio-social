@@ -160,8 +160,8 @@ Negro de huesos (Y7:E4)
 Negro de humo. Kremer (Y7:E5)
 
 
-Bermellon. Kremer (Y8: A1-A5)
-Cochinilla. Laca carmín (Y8: B1:B5)
+Bermellon. Kremer (Y7: A1-A5)
+Cochinilla. Laca carmín (Y7: B1:B5)
 Azurita. Zeechi (Y8: C1:C5)
 Amarillo de plomo estaño. Kremer (Y8: D1-D5)
 Blanco de plomo. Kremer (Y8: E1-E5)	

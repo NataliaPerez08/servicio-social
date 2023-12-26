@@ -163,4 +163,3 @@ def imprimir():
         for o in f:
             print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
 
-imprimir()
