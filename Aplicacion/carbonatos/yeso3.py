@@ -49,7 +49,7 @@ def obtener_dframes(lista,pigmento):
         dataframe['path'] = l
         dataframe['base'] = "Carbonato de calcio"   
         dataframe['carpeta'] = "Tablas2"
-        dataframe['tabla'] = "C2"
+        dataframe['tabla'] = "Y3"
         dataframe['espectro'] = l.split("/")[-1]
 
         dframes.append(dataframe)

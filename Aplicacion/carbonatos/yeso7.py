@@ -173,6 +173,7 @@ def obtener_yeso_Y7_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
+
             if f[1] == '1':
                 dataframe['pigmento'] = "Resinato de cobre"
                 dataframe['aglutinante'] = ""
@@ -203,18 +204,22 @@ def obtener_yeso_Y7_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Sombra tostada de Cipre"
 
             if f[1] == '1':
-                dataframe['aglutinante'] = "Aceite de linaza"
+                dataframe['pigmento'] = "Tierra de Sombra"
+                dataframe['aglutinante'] = ""
             elif f[1] == '2':
-                dataframe['aglutinante'] = "Yema de huevo"
+                dataframe['pigmento'] = "Sombra tostada de Chipre"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '3':
-                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+                dataframe['pigmento'] = "Siena"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '4':
-                dataframe['aglutinante'] = "Cola de conejo"
+                dataframe['pigmento'] = "Siena tostada"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['pigmento'] = "Espalto"
+                dataframe['aglutinante'] = ""
 
             dataframe['base'] = "Yeso"
             dataframe['path'] = dir+"/"+f
@@ -222,24 +227,30 @@ def obtener_yeso_Y7_tablas_1():
             dataframe['carpeta'] = "Tablas1"
             dataframe['tabla'] = "Y7"
             dataframe['espectro'] = f
-            sombra_tostada_de_Chipre.append(dataframe)
+            df_list.append(dataframe)
 
         elif f[0]=="C":
             df = rr.get_df_from_asd(dir+"/"+f)
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre oscuro Siena"
+            
             if f[1] == '1':
+                dataframe['pigmento'] = "Cinabrio"
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
-                dataframe['aglutinante'] = "Yema de huevo"
+                dataframe['pigmento'] = "Almagre"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '3':
-                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+                dataframe['pigmento'] = "Azarcón o Minio"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '4':
-                dataframe['aglutinante'] = "Cola de conejo"
+                dataframe['pigmento'] = "Cochinilla. Tlapanocheztli"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['pigmento'] = "Alizarina. Zeechi"
+                dataframe['aglutinante'] = ""
+
 
             dataframe['base'] = "Yeso"
             dataframe['path'] = dir+"/"+f
@@ -247,58 +258,72 @@ def obtener_yeso_Y7_tablas_1():
             dataframe['carpeta'] = "Tablas1"
             dataframe['tabla'] = "Y7"
             dataframe['espectro'] = f
-            ocre_oscuro_Siena.append(dataframe)
+
+            df_list.append(dataframe)
 
         elif f[0]=="D":
             df = rr.get_df_from_asd(dir+"/"+f)
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Siena tostada"
+
             if f[1] == '1':
+                dataframe['pigmento'] = "Laca rubia"
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
-                dataframe['aglutinante'] = "Yema de huevo"
+                dataframe['pigmento'] = "Azurita"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '3':
-                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+                dataframe['pigmento'] = "Esmalte"
+                dataframe['aglutinante'] = ""
             elif f[1] == '4':
-                dataframe['aglutinante'] = "Cola de conejo"
+                dataframe['pigmento'] = "Lapislazuli"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['pigmento'] = "Indigo"
+                dataframe['aglutinante'] = ""
+
             dataframe['base'] = "Yeso"
             dataframe['path'] = dir+"/"+f
 
             dataframe['carpeta'] = "Tablas1"
             dataframe['tabla'] = "Y7"
             dataframe['espectro'] = f
-            siena_tostada.append(dataframe)
+
+            df_list.append(dataframe)
 
         elif f[0]=="E":
             df = rr.get_df_from_asd(dir+"/"+f)
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Betun de Judea"
+
+
             if f[1] == '1':
-                dataframe['aglutinante'] = "Aceite de linaza"
+                dataframe['pigmento'] = "Resinato de cobre"
+                dataframe['aglutinante'] = ""
             elif f[1] == '2':
-                dataframe['aglutinante'] = "Yema de huevo"
+                dataframe['pigmento'] = "Malaquita africana"
+                dataframe['aglutinante'] = ""
             elif f[1] == '3':
-                dataframe['aglutinante'] = "Yema de huevo y aceite de linaza"
+                dataframe['pigmento'] = "Tierra verde de bohemia"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '4':
-                dataframe['aglutinante'] = "Cola de conejo"
+                dataframe['pigmento'] = "Negro de huesos"
+                dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['pigmento'] = "Negro de humo"
+                dataframe['aglutinante'] = ""
+
             dataframe['base'] = "Yeso"
             dataframe['path'] = dir+"/"+f
             dataframe['carpeta'] = "Tablas1"
             dataframe['tabla'] = "Y7"
             dataframe['espectro'] = f
-            betun_de_Judea.append(dataframe)
+
+            df_list.append(dataframe)
     
-    return [ocre_claro,sombra_tostada_de_Chipre,ocre_oscuro_Siena,siena_tostada,betun_de_Judea]
-
-
+    return df_list
 
 def crear_dataframe(pigmento,tmp):
     carpeta =  "Tablas2"
@@ -322,8 +347,9 @@ def crear_dataframe(pigmento,tmp):
     return dataframe
 
 def imprimir():
-    espectros = obtener_carbonato_C7_tablas_2()
-    print(len(espectros))
+    espectros_1 = obtener_yeso_Y7_tablas_1()
+    espectros_2 = obtener_carbonato_C7_tablas_2()
+    espectros = espectros_1 + espectros_2
     for o in espectros:
         print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
 
