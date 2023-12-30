@@ -154,11 +154,11 @@ def obtener_yeso_Y2_tablas_1():
     
     return [ocre_claro,sombra_tostada_de_Chipre,ocre_oscuro_Siena,siena_tostada,betun_de_Judea]
 
+def obtener_yeso_Y2():
+    return obtener_yeso_Y2_tablas_1()
 
 def imprimir():
-    ocre_mina_ingles = obtener_yeso_Y2_tablas_1()
-    for f in ocre_mina_ingles:
+    espectro = obtener_yeso_Y2_tablas_1()
+    for f in espectro:
         for o in f:
             print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
-
-imprimir()

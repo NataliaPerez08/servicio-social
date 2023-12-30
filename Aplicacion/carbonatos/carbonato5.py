@@ -60,6 +60,8 @@ def obtener_dframes(lista,pigmento):
     dframes[4]['aglutinante'] = "Almáciga y aceite de linaza"
     return dframes
 
+def obtener_carbonato_C5():
+    return obtener_carbonato_C5_tablas_2()
 
 def imprimir():
     ocre_mina_ingles = obtener_carbonato_C5_tablas_2()

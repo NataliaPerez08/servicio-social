@@ -157,6 +157,9 @@ def obtener_yeso_Y6_tablas_1():
     
     return [rejalgar,azurita,esmalte,lapislazuli,indigo_anil]
 
+def obtener_yeso_Y6():
+    return obtener_yeso_Y6_tablas_1()
+
 def imprimir():
     yeso6 = obtener_yeso_Y6_tablas_1()
     for f in yeso6:

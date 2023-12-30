@@ -1,9 +1,6 @@
-from math import pi
 import os
-from re import L
 import recoverRegister as rr
 import pandas as pd
-import numpy as np
 """
 Ocre de	mina inglés	(Y4: A1)
 Oropimente	(Y4: A2)
@@ -370,10 +367,23 @@ def obtener_yeso_Y4_tablas_2():
 
 def imprimir():
     espectros_1 = obtener_yeso_Y4_tablas_1()
-    #espectros_2 = obtener_yeso_Y4_tablas_2()
-    #espectros = espectros_1 + espectros_2
-    for o in espectros_1:
+    espectros_2 = obtener_yeso_Y4_tablas_2()
+    espectros = espectros_1 + espectros_2
+    for o in espectros:
        # print(o)
         print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
 
-imprimir()
+def obtener_yeso_Y4():
+    espectros_1 = obtener_yeso_Y4_tablas_1()
+    espectros_2 = obtener_yeso_Y4_tablas_2()
+    espectros = espectros_1 + espectros_2
+    return espectros
+
+def str_yeso_y4():
+    s_y4 = ""
+    espectros_1 = obtener_yeso_Y4_tablas_1()
+    espectros_2 = obtener_yeso_Y4_tablas_2()
+    espectros = espectros_1 + espectros_2
+    for o in espectros:
+       s_y4+=o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0]+"\n"
+    return s_y4

@@ -61,6 +61,9 @@ def obtener_dframes(lista,pigmento):
     dframes[4]['aglutinante'] = "Almáciga y aceite de linaza"
     return dframes
 
+def obtener_yeso_Y3():
+    return obtener_yeso_Y3_tablas_2()
+
 
 def imprimir():
     espectros = obtener_yeso_Y3_tablas_2()

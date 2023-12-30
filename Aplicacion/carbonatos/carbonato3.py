@@ -152,8 +152,11 @@ def obtener_carbonato_C3_tablas_1():
     
     return [cinabrio,almagre,azarcon_o_minio,carmin_de_cochinilla,laca_de_alizarina]
 
+def obtener_carbonato_C3():
+    return obtener_carbonato_C3_tablas_1()
+
 def imprimir():
-    ocre_mina_ingles = obtener_carbonato_C3_tablas_1()
-    for f in ocre_mina_ingles:
+    espectros = obtener_carbonato_C3_tablas_1()
+    for f in espectros:
         for o in f:
             print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])

@@ -37,7 +37,7 @@ Negro de humo. Kremer (Y7:E5)
 Carpeta,Tabla,Espectro,Pigmento,Aglutinante,Base de preparación
 """
 
-def obtener_carbonato_C7_tablas_2():
+def obtener_yeso_Y7_tablas_2():
     # Info de Tabla 2
     dir = "Espectros_FORS_2/Tablas 2/Tabla_Y7"
     archivos=list()
@@ -348,9 +348,22 @@ def crear_dataframe(pigmento,tmp):
 
 def imprimir():
     espectros_1 = obtener_yeso_Y7_tablas_1()
-    espectros_2 = obtener_carbonato_C7_tablas_2()
+    espectros_2 = obtener_yeso_Y7_tablas_2()
     espectros = espectros_1 + espectros_2
     for o in espectros:
         print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
 
-imprimir()
+def obtener_yeso_Y7():
+    espectros_1 = obtener_yeso_Y7_tablas_1()
+    espectros_2 = obtener_yeso_Y7_tablas_2()
+    espectros = espectros_1 + espectros_2
+    return espectros
+
+def str_yeso_y7():
+    s_y7 = ""
+    espectros_1 = obtener_yeso_Y7_tablas_1()
+    espectros_2 = obtener_yeso_Y7_tablas_2()
+    espectros = espectros_1 + espectros_2
+    for o in espectros:
+       s_y7+=o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0]+"\n"
+    return s_y7
