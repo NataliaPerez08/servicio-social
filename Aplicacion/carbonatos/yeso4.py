@@ -1,4 +1,6 @@
+from math import pi
 import os
+from re import L
 import recoverRegister as rr
 import pandas as pd
 import numpy as np
@@ -87,45 +89,125 @@ def obtener_yeso_Y4_tablas_1():
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
-    # B1-B5
     l_tmp = archivos[20:25]
+    pigmento = "Arzica"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    # B1-B5
+    l_tmp = archivos[25:30]
     pigmento = "Pardo antilope"
     aglutinante = "Aceite de linaza"
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
-    l_tmp = archivos[25:30]
+    l_tmp = archivos[30:35]
     pigmento = "Sombra tostada de Chipre"
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
-    l_tmp = archivos[30:35]
+    l_tmp = archivos[35:40]
     pigmento = "Ocre aleman oscuro"
     aglutinante = "Aceite de linaza"
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
-    l_tmp = archivos[35:40]
+    l_tmp = archivos[40:45]
     pigmento = "Tierra de Siena tostada oscura"
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
-    l_tmp = archivos[40:45]
+    l_tmp = archivos[45:50]
     pigmento = "Betun de Judea"
     aglutinante = "Aceite de linaza"
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
     # C1-C5
-    l_tmp = archivos[45:50]
+    l_tmp = archivos[50:55]
     pigmento = "Cinabrio"
     aglutinante = "Aceite de linaza"
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
-    l_tmp = archivos[50:55]
+    l_tmp = archivos[55:60]
     pigmento = "Hematita natural"
     aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    l_tmp = archivos[60:65]
+    pigmento = "Minio"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    l_tmp = archivos[65:70]
+    pigmento = "Cochinilla"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    l_tmp = archivos[70:75]
+    pigmento = "Carmin de alizarina"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    # D1-D5
+    l_tmp = archivos[75:80]
+    pigmento = "Laca rubia"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    l_tmp = archivos[80:85]
+    pigmento = "Azurita natural"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list +dframes
+
+    l_tmp = archivos[85:90]
+    pigmento = "Esmalte"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list +dframes
+
+    l_tmp = archivos[90:95]
+    pigmento = "Lapislazuli"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list= df_list + dframes
+
+    l_tmp = archivos[95:100]
+    pigmento = "Anil o Indigo"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list= df_list + dframes
+
+    # E1-E5
+    l_tmp = archivos[100:105]
+    pigmento = "Resinato de cobre"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    l_tmp = archivos[105:110]
+    pigmento = "Malaquita natural"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    l_tmp = archivos[110:115]
+    pigmento = "Terra verde"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list= df_list + dframes
+
+    l_tmp = archivos[115:120]
+    pigmento = "Negro de huesos o marfil"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
+
+    l_tmp = archivos[120:125]
+    pigmento = "Negro de vid frances"
     dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
     df_list = df_list + dframes
 
