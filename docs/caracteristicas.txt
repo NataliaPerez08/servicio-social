@@ -97,6 +97,7 @@ Tierra verde de Verona (Y5: C1:C5)
 Negro de huesos (Y5: D1-D5)
 Negro de humo(Y5: E1-E5)	
 
+----
 
 Ocre de	mina inglés	(Y4: A1)
 Oropimente	(Y4: A2)
@@ -127,6 +128,8 @@ Malaquita natural (Y4:E2)
 Terra verde (Y4:E3)
 Negro de huesos o marfil (Y4:E4)
 Negro de vid francés (Y4:E5)
+
+-----
 
 Resinato de	cobre, Blanco de plomo, ocre y negro de vid (Y7:A1)
 Amarillo de plomo (estaño. Tipo I) (Y7: A2)
@@ -160,8 +163,8 @@ Negro de huesos (Y7:E4)
 Negro de humo. Kremer (Y7:E5)
 
 
-Bermellon. Kremer (Y7: A1-A5)
-Cochinilla. Laca carmín (Y7: B1:B5)
+Bermellon. Kremer (Y8: A1-A5)
+Cochinilla. Laca carmín (Y8: B1:B5)
 Azurita. Zeechi (Y8: C1:C5)
 Amarillo de plomo estaño. Kremer (Y8: D1-D5)
 Blanco de plomo. Kremer (Y8: E1-E5)	
