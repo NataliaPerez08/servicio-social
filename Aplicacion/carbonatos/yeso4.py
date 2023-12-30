@@ -279,7 +279,7 @@ def obtener_yeso_Y4_tablas_1():
 def crear_dataframe(pigmento,tmp):
     carpeta =  "Tablas2"
     base = "Yeso"
-    tabla = "Y7"
+    tabla = "Y4"
     # Crear dataframe
     dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro'])
 
@@ -309,14 +309,17 @@ def obtener_yeso_Y4_tablas_2():
     # A1
     tmp = archivos[0]
     df = crear_dataframe("Ocre de mina ingles",tmp)
+    df['aglutinante'] = "Aceite de linaza"
     df_list.append(df)
     
     tmp = archivos[1]
     df = crear_dataframe("Oropimente",tmp)
+    df['aglutinante'] = "Aceite de linaza"
     df_list.append(df)
    
     tmp = archivos[2]
     df = crear_dataframe("Amarillo de plomo",tmp)
+    df['aglutinante'] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[3]
@@ -330,6 +333,7 @@ def obtener_yeso_Y4_tablas_2():
     # B1-B5
     tmp = archivos[5]
     df = crear_dataframe("Pardo antilope",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[6]
@@ -338,6 +342,7 @@ def obtener_yeso_Y4_tablas_2():
 
     tmp = archivos[7]
     df = crear_dataframe("Ocre aleman oscuro",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[8]
@@ -346,38 +351,46 @@ def obtener_yeso_Y4_tablas_2():
 
     tmp = archivos[9]
     df = crear_dataframe("Betun de Judea",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     
     # C1-C5
     tmp = archivos[10]
     df = crear_dataframe("Cinabrio",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[11]
     df = crear_dataframe("Hematita natural",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[12]
     df = crear_dataframe("Minio",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[13]
     df = crear_dataframe("Cochinilla",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[14]
     df = crear_dataframe("Carmin de alizarina",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     # D1-D5
 
     tmp = archivos[15]
     df = crear_dataframe("Laca rubia",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[16]
     df = crear_dataframe("Azurita	natural",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[17]
@@ -386,10 +399,12 @@ def obtener_yeso_Y4_tablas_2():
 
     tmp = archivos[18]
     df = crear_dataframe("Lapislazuli",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[19]
     df = crear_dataframe("Anil o Indigo",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     # E1-E5
@@ -403,6 +418,7 @@ def obtener_yeso_Y4_tablas_2():
 
     tmp = archivos[22]
     df = crear_dataframe("Terra verde",tmp)
+    df["aglutinante"] = "Aceite de linaza"
     df_list.append(df)
 
     tmp = archivos[23]
