@@ -1,6 +1,7 @@
 import os
 import recoverRegister as rr
 import pandas as pd
+import numpy as np
 """
 Ocre de	mina inglés	(Y4: A1)
 Oropimente	(Y4: A2)
@@ -32,247 +33,101 @@ Terra verde (Y4:E3)
 Negro de huesos o marfil (Y4:E4)
 Negro de vid francés (Y4:E5)
 """
+def obtener_dframes(lista,pigmento,aglutinante):
+    dframes = list()
+
+    for l in lista:
+        dataframe = pd.DataFrame(columns=['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro'])
+        df = rr.create_df_from_txt(l)
+        # crear dataframe
+        dataframe['wavelength'] = df['Wavelength']
+        dataframe['reflectance'] = df['reflectance']
+        dataframe['pigmento'] = pigmento
+        dataframe['path'] = l
+        dataframe['base'] = "Yeso"  
+        dataframe['carpeta'] = "Tablas 1"
+        dataframe['tabla'] = "Y4"
+        dataframe['espectro'] = l.split("/")[-1]
+        dataframe['aglutinante'] = aglutinante
+
+        dframes.append(dataframe)
+
+    return dframes
 
 def obtener_yeso_Y4_tablas_1():
-    # Info de Tabla 2
+    # Info de Tabla 1
     dir = "Espectros_FORS_2/Tablas 1/Y4"
     archivos=list()
     for f in os.listdir(dir):
         archivos.append(dir+"/"+f)
     archivos.sort()
-    
+
     df_list = list()
-    print(len(archivos))
-    # A1
-    tmp = archivos[0]
-    df0 = crear_dataframe("Ocre de mina ingles",tmp)
-    tmp = archivos[1]
-    df1 = crear_dataframe("Ocre de mina ingles",tmp)
-    tmp = archivos[2]
-    df2 = crear_dataframe("Ocre de mina ingles",tmp)
-    tmp = archivos[3]
-    df3 = crear_dataframe("Ocre de mina ingles",tmp)
-    tmp = archivos[4]
-    df4 = crear_dataframe("Ocre de mina ingles",tmp)
-    
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
+    # A1-A5
+    l_tmp = archivos[0:5]
+    pigmento = "Ocre de mina ingles"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    # A2
-    tmp = archivos[5]
-    df0 = crear_dataframe("Oropimente",tmp)
-    tmp = archivos[6]
-    df1 = crear_dataframe("Oropimente",tmp)
-    tmp = archivos[7]
-    df2 = crear_dataframe("Oropimente",tmp)
-    tmp = archivos[8]
-    df3 = crear_dataframe("Oropimente",tmp)
-    tmp = archivos[9]
-    df4 = crear_dataframe("Oropimente",tmp)
-    
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
+    l_tmp = archivos[5:10]
+    pigmento = "Oropimente"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    # A3
-    tmp = archivos[10]
-    df = crear_dataframe("Amarillo de plomo",tmp)
-    tmp = archivos[11]
-    df = crear_dataframe("Amarillo de plomo",tmp)
-    tmp = archivos[12]
-    df = crear_dataframe("Amarillo de plomo",tmp)
-    tmp = archivos[13]
-    df = crear_dataframe("Amarillo de plomo",tmp)
-    tmp = archivos[14]
-    df = crear_dataframe("Amarillo de plomo",tmp)
+    l_tmp = archivos[10:15]
+    pigmento = "Amarillo de plomo"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
+    l_tmp = archivos[15:20]
+    pigmento = "Gualda"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    # A4
-    tmp = archivos[15]
-    df0 = crear_dataframe("Gualda",tmp)
-    tmp = archivos[16]
-    df1 = crear_dataframe("Gualda",tmp)
-    tmp = archivos[17]
-    df2 = crear_dataframe("Gualda",tmp)
-    tmp = archivos[18]
-    df3 = crear_dataframe("Gualda",tmp)
-    tmp = archivos[19]
-    df4 = crear_dataframe("Gualda",tmp)
+    # B1-B5
+    l_tmp = archivos[20:25]
+    pigmento = "Pardo antilope"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
+    l_tmp = archivos[25:30]
+    pigmento = "Sombra tostada de Chipre"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    # A5
-    tmp = archivos[20]
-    df0 = crear_dataframe("Arzica",tmp)
-    tmp = archivos[21]
-    df1 = crear_dataframe("Arzica",tmp)
-    tmp = archivos[22]
-    df2 = crear_dataframe("Arzica",tmp)
-    tmp = archivos[23]
-    df3 = crear_dataframe("Arzica",tmp)
-    tmp = archivos[24]
-    df4 = crear_dataframe("Arzica",tmp)
+    l_tmp = archivos[30:35]
+    pigmento = "Ocre aleman oscuro"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
+    l_tmp = archivos[35:40]
+    pigmento = "Tierra de Siena tostada oscura"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    # B1 
-    tmp = archivos[25]
-    df0 = crear_dataframe("Pardo antilope",tmp)
-    tmp = archivos[26]
-    df1 = crear_dataframe("Pardo antilope",tmp)
-    tmp = archivos[27]
-    df2 = crear_dataframe("Pardo antilope",tmp)
-    tmp = archivos[28]
-    df3 = crear_dataframe("Pardo antilope",tmp)
-    tmp = archivos[29]
-    df4 = crear_dataframe("Pardo antilope",tmp)
+    l_tmp = archivos[40:45]
+    pigmento = "Betun de Judea"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
+    # C1-C5
+    l_tmp = archivos[45:50]
+    pigmento = "Cinabrio"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
-    # B2
-    tmp = archivos[30]
-    df0 = crear_dataframe("Sombra tostada de Chipre",tmp)
-    tmp = archivos[31]
-    df1 = crear_dataframe("Sombra tostada de Chipre",tmp)
-    tmp = archivos[32]
-    df2 = crear_dataframe("Sombra tostada de Chipre",tmp)
-    tmp = archivos[33]
-    df3 = crear_dataframe("Sombra tostada de Chipre",tmp)
-    tmp = archivos[34]
-    df4 = crear_dataframe("Sombra tostada de Chipre",tmp)
-    
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
-
-    # B3
-    tmp = archivos[35]
-    df0 = crear_dataframe("Ocre aleman oscuro",tmp)
-    tmp = archivos[36]
-    df1 = crear_dataframe("Ocre aleman oscuro",tmp)
-    tmp = archivos[37]
-    df2 = crear_dataframe("Ocre aleman oscuro",tmp)
-    tmp = archivos[38]
-    df3 = crear_dataframe("Ocre aleman oscuro",tmp)
-    tmp = archivos[39]
-    df4 = crear_dataframe("Ocre aleman oscuro",tmp)
-
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
-
-    # B4
-    tmp = archivos[40]
-    df0 = crear_dataframe("Tierra de Siena tostada oscura",tmp)
-    tmp = archivos[41]
-    df1 = crear_dataframe("Tierra de Siena tostada oscura",tmp)
-    tmp = archivos[42]
-    df2 = crear_dataframe("Tierra de Siena tostada oscura",tmp)
-    tmp = archivos[43]
-    df3 = crear_dataframe("Tierra de Siena tostada oscura",tmp)
-    tmp = archivos[44]
-    df4 = crear_dataframe("Tierra de Siena tostada oscura",tmp)
-
-    df_list.append(df0)
-    df_list.append(df1)
-    df_list.append(df2)
-    df_list.append(df3)
-    df_list.append(df4)
-
-    # B5
-    tmp = archivos[45]
-    df0 = crear_dataframe("Betun de Judea",tmp)
-    
-    # C1
-
-    tmp = archivos[10]
-    df = crear_dataframe("Cinabrio",tmp)
-    df_list.append(df)
-
-    tmp = archivos[11]
-    df = crear_dataframe("Hematita natural",tmp)
-    df_list.append(df)
-
-    tmp = archivos[12]
-    df = crear_dataframe("Minio",tmp)
-    df_list.append(df)
-
-    tmp = archivos[13]
-    df = crear_dataframe("Cochinilla",tmp)
-    df_list.append(df)
-
-    tmp = archivos[14]
-    df = crear_dataframe("Carmin de alizarina",tmp)
-    df_list.append(df)
-
-    # D1-D5
-
-    tmp = archivos[15]
-    df = crear_dataframe("Laca rubia",tmp)
-    df_list.append(df)
-
-    tmp = archivos[16]
-    df = crear_dataframe("Azurita	natural",tmp)
-    df_list.append(df)
-
-    tmp = archivos[17]
-    df = crear_dataframe("Esmalte",tmp)
-    df_list.append(df)
-
-    tmp = archivos[18]
-    df = crear_dataframe("Lapislazuli",tmp)
-    df_list.append(df)
-
-    tmp = archivos[19]
-    df = crear_dataframe("Anil o Indigo",tmp)
-    df_list.append(df)
-
-    # E1-E5
-    tmp = archivos[20]
-    df = crear_dataframe("Resinato de cobre",tmp)
-    df_list.append(df)
-
-    tmp = archivos[21]
-    df = crear_dataframe("Malaquita natural",tmp)
-    df_list.append(df)
-
-    tmp = archivos[22]
-    df = crear_dataframe("Terra verde",tmp)
-    df_list.append(df)
-
-    tmp = archivos[23]
-    df = crear_dataframe("Negro de huesos o marfil",tmp)
-    df_list.append(df)
-
-    tmp = archivos[24]
-    df = crear_dataframe("Negro de vid frances",tmp)
-    df_list.append(df)
+    l_tmp = archivos[50:55]
+    pigmento = "Hematita natural"
+    aglutinante = "Aceite de linaza"
+    dframes = obtener_dframes(l_tmp,pigmento,aglutinante)
+    df_list = df_list + dframes
 
     return df_list
 
@@ -306,7 +161,7 @@ def obtener_yeso_Y4_tablas_2():
     archivos.sort()
 
     df_list = list()
-    # A1
+    # A1-A5
     tmp = archivos[0]
     df = crear_dataframe("Ocre de mina ingles",tmp)
     df['aglutinante'] = "Aceite de linaza"
@@ -432,10 +287,11 @@ def obtener_yeso_Y4_tablas_2():
     return df_list
 
 def imprimir():
-    #espectros_1 = obtener_yeso_Y4_tablas_1()
-    espectros_2 = obtener_yeso_Y4_tablas_2()
+    espectros_1 = obtener_yeso_Y4_tablas_1()
+    #espectros_2 = obtener_yeso_Y4_tablas_2()
     #espectros = espectros_1 + espectros_2
-    for o in espectros_2:
+    for o in espectros_1:
+       # print(o)
         print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
 
 imprimir()
