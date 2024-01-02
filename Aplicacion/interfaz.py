@@ -79,17 +79,14 @@ class HelloWindow(QMainWindow):
     # Funcion para buscar el espectro en la base de datos usando el buscador 
     def buscar(self,text, box):
         resultados = controlador_busqueda(self.filtros)
-        n_resultados = len(resultados)
         # Create layout and add widgets
         boxWidget = QListWidget()
         boxLayout2 = QVBoxLayout()
         boxWidget.setLayout(boxLayout2)
 
-        label = QtWidgets.QLabel("")
         for i in range(len(resultados)):
             # limpia resultado
             resultado = str(resultados[i]).replace("(","").replace(")","").replace(",","").replace("'","")
-            label = QtWidgets.QLabel(resultado)
             qitem = QListWidgetItem(resultado)
             boxWidget.addItem(qitem)
         box.setWidget(boxWidget)

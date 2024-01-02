@@ -1,5 +1,4 @@
 from connectDB import consulta_db
-from recoverRegister import get_df_from_txt
 
 # Controlador de la aplicacion
 
