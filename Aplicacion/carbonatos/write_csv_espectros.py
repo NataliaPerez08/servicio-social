@@ -37,16 +37,20 @@ str_c4 = obtener_cadena(c4.obtener_carbonato_C4())
 str_c5 = obtener_cadena(c5.obtener_carbonato_C5())
 str_c6 = obtener_cadena(c6.obtener_carbonato_C6())
 
-#str_c7 = c7.str_carbonato_C7()
+str_c7 = c7.str_carbonato_C7()
+print("Termino de obtener espectros de base carbonato")
 
 str_y1 = obtener_cadena(y1.obtener_yeso_Y1())
 str_y2 = obtener_cadena(y2.obtener_yeso_Y2())
 str_y3 = obtener_cadena(y3.obtener_yeso_Y3())
-#str_y4 = y4.str_yeso_y4()
+
+str_y4 = y4.str_yeso_y4()
 
 str_y5 = obtener_cadena(y5.obtener_yeso_Y5())
 str_y6 = obtener_cadena(y6.obtener_yeso_Y6())
-#str_y7 = y7.str_yeso_y7()
+
+str_y7 = y7.str_yeso_y7()
+print("Termino de obtener espectros de base yeso")
 
 print("Escribiendo espectros en csv")
 with open('espectros.csv', 'w', newline='') as csvfile:
@@ -56,24 +60,59 @@ with open('espectros.csv', 'w', newline='') as csvfile:
     writer.writeheader()
     for i in str_c1:
         writer.writerow(i)
+    print("Termino de escribir carbonato 1")
+
     for i in str_c2:
         writer.writerow(i)
+    print("Termino de escribir carbonato 2")
+
     for i in str_c3:
         writer.writerow(i)
+    print("Termino de escribir carbonato 3")
+
     for i in str_c4:
         writer.writerow(i)
+    print("Termino de escribir carbonato 4")
+
     for i in str_c5:
         writer.writerow(i)
+    print("Termino de escribir carbonato 5")
+
     for i in str_c6:
         writer.writerow(i)
+    print("Termino de escribir carbonato 6")
+
+    for i in str_c7:
+        writer.writerow(i)
+    print("Termino de escribir carbonato 7")
+
     for i in str_y1:
         writer.writerow(i)
+    print("Termino de escribir yeso 1")
+
     for i in str_y2:
         writer.writerow(i)
+    print("Termino de escribir yeso 2")
+
     for i in str_y3:
         writer.writerow(i)
+    print("Termino de escribir yeso 3")
+
+    for i in str_y4:
+        writer.writerow(i)
+    print("Termino de escribir yeso 4")
+
     for i in str_y5:
         writer.writerow(i)
+    print("Termino de escribir yeso 5")
+
     for i in str_y6:
         writer.writerow(i)
+    print("Termino de escribir yeso 6")
+
+    for i in str_y7:
+        writer.writerow(i)
+    print("Termino de escribir yeso 7")
+
+
 

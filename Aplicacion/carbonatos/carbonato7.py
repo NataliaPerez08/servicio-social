@@ -181,10 +181,16 @@ def obtener_carbonato_C7():
 
 def str_carbonato_C7():
     espectros = obtener_carbonato_C7_tablas_2()
-    s_c7 = ""
+    l_obj = list() 
     for o in espectros:
-        s_c7+=o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0]+"\n"
-    return s_c7
+        s_ejemplar = {'Carpeta':o['carpeta'][0],
+                            'Tabla':o['tabla'][0],
+                            'Espectro':o['espectro'][0],
+                            'Pigmento':o['pigmento'][0],
+                            'Aglutinante':o['aglutinante'][0],
+                            'Base de preparación':o['base'][0]}
+        l_obj.append(s_ejemplar)
+    return l_obj
 
 def imprimir():
     espectros = obtener_carbonato_C7_tablas_2()

@@ -47,7 +47,7 @@ def obtener_carbonato_C1_tablas_1():
             elif f[1] == '4':
                 dataframe['aglutinante'] = "Cola de conejo"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['aglutinante'] = "Almaciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
 
@@ -72,7 +72,7 @@ def obtener_carbonato_C1_tablas_1():
             elif f[1] == '4':
                 dataframe['aglutinante'] = "Cola de conejo"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['aglutinante'] = "Almaciga y aceite de linaza"
 
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f   
@@ -96,7 +96,7 @@ def obtener_carbonato_C1_tablas_1():
             elif f[1] == '4':
                 dataframe['aglutinante'] = "Cola de conejo"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['aglutinante'] = "Almaciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
             dataframe['carpeta'] = "Tablas1"
@@ -118,7 +118,7 @@ def obtener_carbonato_C1_tablas_1():
             elif f[1] == '4':
                 dataframe['aglutinante'] = "Cola de conejo"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['aglutinante'] = "Almaciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
             dataframe['carpeta'] = "Tablas1"
@@ -140,7 +140,7 @@ def obtener_carbonato_C1_tablas_1():
             elif f[1] == '4':
                 dataframe['aglutinante'] = "Cola de conejo"
             elif f[1] == '5':
-                dataframe['aglutinante'] = "Almáciga y aceite de linaza"
+                dataframe['aglutinante'] = "Almaciga y aceite de linaza"
             dataframe['base'] = "Carbonato de calcio"
             dataframe['path'] = dir+"/"+f
             dataframe['carpeta'] = "Tablas1"
@@ -194,7 +194,7 @@ def obtener_dframes(lista,pigmento):
     dframes[1]['aglutinante'] = "Yema de huevo"
     dframes[2]['aglutinante'] = "Yema de huevo y aceite de linaza"
     dframes[3]['aglutinante'] = "Cola de conejo"
-    dframes[4]['aglutinante'] = "Almáciga y aceite de linaza"
+    dframes[4]['aglutinante'] = "Almaciga y aceite de linaza"
 
     return dframes
 

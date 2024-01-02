@@ -360,10 +360,16 @@ def obtener_yeso_Y7():
     return espectros
 
 def str_yeso_y7():
-    s_y7 = ""
     espectros_1 = obtener_yeso_Y7_tablas_1()
     espectros_2 = obtener_yeso_Y7_tablas_2()
     espectros = espectros_1 + espectros_2
+    l_obj = list() 
     for o in espectros:
-       s_y7+=o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0]+"\n"
-    return s_y7
+        s_ejemplar = {'Carpeta':o['carpeta'][0],
+                            'Tabla':o['tabla'][0],
+                            'Espectro':o['espectro'][0],
+                            'Pigmento':o['pigmento'][0],
+                            'Aglutinante':o['aglutinante'][0],
+                            'Base de preparación':o['base'][0]}
+        l_obj.append(s_ejemplar)
+    return l_obj
