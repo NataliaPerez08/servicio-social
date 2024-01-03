@@ -1,7 +1,8 @@
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea, QListWidget, QListWidgetItem
-from PyQt5.QtCore import QSize    
+from PyQt5.QtCore import QSize
+from sympy import li    
 from control import controlador_busqueda
 from controlSpec import imprimir_spec,get_df
 
@@ -90,9 +91,9 @@ class HelloWindow(QMainWindow):
             qitem = QListWidgetItem(resultado)
             boxWidget.addItem(qitem)
         box.setWidget(boxWidget)
-
+        ventanas = []
         # Se conecta el boton con la funcion que selecciona el espectro
-        boxWidget.itemClicked.connect(lambda: self.seleccionar(boxWidget.currentItem().text()))
+        boxWidget.itemClicked.connect(lambda: self.seleccionar(boxWidget.currentItem().text(),ventanas))
 
     # Funcion para agregar un filtro a la lista de filtros
     def agregarFiltro(self, llave, text):
@@ -100,11 +101,12 @@ class HelloWindow(QMainWindow):
         return self.filtros
 
     # Funcion para dar el espectro seleccionado
-    def seleccionar(self, espectro):
+    def seleccionar(self, espectro,ventanas):
         # Crea la ventana para mostrar el espectro
         self.ventana = QtWidgets.QWidget()
         self.ventana.setWindowTitle("Espectro")
         self.ventana.setMinimumSize(QSize(640, 480))
+        ventanas.append(self.ventana)
         
         # Imprime info el espectro
         boxLayout2 = QVBoxLayout(self.ventana)
@@ -123,12 +125,10 @@ class HelloWindow(QMainWindow):
         boxLayout2.addWidget(QtWidgets.QLabel("Espectro: "+espectro_name))
         boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
         boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
-        boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
+        boxLayout2.addWidget(QtWidgets.QLabel("Base: "+base))
 
         self.ventana.show()
 
-        #text = str(espectro).replace("(","").replace(")","").replace(",","").replace("'","")
-        #print(text)
         # Plot espectro
         #get_df(carpeta,tabla,espectro_name)
         #imprimir_spec(carpeta,tabla,espectro_name)
@@ -144,13 +144,13 @@ class HelloWindow(QMainWindow):
         dev_x = df[x].to_numpy()
         dev_y = df[y].to_numpy()
         self.ax.plot(dev_x, dev_y)
-        self.ax.set_title("Espectro")
+        self.ax.set_title("Espectro "+espectro_name+" de la tabla "+tabla+" de la carpeta "+carpeta)
         self.ax.set_xlabel("Longitud de onda")
         self.ax.set_ylabel("Reflectancia")
         self.ax.grid()
         self.canvas.draw()
         self.ventana.show()
-
+        
 def create():
     app = QtWidgets.QApplication(sys.argv)
     mainWin = HelloWindow()
