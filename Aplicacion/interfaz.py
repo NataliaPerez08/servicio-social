@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea, QListWidget, QListWidgetItem
 from PyQt5.QtCore import QSize
+import matplotlib
 from sympy import li    
 from control import controlador_busqueda
 from controlSpec import imprimir_spec,get_df
@@ -146,6 +147,68 @@ class HelloWindow(QMainWindow):
         self.ax.grid()
         self.canvas.draw()
         self.ventana.show()
+        # Crear el boton para combinar ventanas
+        self.button = QtWidgets.QPushButton('Combinar ventanas', self.ventana)
+        boxLayout2.addWidget(self.button)
+        # Se conecta el boton con la funcion que combina ventanas
+        self.button.clicked.connect(lambda: combinar_ventanas(self,ventanas))
+
+        
+def combinar_ventanas(self,ventanas):
+    eje_X = []
+    lista_ys = []
+    labels = []
+    print("Combinando ventanas")
+    for i in range(len(ventanas)):
+        #print(ventanas[i])
+        #print(ventanas[i].children())
+        hijos = ventanas[i].children()
+        for j in range(len(hijos)):
+            tipo_hijo = type(hijos[j])
+            # Verifica que el hijo sea un matplotlib
+            if tipo_hijo == matplotlib.backends.backend_qtagg.FigureCanvasQTAgg:
+                # Obtiene la figura
+                fig = hijos[j].figure
+                # Obtiene el eje
+                ax = fig.axes[0]
+                # Obtiene los datos
+                line = ax.lines[0]
+                # Obtiene los datos de x
+                x = line.get_xdata()
+                # Obtiene los datos de y
+                y = line.get_ydata()
+                eje_X = x
+                lista_ys.append(y)
+            # Verifica que el hijo sea un label para obtener el nombre del espectro
+            elif tipo_hijo == QtWidgets.QLabel:
+                labels.append(hijos[j].text())
+
+        ventanas[i].close() 
+
+    # Crea un matplotlib para combinar los espectros
+    # Include the matplotlib figure
+    self.ventana = QtWidgets.QWidget()
+    self.ventana.setWindowTitle("Espectro")
+    self.ventana.setMinimumSize(QSize(640, 480))
+    boxLayout2 = QVBoxLayout(self.ventana)
+    self.ventana.setLayout(boxLayout2)
+
+    print("Creando matplotlib") 
+    figure = Figure()
+    canvas = FigureCanvasQTAgg(figure)
+    self.ventana.layout().addWidget(canvas)
+    ax = figure.add_subplot(111)
+    ax.set_title("Espectro combinado")
+    ax.set_ylabel("Reflectancia")
+    ax.grid()
+    # Combina los espectros
+    for j in range(len(lista_ys)):
+        ax.plot(eje_X, lista_ys[j])
+    canvas.draw()
+    # Imprime los nombres de los espectros
+    print(len(labels))
+    boxLayout2.addWidget(QtWidgets.QLabel("Espectros: \n\n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
+    self.ventana.show()
 
 def create():
     app = QtWidgets.QApplication(sys.argv)
