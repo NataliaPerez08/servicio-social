@@ -74,11 +74,11 @@ class HelloWindow(QMainWindow):
         self.button = QtWidgets.QPushButton('Buscar', self)
         boxLayout.addWidget(self.button)
         # Se conecta el boton con la funcion que busca
-        self.button.clicked.connect(lambda: self.buscar(self.textbox.text(),scroll))
+        self.button.clicked.connect(lambda: self.buscar(scroll))
         boxLayout.addWidget(scroll)
         
     # Funcion para buscar el espectro en la base de datos usando el buscador 
-    def buscar(self,text, box):
+    def buscar(self, box):
         resultados = controlador_busqueda(self.filtros)
         # Create layout and add widgets
         boxWidget = QListWidget()
@@ -87,7 +87,7 @@ class HelloWindow(QMainWindow):
 
         for i in range(len(resultados)):
             # limpia resultado
-            resultado = str(resultados[i]).replace("(","").replace(")","").replace(",","").replace("'","")
+            resultado = str(resultados[i]).replace("(","").replace(")","").replace("'","")
             qitem = QListWidgetItem(resultado)
             boxWidget.addItem(qitem)
         box.setWidget(boxWidget)
@@ -102,6 +102,7 @@ class HelloWindow(QMainWindow):
 
     # Funcion para dar el espectro seleccionado
     def seleccionar(self, espectro,ventanas):
+        print("Seleccionado: "+espectro+" para mostrar")
         # Crea la ventana para mostrar el espectro
         self.ventana = QtWidgets.QWidget()
         self.ventana.setWindowTitle("Espectro")
@@ -111,11 +112,10 @@ class HelloWindow(QMainWindow):
         # Imprime info el espectro
         boxLayout2 = QVBoxLayout(self.ventana)
         self.ventana.setLayout(boxLayout2)
-        print(espectro)
-        split_espectro = espectro.split()
+        split_espectro = espectro.split(",")
         carpeta = split_espectro[0]
-        tabla = split_espectro[1]
-        espectro_name = split_espectro[2]
+        tabla = split_espectro[1].replace(" ","")
+        espectro_name = split_espectro[2].replace(" ","")
         pigmento = split_espectro[3]
         aglutinante = split_espectro[4]
         base = split_espectro[5]
@@ -125,15 +125,12 @@ class HelloWindow(QMainWindow):
         boxLayout2.addWidget(QtWidgets.QLabel("Espectro: "+espectro_name))
         boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
         boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
-        boxLayout2.addWidget(QtWidgets.QLabel("Base: "+base))
-
-        self.ventana.show()
+        boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
 
         # Plot espectro
         #get_df(carpeta,tabla,espectro_name)
         #imprimir_spec(carpeta,tabla,espectro_name)
         # Include the matplotlib figure
-        
         self.figure = Figure()
         self.canvas = FigureCanvasQTAgg(self.figure)
         boxLayout2.addWidget(self.canvas)
@@ -144,13 +141,12 @@ class HelloWindow(QMainWindow):
         dev_x = df[x].to_numpy()
         dev_y = df[y].to_numpy()
         self.ax.plot(dev_x, dev_y)
-        self.ax.set_title("Espectro "+espectro_name+" de la tabla "+tabla+" de la carpeta "+carpeta)
-        self.ax.set_xlabel("Longitud de onda")
+        self.ax.set_title("Espectro "+espectro_name)
         self.ax.set_ylabel("Reflectancia")
         self.ax.grid()
         self.canvas.draw()
         self.ventana.show()
-        
+
 def create():
     app = QtWidgets.QApplication(sys.argv)
     mainWin = HelloWindow()
