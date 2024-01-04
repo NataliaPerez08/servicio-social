@@ -158,6 +158,7 @@ def combinar_ventanas(self,ventanas):
     eje_X = []
     lista_ys = []
     labels = []
+    espectros = []
     print("Combinando ventanas")
     for i in range(len(ventanas)):
         #print(ventanas[i])
@@ -181,6 +182,9 @@ def combinar_ventanas(self,ventanas):
                 lista_ys.append(y)
             # Verifica que el hijo sea un label para obtener el nombre del espectro
             elif tipo_hijo == QtWidgets.QLabel:
+                text = hijos[j].text()
+                if "Espectro" in text:
+                    espectros.append(text)
                 labels.append(hijos[j].text())
 
         ventanas[i].close() 
@@ -204,11 +208,13 @@ def combinar_ventanas(self,ventanas):
     # Combina los espectros
     for j in range(len(lista_ys)):
         ax.plot(eje_X, lista_ys[j])
+        ax.legend(espectros)
     canvas.draw()
     # Imprime los nombres de los espectros
-    print(len(labels))
     boxLayout2.addWidget(QtWidgets.QLabel("Espectros: \n\n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
     self.ventana.show()
+    # Al cerrar la ventana se limpia la lista de ventanas
+    self.ventana.destroyed.connect(lambda: ventanas.clear())
 
 def create():
     app = QtWidgets.QApplication(sys.argv)
