@@ -154,7 +154,14 @@ def obtener_carbonato_C7_tablas_2():
     df = crear_dataframe("Negro de vid frances",tmp)
     df_list.append(df)
 
-    return df_list
+    A1_A5_list = df_list[0:5]
+    B1_B5_list = df_list[5:10]
+    C1_C5_list = df_list[10:15]
+    D1_D5_list = df_list[15:20]
+    E1_E5_list = df_list[20:25]
+
+    return [A1_A5_list,B1_B5_list,C1_C5_list,D1_D5_list,E1_E5_list]
+
 def crear_dataframe(pigmento,tmp):
     carpeta =  "Tablas2"
     base = "Carbonato de calcio"
@@ -195,7 +202,6 @@ def str_carbonato_C7():
 def imprimir():
     espectros = obtener_carbonato_C7_tablas_2()
     print(len(espectros))
-    for o in espectros:
-        print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
-
-
+    for e in espectros:
+        for o in e:
+            print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])

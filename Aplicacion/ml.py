@@ -1,8 +1,13 @@
 from math import e
-from re import X
 import numpy as np
 import carbonatos.carbonato1 as c1
 import carbonatos.carbonato2 as c2
+import carbonatos.carbonato3 as c3
+import carbonatos.carbonato4 as c4
+import carbonatos.carbonato5 as c5
+import carbonatos.carbonato6 as c6
+import carbonatos.carbonato7 as c7
+
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LinearRegression
@@ -11,12 +16,6 @@ from sklearn.linear_model import Perceptron
 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, precision_score
 from sklearn.metrics import explained_variance_score
-
-
-feature_names = ['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro']
-
-ejemplares_c1 = c1.obtener_carbonato_C1()
-#ejemplares_c2 = c2.contenar_c2()
 
 def encode_labels(label_names):
     label_names = list(label_names)
@@ -83,22 +82,15 @@ def get_GNB(ejemplares):
     # Create Gaussian Naive Bayes object with prior probabilities of each label
     GNBclf = GaussianNB()
     # Train model
-    model = GNBclf.fit(X, y)
+    model = GNBclf.fit(X_train, y_train)
 
     # Make predictions
     y_pred =  model.predict(X_test)
-    print(y_test)
-    print(y_pred)
 
     # View accuracy score
     accuracy = accuracy_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
-
-    print(precision_score(y_test, y_pred, average='macro', zero_division=0))
     print(classification_report(y_test, y_pred, zero_division=0))
-
-    #View confusion matrix
-    confusion_matrix(y_test, y_pred)
 
 def get_linear_regression(ejemplares):
     X,y = get_X_y_Tabla(ejemplares)
@@ -107,16 +99,16 @@ def get_linear_regression(ejemplares):
     # Create Linear Regression object
     LRclf = LinearRegression()
     # Train model
-    model = LRclf.fit(X, y)
+    model = LRclf.fit(X_train, y_train)
 
     # Make predictions
-    y_pred =  LRclf.predict(X_test)
-    print(y_test)
-    print(y_pred)
+    y_pred =  model.predict(X_test)
+
 
     # View accuracy score
     accuracy = explained_variance_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
+
 
 def get_logistic_Regression(ejemplares):
     X,y = get_X_y_Tabla(ejemplares)
@@ -125,17 +117,17 @@ def get_logistic_Regression(ejemplares):
     # Create Logistic Regression object
     LRclf = LogisticRegression(penalty='l2',solver='lbfgs', max_iter=10500)
     # Train model
-    model = LRclf.fit(X, y)
+    model = LRclf.fit(X_train, y_train)
 
     # Make predictions
-    y_pred =  LRclf.predict(X_test)
-    print(y_test)
-    print(y_pred)
+    y_pred = model.predict(X_test)
 
     # View accuracy score
     accuracy = accuracy_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
     print(precision_score(y_test, y_pred, average='macro', zero_division=0))
+
+    print(classification_report(y_test, y_pred, zero_division=0))
 
 def get_perceptron(ejemplares):
     X,y = get_X_y_Tabla(ejemplares)
@@ -144,17 +136,41 @@ def get_perceptron(ejemplares):
     # Create Perceptron object
     Pclf = Perceptron()
     # Train model
-    model = Pclf.fit(X, y)
+    model = Pclf.fit(X_train, y_train)
 
     # Make predictions
-    y_pred =  Pclf.predict(X_test)
-    print(y_test)
-    print(y_pred)
+    y_pred =  model.predict(X_test)
 
     # View accuracy score
     accuracy = accuracy_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
     print(precision_score(y_test, y_pred, average='macro', zero_division=0))
 
-print("Perceptron")
-get_perceptron(ejemplares_c1)
+    print(classification_report(y_test, y_pred, zero_division=0))
+
+if __name__ == "__main__":
+    feature_names = ['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro']
+
+    ejemplares_c1 = c1.obtener_carbonato_C1()
+    ejemplares_c2 = c2.obtener_carbonato_C2()
+    ejemplares_c3 = c3.obtener_carbonato_C3()
+    ejemplares_c4 = c4.obtener_carbonato_C4()
+    ejemplares_c5 = c5.obtener_carbonato_C5()
+    ejemplares_c6 = c6.obtener_carbonato_C6()
+    ejemplares_c7 = c7.obtener_carbonato_C7()
+
+
+    ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7
+
+    print("Perceptron")
+    get_perceptron(ejemplares)
+
+    #print("Logistic Regression")
+    #get_logistic_Regression(ejemplares)
+
+    #print("Linear Regression")
+    #get_linear_regression(ejemplares)
+
+    #print("Naive Bayes")
+    #get_GNB(ejemplares)
+
