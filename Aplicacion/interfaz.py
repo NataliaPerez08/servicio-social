@@ -1,9 +1,11 @@
 import sys
+from tkinter import Grid
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea, QListWidget, QListWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea, QListWidget, QListWidgetItem, QGridLayout,QDialog
 from PyQt5.QtCore import QSize
+from PyQt5 import QtGui
 import matplotlib
-from sympy import li    
+from matplotlib.pyplot import grid
 from control import controlador_busqueda
 from controlSpec import imprimir_spec,get_df
 
@@ -79,7 +81,7 @@ class HelloWindow(QMainWindow):
         boxLayout.addWidget(scroll)
         
     # Funcion para buscar el espectro en la base de datos usando el buscador 
-    def buscar(self, box):
+    def buscar(self, scroll):
         resultados = controlador_busqueda(self.filtros)
         # Create layout and add widgets
         boxWidget = QListWidget()
@@ -91,7 +93,7 @@ class HelloWindow(QMainWindow):
             resultado = str(resultados[i]).replace("(","").replace(")","").replace("'","")
             qitem = QListWidgetItem(resultado)
             boxWidget.addItem(qitem)
-        box.setWidget(boxWidget)
+        scroll.setWidget(boxWidget)
         ventanas = []
         # Se conecta el boton con la funcion que selecciona el espectro
         boxWidget.itemClicked.connect(lambda: self.seleccionar(boxWidget.currentItem().text(),ventanas))
@@ -108,6 +110,7 @@ class HelloWindow(QMainWindow):
         self.ventana = QtWidgets.QWidget()
         self.ventana.setWindowTitle("Espectro")
         self.ventana.setMinimumSize(QSize(640, 480))
+        self.ventana.move(100,100)
         ventanas.append(self.ventana)
         
         # Imprime info el espectro
@@ -192,10 +195,44 @@ def combinar_ventanas(self,ventanas):
     # Crea un matplotlib para combinar los espectros
     # Include the matplotlib figure
     self.ventana = QtWidgets.QWidget()
+    self.ventana.move(100,100)
     self.ventana.setWindowTitle("Espectro")
     self.ventana.setMinimumSize(QSize(640, 480))
-    boxLayout2 = QVBoxLayout(self.ventana)
+
+    boxLayout2 = QGridLayout(self.ventana)#QVBoxLayout(self.ventana)
     self.ventana.setLayout(boxLayout2)
+
+    # Imprime los nombres de los espectros
+    #boxLayout2.addWidget(QtWidgets.QLabel("Espectros: \n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
+    self.info = QtWidgets.QWidget()
+    # Crear la ventana para mostrar la informacion de los espectros ligeramente a la izquierda de la ventana de combinacion
+    self.info.move(100,600)
+    self.info.setLayout(QGridLayout())
+    self.info.setWindowTitle("Información espectros")
+    self.info.setMinimumSize(QSize(440, 380))
+    #self.info.layout().addWidget(QtWidgets.QLabel("Espectros:  \n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
+    
+    scroll = QScrollArea()
+    scroll.adjustSize()
+    scroll.setWidgetResizable(True)
+    scrollContent = QWidget(scroll)
+    
+    scroll.setWidget(scrollContent)
+    self.info.layout().addWidget(scroll)
+    boxWidget = QListWidget()
+    boxLayout2 = QVBoxLayout()
+    boxWidget.setLayout(boxLayout2)
+    for i in range(len(labels)):
+        qitem = QListWidgetItem(labels[i])
+        if "Espectro" in labels[i]:
+            qitem.setBackground(QtGui.QColor("yellow"))
+        boxWidget.addItem(qitem)
+    scroll.setWidget(boxWidget)
+    
+    self.info.show()
+        
+
+    self.ventana.show()
 
     print("Creando matplotlib") 
     figure = Figure()
@@ -210,11 +247,11 @@ def combinar_ventanas(self,ventanas):
         ax.plot(eje_X, lista_ys[j])
         ax.legend(espectros)
     canvas.draw()
-    # Imprime los nombres de los espectros
-    boxLayout2.addWidget(QtWidgets.QLabel("Espectros: \n\n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
-    self.ventana.show()
-    # Al cerrar la ventana se limpia la lista de ventanas
+    # Al cerrar la ventana se limpia la lista de ventanas y se cierra la ventana de informacion
+
     self.ventana.destroyed.connect(lambda: ventanas.clear())
+    if self.ventana.destroyed and not self.info.destroyed:
+        self.info.close()
 
 def create():
     app = QtWidgets.QApplication(sys.argv)
