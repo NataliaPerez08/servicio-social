@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QPushButton,
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QPixmap
 
+import recoverRegister as rr 
+
 # Aplicacion que recibe un archivo e imprime su contenido
 class Aplicacion(QMainWindow):
     def __init__(self):

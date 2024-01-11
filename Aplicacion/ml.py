@@ -1,12 +1,20 @@
 from math import e
 import numpy as np
-import carbonatos.carbonato1 as c1
-import carbonatos.carbonato2 as c2
-import carbonatos.carbonato3 as c3
-import carbonatos.carbonato4 as c4
-import carbonatos.carbonato5 as c5
-import carbonatos.carbonato6 as c6
-import carbonatos.carbonato7 as c7
+import tablas.carbonato1 as c1
+import tablas.carbonato2 as c2
+import tablas.carbonato3 as c3
+import tablas.carbonato4 as c4
+import tablas.carbonato5 as c5
+import tablas.carbonato6 as c6
+import tablas.carbonato7 as c7
+
+import tablas.yeso1 as y1
+import tablas.yeso2 as y2
+import tablas.yeso3 as y3
+import tablas.yeso4 as y4
+import tablas.yeso5 as y5
+import tablas.yeso6 as y6
+import tablas.yeso7 as y7
 
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
@@ -14,8 +22,12 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import Perceptron
 
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, precision_score
+from sklearn.metrics import accuracy_score, classification_report, precision_score
 from sklearn.metrics import explained_variance_score
+from sklearn.decomposition import PCA
+# Import random forest model
+from sklearn.ensemble import RandomForestClassifier
+
 
 def encode_labels(label_names):
     label_names = list(label_names)
@@ -113,11 +125,11 @@ def get_linear_regression(ejemplares):
 def get_logistic_Regression(ejemplares):
     X,y = get_X_y_Tabla(ejemplares)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
-
     # Create Logistic Regression object
     LRclf = LogisticRegression(penalty='l2',solver='lbfgs', max_iter=10500)
     # Train model
     model = LRclf.fit(X_train, y_train)
+    print("Numero de features: ",LRclf.n_features_in_)
 
     # Make predictions
     y_pred = model.predict(X_test)
@@ -148,11 +160,32 @@ def get_perceptron(ejemplares):
 
     print(classification_report(y_test, y_pred, zero_division=0))
 
+def get_random_forest(ejemplares):
+    X,y = get_X_y_Tabla(ejemplares)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
+
+    # Create Random Forest object
+    RFclf = RandomForestClassifier()
+    # Train model
+    model = RFclf.fit(X_train, y_train)
+
+    # Make predictions
+    y_pred =  model.predict(X_test)
+
+    # View accuracy score
+    accuracy = accuracy_score(y_test, y_pred)
+    print("Precisión del modelo:", accuracy)
+    print(precision_score(y_test, y_pred, average='macro', zero_division=0))
+
+    print(classification_report(y_test, y_pred, zero_division=0))
+
 if __name__ == "__main__":
     feature_names = ['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro']
 
     ejemplares_c1 = c1.obtener_carbonato_C1()
     ejemplares_c2 = c2.obtener_carbonato_C2()
+    
+ 
     ejemplares_c3 = c3.obtener_carbonato_C3()
     ejemplares_c4 = c4.obtener_carbonato_C4()
     ejemplares_c5 = c5.obtener_carbonato_C5()
@@ -160,10 +193,20 @@ if __name__ == "__main__":
     ejemplares_c7 = c7.obtener_carbonato_C7()
 
 
-    ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7
+    """
+    ejemplares_y1 = y1.obtener_yeso_Y1()
+    ejemplares_y2 = y2.obtener_yeso_Y2()
+    ejemplares_y3 = y3.obtener_yeso_Y3()
+    ejemplares_y4 = y4.obtener_yeso_Y4()
+    ejemplares_y5 = y5.obtener_yeso_Y5()
+    ejemplares_y6 = y6.obtener_yeso_Y6()
+    ejemplares_y7 = y7.obtener_yeso_Y7()
+    """
 
-    print("Perceptron")
-    get_perceptron(ejemplares)
+    ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7#+ejemplares_y1+ejemplares_y2+ejemplares_y3+ejemplares_y4+ejemplares_y5+ejemplares_y6+ejemplares_y7
+
+    #print("Perceptron")
+    #get_perceptron(ejemplares)
 
     #print("Logistic Regression")
     #get_logistic_Regression(ejemplares)
@@ -174,3 +217,5 @@ if __name__ == "__main__":
     #print("Naive Bayes")
     #get_GNB(ejemplares)
 
+    print("Random Forest")
+    get_random_forest(ejemplares)
