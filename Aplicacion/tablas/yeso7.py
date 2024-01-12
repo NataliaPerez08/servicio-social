@@ -42,7 +42,6 @@ def obtener_yeso_Y7_tablas_2():
     dir = "Espectros_FORS_2/Tablas 2/Tabla_Y7"
     archivos=list()
     for f in os.listdir(dir):
-        print(f)
         archivos.append(dir+"/"+f)
     archivos.sort()
     

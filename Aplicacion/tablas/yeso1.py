@@ -17,7 +17,7 @@ Carpeta,Tabla,Espectro,Pigmento,Aglutinante,Base de preparación
 
 def obtener_yeso_Y1_tablas_1():
     # Info de Tabla 1
-    dir = "Espectros_FORS_2/Tablas 1/C1"
+    dir = "Espectros_FORS_2/Tablas 1/Y1"
     archivos=list()
     for f in os.listdir(dir):
         archivos.append(f)
@@ -156,7 +156,7 @@ def obtener_yeso_Y1_tablas_1():
 
 def obtener_yeso_Y1_tablas_2():
     # Info de Tabla 2
-    dir = "Espectros_FORS_2/Tablas 2/Tabla_C1"
+    dir = "Espectros_FORS_2/Tablas 2/Tabla_Y1"
     archivos=list()
     for f in os.listdir(dir):
         archivos.append(dir+"/"+f)

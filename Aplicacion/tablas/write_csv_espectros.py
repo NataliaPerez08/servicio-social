@@ -37,11 +37,11 @@ str_c4 = obtener_cadena(c4.obtener_carbonato_C4())
 str_c5 = obtener_cadena(c5.obtener_carbonato_C5())
 str_c6 = obtener_cadena(c6.obtener_carbonato_C6())
 
-str_c7 = c7.str_carbonato_C7()
+str_c7 = obtener_cadena(c7.obtener_carbonato_C7())
 print("Termino de obtener espectros de base carbonato")
 
 str_y1 = obtener_cadena(y1.obtener_yeso_Y1())
-str_y2 = obtener_cadena(y2.obtener_yeso_Y2())
+#str_y2 = obtener_cadena(y2.obtener_yeso_Y2())
 str_y3 = obtener_cadena(y3.obtener_yeso_Y3())
 
 str_y4 = y4.str_yeso_y4()
@@ -90,9 +90,9 @@ with open('espectros.csv', 'w', newline='') as csvfile:
         writer.writerow(i)
     print("Termino de escribir yeso 1")
 
-    for i in str_y2:
-        writer.writerow(i)
-    print("Termino de escribir yeso 2")
+    #for i in str_y2:
+    #    writer.writerow(i)
+    #print("Termino de escribir yeso 2")
 
     for i in str_y3:
         writer.writerow(i)

@@ -27,7 +27,7 @@ def obtener_carbonato_C5_tablas_2():
     tmp = archivos[11:16]
     tierra_verde = obtener_dframes(tmp,"Tierra verde de Verona")
 
-    tmp = archivos[17:21]
+    tmp = archivos[16:21]
     negro_huesos = obtener_dframes(tmp,"Negro de huesos")
 
     tmp = archivos[21:26]
@@ -64,7 +64,7 @@ def obtener_carbonato_C5():
     return obtener_carbonato_C5_tablas_2()
 
 def imprimir():
-    ocre_mina_ingles = obtener_carbonato_C5_tablas_2()
-    for f in ocre_mina_ingles:
+    spectros = obtener_carbonato_C5_tablas_2()
+    for f in spectros:
         for o in f:
             print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])

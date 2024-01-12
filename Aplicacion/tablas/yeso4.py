@@ -44,7 +44,7 @@ def obtener_dframes(lista,pigmento,aglutinante):
         dataframe['pigmento'] = pigmento
         dataframe['path'] = l
         dataframe['base'] = "Yeso"  
-        dataframe['carpeta'] = "Tablas 1"
+        dataframe['carpeta'] = "Tablas1"
         dataframe['tabla'] = "Y4"
         dataframe['espectro'] = l.split("/")[-1]
         dataframe['aglutinante'] = aglutinante

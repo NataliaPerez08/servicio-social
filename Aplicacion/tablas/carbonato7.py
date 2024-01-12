@@ -185,20 +185,6 @@ def crear_dataframe(pigmento,tmp):
 
 def obtener_carbonato_C7():
     return obtener_carbonato_C7_tablas_2()
-
-def str_carbonato_C7():
-    espectros = obtener_carbonato_C7_tablas_2()
-    l_obj = list() 
-    for o in espectros:
-        s_ejemplar = {'Carpeta':o['carpeta'][0],
-                            'Tabla':o['tabla'][0],
-                            'Espectro':o['espectro'][0],
-                            'Pigmento':o['pigmento'][0],
-                            'Aglutinante':o['aglutinante'][0],
-                            'Base de preparación':o['base'][0]}
-        l_obj.append(s_ejemplar)
-    return l_obj
-
 def imprimir():
     espectros = obtener_carbonato_C7_tablas_2()
     print(len(espectros))
