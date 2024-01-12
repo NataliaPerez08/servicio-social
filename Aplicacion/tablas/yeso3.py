@@ -19,19 +19,19 @@ def obtener_yeso_Y3_tablas_2():
         archivos.append(dir+"/"+f)
     archivos.sort()
     
-    tmp = archivos[0:5]
+    tmp = archivos[0:10]
     cinabrio = obtener_dframes(tmp,"Cinabrio")
 
-    tmp = archivos[5:10]
+    tmp = archivos[10:20]
     almagre = obtener_dframes(tmp,"Almagre")
 
-    tmp = archivos[10:15]
+    tmp = archivos[20:30]
     azarcon_o_minio = obtener_dframes(tmp,"Azarcon o minio")
 
-    tmp = archivos[15:20]
+    tmp = archivos[30:40]
     laca_de_cochinilla = obtener_dframes(tmp,"Laca de cochinilla")
 
-    tmp = archivos[20:25]
+    tmp = archivos[40:50]
     laca_de_alizarina = obtener_dframes(tmp,"Laca de alizarina")
 
     return [cinabrio,almagre,azarcon_o_minio,laca_de_cochinilla,laca_de_alizarina]
@@ -55,10 +55,20 @@ def obtener_dframes(lista,pigmento):
         dframes.append(dataframe)
 
     dframes[0]['aglutinante'] = "Aceite de linaza"
-    dframes[1]['aglutinante'] = "Yema de huevo"
-    dframes[2]['aglutinante'] = "Yema de huevo y aceite de linaza"
-    dframes[3]['aglutinante'] = "Cola de conejo"
-    dframes[4]['aglutinante'] = "Almáciga y aceite de linaza"
+    dframes[1]['aglutinante'] = "Aceite de linaza"
+
+    dframes[2]['aglutinante'] = "Yema de huevo"
+    dframes[3]['aglutinante'] = "Yema de huevo"
+
+    dframes[4]['aglutinante'] = "Yema de huevo y aceite de linaza"
+    dframes[5]['aglutinante'] = "Yema de huevo y aceite de linaza"
+
+    dframes[6]['aglutinante'] = "Cola de conejo"
+    dframes[7]['aglutinante'] = "Cola de conejo"
+
+    dframes[8]['aglutinante'] = "Almáciga y aceite de linaza"
+    dframes[9]['aglutinante'] = "Almáciga y aceite de linaza"
+
     return dframes
 
 def obtener_yeso_Y3():
@@ -70,3 +80,4 @@ def imprimir():
     for f in espectros:
         for o in f:
             print(o['carpeta'][0]+" "+o['tabla'][0]+" "+o['espectro'][0]+" "+o['pigmento'][0]+" "+o['aglutinante'][0]+" "+o['base'][0])
+imprimir()

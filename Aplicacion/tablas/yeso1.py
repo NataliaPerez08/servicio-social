@@ -162,19 +162,19 @@ def obtener_yeso_Y1_tablas_2():
         archivos.append(dir+"/"+f)
     archivos.sort()
     
-    tmp = archivos[0:5]
+    tmp = archivos[1:6]
     ocre_mina_ingles = obtener_dframes(tmp,"Ocre de mina inglés")
 
-    tmp = archivos[5:10]
+    tmp = archivos[6:11]
     oropimente = obtener_dframes(tmp,"Oropimente")
 
-    tmp = archivos[10:15]
+    tmp = archivos[11:16]
     amarillo_plomo_estano = obtener_dframes(tmp,"Amarillo de plomo estaño")
 
-    tmp = archivos[15:20]
+    tmp = archivos[16:21]
     gualda = obtener_dframes(tmp,"Gualda")
 
-    tmp = archivos[20:25]
+    tmp = archivos[21:26]
     ancorca_zecchi = obtener_dframes(tmp,"Ancorca o gualda Zecchi")
     return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,gualda,ancorca_zecchi]
 

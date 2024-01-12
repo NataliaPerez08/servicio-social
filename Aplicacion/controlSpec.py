@@ -1,5 +1,5 @@
 from recoverRegister import get_df_from_asd,get_df_from_txt
-from pre_process import print_spec
+from print_specs_control import print_spec
 
 def obten_spec(carpeta,tabla,espectro):
     print(carpeta,tabla,espectro)

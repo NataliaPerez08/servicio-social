@@ -172,19 +172,19 @@ def obtener_carbonato_C4_tablas_2():
     #Esmalte (C4: C1-C5)
     #Lapislázuli	(C4: D1-D5)
     #Índigo o añil (C4: E1-E5)	
-    tmp = archivos[0:5]
+    tmp = archivos[1:6]
     rejalgar = obtener_dframes(tmp,"Rejalgar")
 
-    tmp = archivos[5:10]
+    tmp = archivos[6:11]
     azurita = obtener_dframes(tmp,"Azurita")
 
-    tmp = archivos[10:15]
+    tmp = archivos[11:16]
     esmalte = obtener_dframes(tmp,"Esmalte")
 
-    tmp = archivos[15:20]
+    tmp = archivos[16:21]
     lapislazuli = obtener_dframes(tmp,"Lapislázuli")
 
-    tmp = archivos[20:25]
+    tmp = archivos[21:26]
     indigo_o_anil = obtener_dframes(tmp,"Índigo o añil")
 
     return [rejalgar,azurita,esmalte,lapislazuli,indigo_o_anil]

@@ -166,19 +166,19 @@ def obtener_yeso_Y5_tablas_2():
         archivos.append(dir+"/"+f)
     archivos.sort()
     
-    tmp = archivos[0:5]
+    tmp = archivos[1:6]
     acetato_cobre = obtener_dframes(tmp,"Acetato basico de cobre")
 
-    tmp = archivos[5:10]
+    tmp = archivos[6:11]
     malaquita_africana = obtener_dframes(tmp,"Malaquita africana")
 
-    tmp = archivos[10:15]
+    tmp = archivos[11:16]
     tierra_verde_verona = obtener_dframes(tmp,"Tierra verde de Verona")
 
-    tmp = archivos[15:20]
+    tmp = archivos[16:21]
     negro_huesos = obtener_dframes(tmp,"Negro de huesos")
 
-    tmp = archivos[20:25]
+    tmp = archivos[21:26]
     negro_humo = obtener_dframes(tmp,"Negro de humo")
 
     return [acetato_cobre,malaquita_africana,tierra_verde_verona,negro_huesos,negro_humo]

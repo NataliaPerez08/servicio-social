@@ -18,19 +18,19 @@ def obtener_carbonato_C5_tablas_2():
         archivos.append(dir+"/"+f)
     archivos.sort()
 
-    tmp = archivos[0:5]
+    tmp = archivos[1:6]
     acetato_cobre = obtener_dframes(tmp,"Acetato básico de cobre")
 
-    tmp = archivos[5:10]
+    tmp = archivos[6:11]
     malaquita = obtener_dframes(tmp,"Malaquita africana")
 
-    tmp = archivos[10:15]
+    tmp = archivos[11:16]
     tierra_verde = obtener_dframes(tmp,"Tierra verde de Verona")
 
-    tmp = archivos[15:20]
+    tmp = archivos[17:21]
     negro_huesos = obtener_dframes(tmp,"Negro de huesos")
 
-    tmp = archivos[20:25]
+    tmp = archivos[21:26]
     negro_humo = obtener_dframes(tmp,"Negro de humo")
 
     return [acetato_cobre,malaquita,tierra_verde,negro_huesos,negro_humo]

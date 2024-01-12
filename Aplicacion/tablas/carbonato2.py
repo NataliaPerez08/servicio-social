@@ -159,19 +159,19 @@ def obtener_carbonato_C2_tablas_2():
         archivos.append(dir+"/"+f)
     archivos.sort()
     
-    tmp = archivos[0:5]
+    tmp = archivos[1:6]
     ocre_claro= obtener_dframes(tmp,"Ocre claro")
 
-    tmp = archivos[5:10]
+    tmp = archivos[6:11]
     sombra_tostada_de_Chipre = obtener_dframes(tmp,"Sombra tostada de Chipre")
 
-    tmp = archivos[10:15]
+    tmp = archivos[11:16]
     ocre_oscuro_Siena = obtener_dframes(tmp,"Ocre oscuro Siena")
 
-    tmp = archivos[15:20]
+    tmp = archivos[16:21]
     siena_tostada = obtener_dframes(tmp,"Siena tostada")
 
-    tmp = archivos[20:25]
+    tmp = archivos[21:26]
     betun_de_Judea = obtener_dframes(tmp,"Betún de Judea")
 
     return [ocre_claro,sombra_tostada_de_Chipre,ocre_oscuro_Siena,siena_tostada,betun_de_Judea]

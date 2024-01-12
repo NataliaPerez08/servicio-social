@@ -166,19 +166,19 @@ def obtener_carbonato_C6_tablas_2():
         archivos.append(dir+"/"+f)
     archivos.sort()
     
-    tmp = archivos[0:5]
+    tmp = archivos[1:6]
     bermellon = obtener_dframes(tmp,"Bermellon")
 
-    tmp = archivos[5:10]
+    tmp = archivos[6:11]
     cochinilla = obtener_dframes(tmp,"Cochinilla")
 
-    tmp = archivos[10:15]
+    tmp = archivos[11:16]
     azurita = obtener_dframes(tmp,"Azurita")
 
-    tmp = archivos[15:20]
+    tmp = archivos[16:21]
     amarillo_plomo_estano = obtener_dframes(tmp,"Amarillo de plomo estaño")
 
-    tmp = archivos[20:25]
+    tmp = archivos[21:26]
     blanco_plomo = obtener_dframes(tmp,"Blanco de plomo")
 
     return [bermellon,cochinilla,azurita,amarillo_plomo_estano,blanco_plomo]

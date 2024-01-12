@@ -203,7 +203,7 @@ if __name__ == "__main__":
     ejemplares_y7 = y7.obtener_yeso_Y7()
     """
 
-    ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7#+ejemplares_y1+ejemplares_y2+ejemplares_y3+ejemplares_y4+ejemplares_y5+ejemplares_y6+ejemplares_y7
+    #ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7#+ejemplares_y1+ejemplares_y2+ejemplares_y3+ejemplares_y4+ejemplares_y5+ejemplares_y6+ejemplares_y7
 
     #print("Perceptron")
     #get_perceptron(ejemplares)
@@ -218,4 +218,5 @@ if __name__ == "__main__":
     #get_GNB(ejemplares)
 
     print("Random Forest")
+    ejemplares = ejemplares_c1
     get_random_forest(ejemplares)
