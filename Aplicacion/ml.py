@@ -9,7 +9,7 @@ import tablas.carbonato6 as c6
 import tablas.carbonato7 as c7
 
 import tablas.yeso1 as y1
-import tablas.yeso2 as y2
+#import tablas.yeso2 as y2
 import tablas.yeso3 as y3
 import tablas.yeso4 as y4
 import tablas.yeso5 as y5
@@ -192,18 +192,15 @@ if __name__ == "__main__":
     ejemplares_c6 = c6.obtener_carbonato_C6()
     ejemplares_c7 = c7.obtener_carbonato_C7()
 
-
-    """
     ejemplares_y1 = y1.obtener_yeso_Y1()
-    ejemplares_y2 = y2.obtener_yeso_Y2()
     ejemplares_y3 = y3.obtener_yeso_Y3()
     ejemplares_y4 = y4.obtener_yeso_Y4()
     ejemplares_y5 = y5.obtener_yeso_Y5()
     ejemplares_y6 = y6.obtener_yeso_Y6()
     ejemplares_y7 = y7.obtener_yeso_Y7()
-    """
 
-    #ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7#+ejemplares_y1+ejemplares_y2+ejemplares_y3+ejemplares_y4+ejemplares_y5+ejemplares_y6+ejemplares_y7
+
+    ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7#+ejemplares_y1+ejemplares_y2+ejemplares_y3+ejemplares_y4+ejemplares_y5+ejemplares_y6+ejemplares_y7
 
     #print("Perceptron")
     #get_perceptron(ejemplares)
@@ -218,5 +215,4 @@ if __name__ == "__main__":
     #get_GNB(ejemplares)
 
     print("Random Forest")
-    ejemplares = ejemplares_c1
     get_random_forest(ejemplares)
