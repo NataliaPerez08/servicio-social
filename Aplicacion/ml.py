@@ -1,4 +1,6 @@
+from cProfile import label
 from math import e
+from matplotlib.pylab import f
 import numpy as np
 import tablas.carbonato1 as c1
 import tablas.carbonato2 as c2
@@ -21,13 +23,35 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import Perceptron
+from sklearn.ensemble import RandomForestClassifier
+# import svm sklearn.svm.SVC
+from sklearn.svm import SVC
 
+#Para importar los modelos de evaluación
+from joblib import dump
 from sklearn.metrics import accuracy_score, classification_report, precision_score
 from sklearn.metrics import explained_variance_score
 from sklearn.decomposition import PCA
 # Import random forest model
-from sklearn.ensemble import RandomForestClassifier
 
+# Import OS
+import os
+
+def guardar_modelo(modelo,nombre,labels):
+    carpeta = "Modelos/"+nombre
+    if not os.path.exists(carpeta):
+        os.makedirs(carpeta) 
+
+    dump(modelo, carpeta+"/"+nombre+".joblib")
+    # Guardar las etiquetas
+    ruta_labels = carpeta+"/labels"
+    if not os.path.exists(ruta_labels):
+       os.makedirs(ruta_labels) 
+    nombre_labels = nombre+"_labels.txt"
+    aux = ruta_labels+"/"+nombre_labels
+    with open(aux, 'w') as f:
+        for item in labels:
+            f.write("%s\n" % item)
 
 def encode_labels(label_names):
     label_names = list(label_names)
@@ -71,6 +95,8 @@ def etiquetar_ejemplares(labels,ejemplares):
 def get_X_y_Tabla(ejemplares):
     X = np.array([])
     y = np.array([])
+    labels = list()
+    
     for l in ejemplares:
         features = obtener_features(l) 
         # Obtener etiquetas sin codificar de TODOS los ejemplares
@@ -78,13 +104,16 @@ def get_X_y_Tabla(ejemplares):
 
         # Codificación de las etiquetas
         enco = encode_labels(get_labels)
+        # concatenar las etiquetas de los ejemplares
+        labels.append(enco)
+
         y_tmp = etiquetar_ejemplares(enco,l)
         if X.size == 0:
             y = np.array(y_tmp)
             X = np.array(features)
         y = np.concatenate((y,y_tmp),axis=0)
         X = np.concatenate((X,features),axis=0)
-    return X,y
+    return X,y,labels
 
 # Función para obtener el modelo de Naive Bayes
 def get_GNB(ejemplares):
@@ -115,8 +144,6 @@ def get_linear_regression(ejemplares):
 
     # Make predictions
     y_pred =  model.predict(X_test)
-
-
     # View accuracy score
     accuracy = explained_variance_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
@@ -144,7 +171,7 @@ def get_logistic_Regression(ejemplares):
 def get_perceptron(ejemplares):
     X,y = get_X_y_Tabla(ejemplares)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
-
+   
     # Create Perceptron object
     Pclf = Perceptron()
     # Train model
@@ -160,10 +187,11 @@ def get_perceptron(ejemplares):
 
     print(classification_report(y_test, y_pred, zero_division=0))
 
-def get_random_forest(ejemplares):
-    X,y = get_X_y_Tabla(ejemplares)
-    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
 
+def get_random_forest(ejemplares):
+    X,y,labels = get_X_y_Tabla(ejemplares)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
+    #print(labels)
     # Create Random Forest object
     RFclf = RandomForestClassifier()
     # Train model
@@ -178,14 +206,35 @@ def get_random_forest(ejemplares):
     print(precision_score(y_test, y_pred, average='macro', zero_division=0))
 
     print(classification_report(y_test, y_pred, zero_division=0))
+    print(RFclf.feature_importances_)
+    print("Guardando el modelo")
+    
+    #dump(RFclf, 'modeloRF.joblib')
+    guardar_modelo(RFclf,"modeloRF",labels)
 
-if __name__ == "__main__":
-    feature_names = ['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro']
+def get_svc(ejemplares):
+    X,y,labels = get_X_y_Tabla(ejemplares)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.35, random_state = 42)
 
+    # Create Support Vector Classification
+    SVCclf = SVC()
+    # Train model
+    model = SVCclf.fit(X_train, y_train)
+    # Make predictions
+    y_pred =  model.predict(X_test)
+
+    # View accuracy score
+    accuracy = accuracy_score(y_test, y_pred)
+    print("Precisión del modelo:", accuracy)
+    print(precision_score(y_test, y_pred, average='macro', zero_division=0))
+
+    print(classification_report(y_test, y_pred, zero_division=0))
+
+    guardar_modelo(SVCclf,"modeloSVC",labels)
+
+def recupera_ejemplares():
     ejemplares_c1 = c1.obtener_carbonato_C1()
     ejemplares_c2 = c2.obtener_carbonato_C2()
-    
- 
     ejemplares_c3 = c3.obtener_carbonato_C3()
     ejemplares_c4 = c4.obtener_carbonato_C4()
     ejemplares_c5 = c5.obtener_carbonato_C5()
@@ -200,7 +249,19 @@ if __name__ == "__main__":
     ejemplares_y7 = y7.obtener_yeso_Y7()
 
 
-    ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7#+ejemplares_y1+ejemplares_y2+ejemplares_y3+ejemplares_y4+ejemplares_y5+ejemplares_y6+ejemplares_y7
+    ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7+ejemplares_y1+ejemplares_y3+ejemplares_y5+ejemplares_y6+ejemplares_y4+ejemplares_y7
+
+    return ejemplares
+
+def obtener_ejemplares_X_y():
+    ejemplares = recupera_ejemplares()
+    X,y,labels = get_X_y_Tabla(ejemplares)
+    return X,y
+
+
+if __name__ == "__main__":
+    feature_names = ['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro']
+
 
     #print("Perceptron")
     #get_perceptron(ejemplares)
@@ -213,6 +274,14 @@ if __name__ == "__main__":
 
     #print("Naive Bayes")
     #get_GNB(ejemplares)
+    
 
-    print("Random Forest")
-    get_random_forest(ejemplares)
+    ejemplares = recupera_ejemplares()
+
+    #print("Random Forest")
+    #get_random_forest(ejemplares)
+
+
+    print("SVM")
+    get_svc(ejemplares)
+

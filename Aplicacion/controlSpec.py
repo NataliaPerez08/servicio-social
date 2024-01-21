@@ -1,4 +1,3 @@
-from torch import NoneType
 from recoverRegister import get_df_from_asd,get_df_from_txt
 from print_specs_control import print_spec
 

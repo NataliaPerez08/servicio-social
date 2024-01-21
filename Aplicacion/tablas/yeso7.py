@@ -356,7 +356,7 @@ def imprimir():
 def obtener_yeso_Y7():
     espectros_1 = obtener_yeso_Y7_tablas_1()
     espectros_2 = obtener_yeso_Y7_tablas_2()
-    espectros = espectros_1 + espectros_2
+    espectros = [espectros_1,espectros_2]#espectros_1 + espectros_2
     return espectros
 
 def str_yeso_y7():
