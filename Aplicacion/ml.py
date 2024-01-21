@@ -275,13 +275,18 @@ if __name__ == "__main__":
     #print("Naive Bayes")
     #get_GNB(ejemplares)
     
-
-    ejemplares = recupera_ejemplares()
-
     #print("Random Forest")
     #get_random_forest(ejemplares)
 
+    #print("SVM")
+    #get_svc(ejemplares)
 
-    print("SVM")
-    get_svc(ejemplares)
-
+    #ejemplares = recupera_ejemplares()
+    
+    ejemplares_c1 = c1.obtener_carbonato_C1()
+    ejemplares_c2 = c2.obtener_carbonato_C2()
+    ejemplares = ejemplares_c1#+ejemplares_c2
+    X,y,labels = get_X_y_Tabla(ejemplares)
+    print(y)
+    print(labels)    
+    # Aplicar one hot encoding

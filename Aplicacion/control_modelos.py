@@ -1,4 +1,5 @@
 # pandas
+from cProfile import label
 import pandas as pd
 
 #Para importar los modelos de evaluación
@@ -15,6 +16,18 @@ from ml import obtener_ejemplares_X_y
 def extraer_modelo(path):
     modelo = load(path)
     return modelo
+
+def extraer_labels(path):
+    # Crear diccionario de labels
+    d_labels = {}
+    with open(path) as f:
+        labels = f.readlines()
+    
+    for label in labels:
+        tmp_dic = eval(label)
+        d_labels.update(tmp_dic)
+        
+    return d_labels
 
 def evaluar_modelo(modelo,X,y):
     y_pred = modelo.predict(X)
@@ -37,14 +50,31 @@ def obtener_X(ruta):
     X = df['reflectance'].to_numpy()
     return X
 
-path = "./modeloRF.joblib"
-modelo = extraer_modelo(path)
-#X,y = obtener_ejemplares_X_y()
-#evaluar_modelo(modelo,X,y)
+def haz_prediccion_ejemplo():
+    path_modelo = "./Modelos/modeloRF/modeloRF.joblib"
+    modelo = extraer_modelo(path_modelo)
 
-path2="reflexion/Echave.001.txt"
-path = "Espectros_FORS_2\Tablas 1\C1\A100000.asd"
+    path_labels = "./Modelos/modeloRF/labels/modeloRF_labels.txt"
+    labels = extraer_labels(path_labels)
 
-X=obtener_X(path)
 
-print("Predicción: ",modelo.predict([X,]))   
+    print("Modelo: ",modelo)
+    #print("Labels: ",labels)
+
+    #X,y = obtener_ejemplares_X_y()
+    #evaluar_modelo(modelo,X,y)
+
+    path2="reflexion/Echave.001.txt"
+    path = "Espectros_FORS_2\Tablas 1\C1\A500000.asd"
+
+    X=obtener_X(path)
+    pred = modelo.predict([X,])
+    print("Predicción: ",modelo.predict([X,]))   
+
+    # Buscar valores en el diccionario
+    for key, value in labels.items():
+        if value == pred[0]:
+            print("Label: ",key)
+            break
+
+#haz_prediccion_ejemplo()
