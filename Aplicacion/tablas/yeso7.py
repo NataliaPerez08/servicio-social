@@ -61,7 +61,7 @@ def obtener_yeso_Y7_tablas_2():
     df_list.append(df)
 
     tmp = archivos[3]
-    df = crear_dataframe("Ancorca. Sennelier",tmp)
+    df = crear_dataframe("Ancorca Sennelier",tmp)
     df_list.append(df)
 
     tmp = archivos[4]

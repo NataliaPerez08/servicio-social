@@ -109,7 +109,7 @@ def obtener_carbonato_C7_tablas_2():
     df_list.append(df)
 
     tmp = archivos[14]
-    df = crear_dataframe("Carmin de alizariona",tmp)
+    df = crear_dataframe("Carmin de alizarina",tmp)
     df_list.append(df)
 
     # D1 - D5

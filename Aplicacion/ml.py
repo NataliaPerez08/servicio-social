@@ -33,7 +33,7 @@ from sklearn.decomposition import PCA
 # Import random forest model
 
 # One hot encoding
-from sklearn.preprocessing import MultiLabelBinarizer
+from sklearn.preprocessing import MultiLabelBinarizer, LabelEncoder
 
 # Import OS
 import os
@@ -57,67 +57,27 @@ def guardar_modelo(modelo,nombre,labels):
         for item in labels:
             f.write("%s\n" % item)
 
-def encode_labels(label_names):
-    label_names = list(label_names)
-    label_names.sort()
-    label_names = dict(zip(label_names,range(len(label_names))))
-    return label_names
-
-def obtener_features(ejemplares):
-    features = list()
-    for e in ejemplares:
-        #aux0 = e['wavelength'].to_numpy()
-        aux = e['reflectance'].to_numpy()
-        #aux = np.stack((aux0,aux1),axis=1)
-        features.append(aux)
-    return features
-
-def obtener_labels(ejemplares):
-    labels = []
-    for e in ejemplares:
-        aux0 = e['pigmento'].iat[0]
-        aux1 = e['aglutinante'].iat[0]
-        aux2 = e['base'].iat[0]
-        aux = (aux0,aux1,aux2)
-        labels.append(aux)
-    return labels
-
-def etiquetar_ejemplares(labels,ejemplares):
-    # lista de labels de los ejemplares de la forma [0,0,0,0,0,2,2,2,5,5,]
-    y = []
-    for e in ejemplares:
-        aux0 = e['pigmento'].iat[0]
-        aux1 = e['aglutinante'].iat[0]
-        aux2 = e['base'].iat[0]
-        aux = (aux0,aux1,aux2)
-        if aux in labels:
-            #print("Codigo: ",labels[aux], " Label: ",aux)
-            y.append(labels[aux])
-    return y
-
 # Función para obtener los datos de entrenamiento y prueba
 def get_X_y_Tabla(ejemplares):
-    X = np.array([])
-    y = np.array([])
-    labels = list()
-    
-    for l in ejemplares:
-        features = obtener_features(l) 
-        # Obtener etiquetas sin codificar de TODOS los ejemplares
-        get_labels = obtener_labels(l)
+    etiqueta_a_usar = 'pigmento'
+    aux_y = list()
+    aux_x = list()
+    #for ejemplar
 
-        # Codificación de las etiquetas
-        enco = encode_labels(get_labels)
-        # concatenar las etiquetas de los ejemplares
-        labels.append(enco)
+    for ejemplar in ejemplares:
+        for e in ejemplar:
+            eti = str(e[etiqueta_a_usar][0])
+            #if e[etiqueta_a_usar][0] not in clases:
+            #    clases.append(eti)
+            aux_y.append(eti)
+            aux_x.append(e['reflectance'].to_numpy())
 
-        y_tmp = etiquetar_ejemplares(enco,l)
-        if X.size == 0:
-            y = np.array(y_tmp)
-            X = np.array(features)
-        y = np.concatenate((y,y_tmp),axis=0)
-        X = np.concatenate((X,features),axis=0)
-    return X,y,labels
+    encoder = MultiLabelBinarizer()
+    y = encoder.fit_transform([aux_y,])
+    y = encoder.fit([aux_y,])
+    X = np.array(aux_x)
+    y = np.array(aux_y)
+    return X,y
 
 # Función para obtener el modelo de Naive Bayes
 def get_GNB(ejemplares):
@@ -139,6 +99,9 @@ def get_GNB(ejemplares):
 
 def get_linear_regression(ejemplares):
     X,y = get_X_y_Tabla(ejemplares)
+    lb = LabelEncoder()
+    y = lb.fit_transform(y)
+    
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
 
     # Create Linear Regression object
@@ -193,9 +156,9 @@ def get_perceptron(ejemplares):
 
 
 def get_random_forest(ejemplares):
-    X,y,labels = get_X_y_Tabla(ejemplares)
+    X,y = get_X_y_Tabla(ejemplares)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
-    #print(labels)
+
     # Create Random Forest object
     RFclf = RandomForestClassifier()
     # Train model
@@ -214,11 +177,11 @@ def get_random_forest(ejemplares):
     print("Guardando el modelo")
     
     #dump(RFclf, 'modeloRF.joblib')
-    guardar_modelo(RFclf,"modeloRF",labels)
+ 
 
 # Función para obtener el modelo de SVM Support Vector Machine  
 def get_svc(ejemplares):
-    X,y,labels = get_X_y_Tabla(ejemplares)
+    X,y = get_X_y_Tabla(ejemplares)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.35, random_state = 42)
 
     # Create Support Vector Classification
@@ -234,8 +197,8 @@ def get_svc(ejemplares):
     print(precision_score(y_test, y_pred, average='macro', zero_division=0))
 
     print(classification_report(y_test, y_pred, zero_division=0))
+    print("Guardando el modelo")
 
-    guardar_modelo(SVCclf,"modeloSVC",labels)
 
 def recupera_ejemplares():
     ejemplares_c1 = c1.obtener_carbonato_C1()
@@ -262,13 +225,12 @@ def recupera_ejemplares():
 
 def obtener_ejemplares_X_y():
     ejemplares = recupera_ejemplares()
-    X,y,labels = get_X_y_Tabla(ejemplares)
+    X,y = get_X_y_Tabla(ejemplares)
     return X,y
 
 
 if __name__ == "__main__":
-    feature_names = ['wavelength','reflectance','pigmento','aglutinante','base','path','carpeta','tabla','espectro']
-
+    ejemplares = c1.obtener_carbonato_C1()#recupera_ejemplares()
 
     #print("Perceptron")
     #get_perceptron(ejemplares)
@@ -276,8 +238,8 @@ if __name__ == "__main__":
     #print("Logistic Regression")
     #get_logistic_Regression(ejemplares)
 
-    #print("Linear Regression")
-    #get_linear_regression(ejemplares)
+    print("Linear Regression")
+    get_linear_regression(ejemplares)
 
     #print("Naive Bayes")
     #get_GNB(ejemplares)
@@ -287,82 +249,3 @@ if __name__ == "__main__":
 
     #print("SVM")
     #get_svc(ejemplares)
-
-    #ejemplares = recupera_ejemplares()
-    
-    #ejemplares_c2 = c2.obtener_carbonato_C2()
-    #ejemplares = ejemplares_c1#+ejemplares_c2
-    #X,y,labels = get_X_y_Tabla(ejemplares)
-    #print(y)
-    #print(labels)    
-
-    ejemplares = recupera_ejemplares() #c1.obtener_carbonato_C1()
-    print("Total de ejemplares: ",len(ejemplares))
-    """
-    e1 = ejemplares_c1[0][0]
-    print(type(e1))
-    print(e1.columns)
-    y = e1['pigmento'].to_numpy().reshape(-1,1)
-
-    # Aplicar one hot encoding
-    encoder = OneHotEncoder()
-    y = encoder.fit_transform(y)
-    print("Ejemplo: ",y[0])
-    print(y)
-    """
-
-    etiqueta_a_usar = 'pigmento'
-    aux_y = list()
-    aux_x = list()
-    #for ejemplar
-
-    for ejemplar in ejemplares:
-        for e in ejemplar:
-            eti = str(e[etiqueta_a_usar][0])
-            #if e[etiqueta_a_usar][0] not in clases:
-            #    clases.append(eti)
-            aux_y.append(eti)
-            aux_x.append(e['reflectance'].to_numpy())
-
-    encoder = MultiLabelBinarizer()
-    y = encoder.fit([aux_y,])
-    print(encoder.classes_)
-    print(y)
-
-
-    y = encoder.fit_transform([aux_y,])
-    
-    #print(y)
-    #print(encoder.classes_)
-
-    #print("Invirtiendo el one hot encoding")
-    #print(encoder.inverse_transform(y))
-
-    X = np.array(aux_x)
-    print("X: ",X.shape)
-    print("y: ",y.shape)
-    aux_y = np.array(aux_y)
-    print("aux_y: ",aux_y.shape)
-
-    print("X: ",X[0:5])
-
-    X_train, X_test, y_train, y_test = train_test_split(X,aux_y,test_size = 0.15, random_state = 42)
-
-    # Create Support Vector Classification
-    SVCclf = SVC()
-    # Train model
-    model = SVCclf.fit(X_train, y_train)
-    # Make predictions
-    y_pred =  model.predict(X_test)
-
-    # View accuracy score
-    accuracy = accuracy_score(y_test, y_pred)
-    print("Precisión del modelo:", accuracy)
-
-   # print(precision_score(y_test, y_pred, average='macro', zero_division=0))
-
-   # print(classification_report(y_test, y_pred, zero_division=0))
-    
-    # Clases del modelo
-    print("Clases del modelo: ",SVCclf.classes_)
-    

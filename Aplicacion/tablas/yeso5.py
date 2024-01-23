@@ -4,7 +4,7 @@ import pandas as pd
 """
 Pigmentos:
 (Tabla 1)
-Acetato básico de cobre. Verdigris	(Y5: A1-A5)
+Acetato basico de cobre. Verdigris	(Y5: A1-A5)
 Malaquita africana (Y5: B1:B5)
 Tierra verde de Verona (Y5: C1:C5)
 Negro de huesos (Y5: D1-D5)

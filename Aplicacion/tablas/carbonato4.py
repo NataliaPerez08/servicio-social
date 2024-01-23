@@ -109,7 +109,7 @@ def obtener_carbonato_C4_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Lapislázuli"
+            dataframe['pigmento'] = "Lapislazuli"
 
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
@@ -182,7 +182,7 @@ def obtener_carbonato_C4_tablas_2():
     esmalte = obtener_dframes(tmp,"Esmalte")
 
     tmp = archivos[16:21]
-    lapislazuli = obtener_dframes(tmp,"Lapislázuli")
+    lapislazuli = obtener_dframes(tmp,"Lapislazuli")
 
     tmp = archivos[21:26]
     indigo_o_anil = obtener_dframes(tmp,"Índigo o añil")

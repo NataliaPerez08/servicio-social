@@ -26,7 +26,7 @@ def obtener_yeso_Y3_tablas_2():
     almagre = obtener_dframes(tmp,"Almagre")
 
     tmp = archivos[20:30]
-    azarcon_o_minio = obtener_dframes(tmp,"Azarcon o minio")
+    azarcon_o_minio = obtener_dframes(tmp,"Azarcón o Minio")
 
     tmp = archivos[30:40]
     laca_de_cochinilla = obtener_dframes(tmp,"Laca de cochinilla")

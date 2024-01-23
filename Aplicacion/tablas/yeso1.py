@@ -25,7 +25,7 @@ def obtener_yeso_Y1_tablas_1():
     
     ocre_mina_ingles = list()
     oropimente = list()
-    amarillo_plomo_estano = list()
+    amarillo_plomo_estaño = list()
     gualda = list()
     ancorca_zecchi = list()
     
@@ -87,7 +87,7 @@ def obtener_yeso_Y1_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Amarillo de plomo estano"
+            dataframe['pigmento'] = "Amarillo de plomo estaño"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
@@ -105,7 +105,7 @@ def obtener_yeso_Y1_tablas_1():
             dataframe['carpeta'] = "Tablas1"
             dataframe['tabla'] = "Y1"
             dataframe['espectro'] = f
-            amarillo_plomo_estano.append(dataframe)
+            amarillo_plomo_estaño.append(dataframe)
         elif f[0]=="D":
             df = rr.get_df_from_asd(dir+"/"+f)
             # crear dataframe
@@ -152,7 +152,7 @@ def obtener_yeso_Y1_tablas_1():
             dataframe['espectro'] = f
             ancorca_zecchi.append(dataframe)
     
-    return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,gualda,ancorca_zecchi]
+    return [ocre_mina_ingles,oropimente,amarillo_plomo_estaño,gualda,ancorca_zecchi]
 
 def obtener_yeso_Y1_tablas_2():
     # Info de Tabla 2
@@ -169,14 +169,14 @@ def obtener_yeso_Y1_tablas_2():
     oropimente = obtener_dframes(tmp,"Oropimente")
 
     tmp = archivos[11:16]
-    amarillo_plomo_estano = obtener_dframes(tmp,"Amarillo de plomo estaño")
+    amarillo_plomo_estaño = obtener_dframes(tmp,"Amarillo de plomo estaño")
 
     tmp = archivos[16:21]
     gualda = obtener_dframes(tmp,"Gualda")
 
     tmp = archivos[21:26]
     ancorca_zecchi = obtener_dframes(tmp,"Ancorca o gualda Zecchi")
-    return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,gualda,ancorca_zecchi]
+    return [ocre_mina_ingles,oropimente,amarillo_plomo_estaño,gualda,ancorca_zecchi]
 
 def obtener_dframes(lista,pigmento):
     dframes = list()
@@ -209,10 +209,10 @@ def obtener_yeso_Y1():
 
     ocre_mina_ingles = tabla1[0]+tabla2[0]
     oropimente = tabla1[1]+tabla2[1]
-    amarillo_plomo_estano = tabla1[2]+tabla2[2]
+    amarillo_plomo_estaño = tabla1[2]+tabla2[2]
     gualda = tabla1[3]+tabla2[3]
     ancorca_zecchi = tabla1[4]+tabla2[4]
-    return [ocre_mina_ingles,oropimente,amarillo_plomo_estano,gualda,ancorca_zecchi]
+    return [ocre_mina_ingles,oropimente,amarillo_plomo_estaño,gualda,ancorca_zecchi]
 
 def imprimir():
     ocre_mina_ingles = obtener_yeso_Y1()

@@ -130,7 +130,7 @@ def obtener_carbonato_C2_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Betún de Judea"
+            dataframe['pigmento'] = "Betun de Judea"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':

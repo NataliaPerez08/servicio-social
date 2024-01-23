@@ -3,7 +3,7 @@ import recoverRegister as rr
 import pandas as pd
 """
 Pigmentos:
-Acetato básico de cobre. Verdigris	(C5: A1-A5)
+Acetato basico de cobre. Verdigris	(C5: A1-A5)
 Malaquita africana (C5: B1:B5)
 Tierra verde de Verona (C5: C1:C5)
 Negro de huesos (C5: D1-D5)
@@ -19,7 +19,7 @@ def obtener_carbonato_C5_tablas_2():
     archivos.sort()
 
     tmp = archivos[1:6]
-    acetato_cobre = obtener_dframes(tmp,"Acetato básico de cobre")
+    acetato_cobre = obtener_dframes(tmp,"Acetato basico de cobre")
 
     tmp = archivos[6:11]
     malaquita = obtener_dframes(tmp,"Malaquita africana")
@@ -57,7 +57,7 @@ def obtener_dframes(lista,pigmento):
     dframes[1]['aglutinante'] = "Aceite de nuez"
     dframes[2]['aglutinante'] = "Yema de huevo y aceite de linaza"
     dframes[3]['aglutinante'] = "Cola de conejo"
-    dframes[4]['aglutinante'] = "Almáciga y aceite de linaza"
+    dframes[4]['aglutinante'] = "Almaciga y aceite de linaza"
     return dframes
 
 def obtener_carbonato_C5():
