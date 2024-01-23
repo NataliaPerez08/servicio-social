@@ -163,7 +163,7 @@ def obtener_yeso_Y1_tablas_2():
     archivos.sort()
     
     tmp = archivos[1:6]
-    ocre_mina_ingles = obtener_dframes(tmp,"Ocre de mina inglés")
+    ocre_mina_ingles = obtener_dframes(tmp,"Ocre de mina ingles")
 
     tmp = archivos[6:11]
     oropimente = obtener_dframes(tmp,"Oropimente")

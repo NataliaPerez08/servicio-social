@@ -83,7 +83,7 @@ def obtener_carbonato_C3_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Ocre de mina ingles"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':
@@ -130,7 +130,7 @@ def obtener_carbonato_C3_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Ocre de mina inglés"
+            dataframe['pigmento'] = "Ocre de mina ingles"
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"
             elif f[1] == '2':

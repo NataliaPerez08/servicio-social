@@ -27,7 +27,6 @@ class Aplicacion(QMainWindow):
         self.btn.clicked.connect(self.abrirArchivo)
 
         self.label = QLabel(self)
-        self.label.setPixmap(QPixmap('logo.png'))
         self.label.move(150, 150)
         self.label.resize(100, 100)
 
@@ -37,15 +36,32 @@ class Aplicacion(QMainWindow):
             self.hilo = Hilo(nombreArchivo)
             self.hilo.start()
             self.hilo.enviarTexto.connect(self.mostrarTexto)
+    
 
     def mostrarTexto(self, texto):
         print("Este es nu")
         self.label.setText(texto)
         # Crear boton
-        self.btnLogic = Widget.QPushButton("Logic")
-        self.btn.setText("Logic")
-        print(self.layout)
+        self.btn = QPushButton("Aplicar regresion logistica")
+        self.btn.clicked.connect(self.aplicar(self,"Logistic Regression"))
+
         #self.btn = widgets.Button(ax=0,label="Aplicar regresion logistica")
+
+        #print("Perceptron")
+        
+        #print("Logistic Regression")
+      
+        #print("Linear Regression")
+       
+        #print("Naive Bayes")
+        
+        #print("Random Forest")
+    
+        #print("SVM")
+
+    def aplicar(modelo):
+        print("Aplicando modelo",modelo)
+       
 
 # Hilo que lee el archivo
 class Hilo(QThread):
@@ -56,6 +72,11 @@ class Hilo(QThread):
         self.nombreArchivo = nombreArchivo
 
     def run(self):
+        print("Nombre archivo: ",self.nombreArchivo)
+        # Obtener extension del archivo
+        ext = self.nombreArchivo.split(".")[-1]
+        print("Extension: ",ext)
+
         with open(self.nombreArchivo, 'r') as archivo:
             texto = archivo.read()
             self.enviarTexto.emit(texto)

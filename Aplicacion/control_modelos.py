@@ -65,7 +65,7 @@ def haz_prediccion_ejemplo():
     #evaluar_modelo(modelo,X,y)
 
     path2="reflexion/Echave.001.txt"
-    path = "Espectros_FORS_2\Tablas 1\C1\A500000.asd"
+    path = "Espectros_FORS_2\Tablas 1\C1\B500000.asd"
 
     X=obtener_X(path)
     pred = modelo.predict([X,])
@@ -77,4 +77,4 @@ def haz_prediccion_ejemplo():
             print("Label: ",key)
             break
 
-#haz_prediccion_ejemplo()
+haz_prediccion_ejemplo()
