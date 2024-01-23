@@ -1,3 +1,4 @@
+from math import e
 from matplotlib.pylab import f
 import numpy as np
 import tablas.carbonato1 as c1
@@ -41,25 +42,15 @@ import os
 # Import pandas
 import pandas as pd
 
-def guardar_modelo(modelo,nombre,labels):
+def guardar_modelo(modelo,nombre,etiqueta_a_usar):
     carpeta = "Modelos/"+nombre
     if not os.path.exists(carpeta):
         os.makedirs(carpeta) 
-
-    dump(modelo, carpeta+"/"+nombre+".joblib")
-    # Guardar las etiquetas
-    ruta_labels = carpeta+"/labels"
-    if not os.path.exists(ruta_labels):
-       os.makedirs(ruta_labels) 
-    nombre_labels = nombre+"_labels.txt"
-    aux = ruta_labels+"/"+nombre_labels
-    with open(aux, 'w') as f:
-        for item in labels:
-            f.write("%s\n" % item)
+    dump(modelo, carpeta+"/"+nombre+etiqueta_a_usar+".joblib")
 
 # Función para obtener los datos de entrenamiento y prueba
-def get_X_y_Tabla(ejemplares):
-    etiqueta_a_usar = 'pigmento'
+def get_X_y_Tabla(ejemplares,etiqueta_a_usar):
+    #etiqueta_a_usar = 'pigmento'
     aux_y = list()
     aux_x = list()
     #for ejemplar
@@ -115,9 +106,12 @@ def get_linear_regression(ejemplares):
     accuracy = explained_variance_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
 
+    print("Guardando el modelo")
+    guardar_modelo(model,"LinearRegression")
 
-def get_logistic_Regression(ejemplares):
-    X,y = get_X_y_Tabla(ejemplares)
+
+def get_logistic_Regression(ejemplares,etiqueta_a_usar):
+    X,y = get_X_y_Tabla(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
     # Create Logistic Regression object
     LRclf = LogisticRegression(penalty='l2',solver='lbfgs', max_iter=10500)
@@ -134,6 +128,8 @@ def get_logistic_Regression(ejemplares):
     print(precision_score(y_test, y_pred, average='macro', zero_division=0))
 
     print(classification_report(y_test, y_pred, zero_division=0))
+    print("Guardando el modelo")
+    guardar_modelo(model,"LogisticRegression",etiqueta_a_usar)
 
 def get_perceptron(ejemplares):
     X,y = get_X_y_Tabla(ejemplares)
@@ -230,16 +226,20 @@ def obtener_ejemplares_X_y():
 
 
 if __name__ == "__main__":
-    ejemplares = c1.obtener_carbonato_C1()#recupera_ejemplares()
+    ejemplares = recupera_ejemplares()
 
     #print("Perceptron")
     #get_perceptron(ejemplares)
 
-    #print("Logistic Regression")
-    #get_logistic_Regression(ejemplares)
+    print("Logistic Regression")
+    #print('Pigmento')
+    #get_logistic_Regression(ejemplares, 'pigmento')
+    print('Aglutinante')
+    get_logistic_Regression(ejemplares, 'aglutinante')
 
-    print("Linear Regression")
-    get_linear_regression(ejemplares)
+
+    #print("Linear Regression")
+    #get_linear_regression(ejemplares)
 
     #print("Naive Bayes")
     #get_GNB(ejemplares)

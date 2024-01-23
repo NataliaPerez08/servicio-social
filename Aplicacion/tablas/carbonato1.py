@@ -61,7 +61,7 @@ def obtener_carbonato_C1_tablas_1():
             # crear dataframe
             dataframe['wavelength'] = df['Wavelength']
             dataframe['reflectance'] = df['reflectance']
-            dataframe['pigmento'] = "Orpimente"
+            dataframe['pigmento'] = "Oropimente"
 
             if f[1] == '1':
                 dataframe['aglutinante'] = "Aceite de linaza"

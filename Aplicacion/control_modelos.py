@@ -7,6 +7,7 @@ from joblib import  load
 from sklearn.metrics import accuracy_score, classification_report, precision_score
 from sklearn.metrics import explained_variance_score
 
+from sklearn.linear_model import LinearRegression
 # Para importar los datos para hacer predicciones
 import recoverRegister as rr
 
@@ -76,5 +77,33 @@ def haz_prediccion_ejemplo():
         if value == pred[0]:
             print("Label: ",key)
             break
+def haz_prediccion_regresion_lineal():
+    path = "./Modelos/LinearRegression/LinearRegression.joblib"
+    modelo = extraer_modelo(path)
 
-haz_prediccion_ejemplo()
+    path = "Espectros_FORS_2\Tablas 1\C1\B500000.asd"
+    X=obtener_X(path)
+
+    pred = modelo.predict([X,])
+    print("Predicción: ",modelo.predict([X,]))
+    clase = modelo.get_metadata_routing()
+    print("Clase: ",clase)
+
+def haz_prediccion_regresion_logistica():
+    # Cambiar el path del modelo para aglutinante
+    path = "./Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"
+    modelo = extraer_modelo(path)
+
+    path = "Espectros_FORS_2\Tablas 1\Y1\B500000.asd"
+    X=obtener_X(path)
+
+    pred = modelo.predict([X,])
+    print("Predicción: ",modelo.predict([X,]))
+    clase = modelo.classes_
+    #print("Clase: ",clase)
+    #print(type(clase))
+
+#haz_prediccion_ejemplo()
+#haz_prediccion_regresion_lineal()
+    
+haz_prediccion_regresion_logistica()
