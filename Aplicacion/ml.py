@@ -28,8 +28,8 @@ from sklearn.svm import SVC
 
 #Para importar los modelos de evaluación
 from joblib import dump
-from sklearn.metrics import accuracy_score, classification_report, precision_score
-from sklearn.metrics import explained_variance_score
+from sklearn.metrics import accuracy_score, classification_report, mean_squared_error, precision_score
+from sklearn.metrics import r2_score
 from sklearn.decomposition import PCA
 # Import random forest model
 
@@ -71,8 +71,8 @@ def get_X_y_Tabla(ejemplares,etiqueta_a_usar):
     return X,y
 
 # Función para obtener el modelo de Naive Bayes
-def get_GNB(ejemplares):
-    X,y = get_X_y_Tabla(ejemplares)
+def get_GNB(ejemplares,etiqueta_a_usar):
+    X,y = get_X_y_Tabla(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
 
     # Create Gaussian Naive Bayes object with prior probabilities of each label
@@ -88,8 +88,11 @@ def get_GNB(ejemplares):
     print("Precisión del modelo:", accuracy)
     print(classification_report(y_test, y_pred, zero_division=0))
 
-def get_linear_regression(ejemplares):
-    X,y = get_X_y_Tabla(ejemplares)
+    print("Guardando el modelo")
+    guardar_modelo(model,"GaussianNB",etiqueta_a_usar)
+
+def get_linear_regression(ejemplares,etiqueta_a_usar):
+    X,y = get_X_y_Tabla(ejemplares,etiqueta_a_usar)
     lb = LabelEncoder()
     y = lb.fit_transform(y)
     
@@ -103,11 +106,12 @@ def get_linear_regression(ejemplares):
     # Make predictions
     y_pred =  model.predict(X_test)
     # View accuracy score
-    accuracy = explained_variance_score(y_test, y_pred)
+    accuracy = r2_score(y_test, y_pred)
+    #accuracy = explained_variance_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
 
     print("Guardando el modelo")
-    guardar_modelo(model,"LinearRegression")
+    guardar_modelo(model,"LinearRegression",etiqueta_a_usar)
 
 
 def get_logistic_Regression(ejemplares,etiqueta_a_usar):
@@ -131,8 +135,9 @@ def get_logistic_Regression(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"LogisticRegression",etiqueta_a_usar)
 
-def get_perceptron(ejemplares):
-    X,y = get_X_y_Tabla(ejemplares)
+def get_perceptron(ejemplares,etiqueta_a_usar):
+    X,y = get_X_y_Tabla(ejemplares,etiqueta_a_usar)
+
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
    
     # Create Perceptron object
@@ -147,12 +152,13 @@ def get_perceptron(ejemplares):
     accuracy = accuracy_score(y_test, y_pred)
     print("Precisión del modelo:", accuracy)
     print(precision_score(y_test, y_pred, average='macro', zero_division=0))
-
     print(classification_report(y_test, y_pred, zero_division=0))
+    print("Guardando el modelo")
+    guardar_modelo(model,"Perceptron",etiqueta_a_usar)
 
 
-def get_random_forest(ejemplares):
-    X,y = get_X_y_Tabla(ejemplares)
+def get_random_forest(ejemplares,etiqueta_a_usar):
+    X,y = get_X_y_Tabla(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
 
     # Create Random Forest object
@@ -169,15 +175,14 @@ def get_random_forest(ejemplares):
     print(precision_score(y_test, y_pred, average='macro', zero_division=0))
 
     print(classification_report(y_test, y_pred, zero_division=0))
-    print(RFclf.feature_importances_)
+
     print("Guardando el modelo")
-    
-    #dump(RFclf, 'modeloRF.joblib')
- 
+    guardar_modelo(model,"RandomForest",etiqueta_a_usar)
+
 
 # Función para obtener el modelo de SVM Support Vector Machine  
-def get_svc(ejemplares):
-    X,y = get_X_y_Tabla(ejemplares)
+def get_svc(ejemplares,etiqueta_a_usar):
+    X,y = get_X_y_Tabla(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.35, random_state = 42)
 
     # Create Support Vector Classification
@@ -194,7 +199,7 @@ def get_svc(ejemplares):
 
     print(classification_report(y_test, y_pred, zero_division=0))
     print("Guardando el modelo")
-
+    guardar_modelo(model,"SVC",etiqueta_a_usar)
 
 def recupera_ejemplares():
     ejemplares_c1 = c1.obtener_carbonato_C1()
@@ -228,24 +233,45 @@ def obtener_ejemplares_X_y():
 if __name__ == "__main__":
     ejemplares = recupera_ejemplares()
 
-    #print("Perceptron")
-    #get_perceptron(ejemplares)
+    """
+    print("Perceptron")
+    print('Pigmento')
+    get_perceptron(ejemplares, 'pigmento')
+    print('Aglutinante')
+    get_perceptron(ejemplares, 'aglutinante')
+
+    print("Naive Bayes")
+    print('Pigmento')
+    get_GNB(ejemplares, 'pigmento')
+    print('Aglutinante')
+    get_GNB(ejemplares, 'aglutinante')
+
+    print("Linear Regression")
+    print('Pigmento')
+    get_linear_regression(ejemplares, 'pigmento')
+    print('Aglutinante')
+    get_linear_regression(ejemplares, 'aglutinante')
+
 
     print("Logistic Regression")
-    #print('Pigmento')
-    #get_logistic_Regression(ejemplares, 'pigmento')
+    print('Pigmento')
+    get_logistic_Regression(ejemplares, 'pigmento')
     print('Aglutinante')
     get_logistic_Regression(ejemplares, 'aglutinante')
-
-
-    #print("Linear Regression")
-    #get_linear_regression(ejemplares)
-
-    #print("Naive Bayes")
-    #get_GNB(ejemplares)
     
-    #print("Random Forest")
-    #get_random_forest(ejemplares)
+    print("Random Forest")
+    print('Pigmento')
+    get_random_forest(ejemplares, 'pigmento')
+    print('Aglutinante')
+    get_random_forest(ejemplares, 'aglutinante')
 
-    #print("SVM")
-    #get_svc(ejemplares)
+
+    print("SVM")
+    print('Pigmento')
+    get_svc(ejemplares, 'pigmento')
+    print('Aglutinante')
+    get_svc(ejemplares, 'aglutinante')
+    """
+
+
+

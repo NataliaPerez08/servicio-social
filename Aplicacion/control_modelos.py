@@ -90,20 +90,71 @@ def haz_prediccion_regresion_lineal():
     print("Clase: ",clase)
 
 def haz_prediccion_regresion_logistica():
+    # Cambiar el path del espectro para pigmento
+    path = "./Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
+    modelo1 = extraer_modelo(path)
+
     # Cambiar el path del modelo para aglutinante
     path = "./Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"
-    modelo = extraer_modelo(path)
+    modelo2 = extraer_modelo(path)
 
-    path = "Espectros_FORS_2\Tablas 1\Y1\B500000.asd"
+
+    path = "Espectros_FORS_2\Tablas 1\Y1\C500000.asd"
     X=obtener_X(path)
 
-    pred = modelo.predict([X,])
-    print("Predicción: ",modelo.predict([X,]))
-    clase = modelo.classes_
-    #print("Clase: ",clase)
-    #print(type(clase))
+
+    pred_pigmento = modelo1.predict([X,])
+    print("Predicción de  pigmento:",pred_pigmento)
+  
+    pred_aglutinante = modelo2.predict([X,])
+    print("Predicción de aglutinante: ",pred_aglutinante)
+
+def haz_prediccion_perceptron():
+    # Cambiar el path del espectro para pigmento
+    path = "./Modelos/Perceptron/Perceptronpigmento.joblib"
+    modelo1 = extraer_modelo(path)
+
+    # Cambiar el path del modelo para aglutinante
+    path = "./Modelos/Perceptron/Perceptronaglutinante.joblib"
+    modelo2 = extraer_modelo(path)
+
+
+    path = "Espectros_FORS_2\Tablas 1\Y1\C500000.asd"
+    X=obtener_X(path)
+
+
+    pred_pigmento = modelo1.predict([X,])
+    print("Predicción de  pigmento:",pred_pigmento)
+  
+    pred_aglutinante = modelo2.predict([X,])
+    print("Predicción de aglutinante: ",pred_aglutinante)
+
+def haz_prediccion_regresion_lineal_aglutinante_pigmento():
+    # Cambiar el path del espectro para pigmento
+    path = "Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
+    modelo1 = extraer_modelo(path)
+
+    # Cambiar el path del modelo para aglutinante
+    path = "Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"
+    modelo2 = extraer_modelo(path)
+
+
+    path = "Espectros_FORS_2\Tablas 1\Y1\C500000.asd"
+    X=obtener_X(path)
+
+
+    pred_pigmento = modelo1.predict([X,])
+    print("Predicción de  pigmento:",pred_pigmento)
+  
+    pred_aglutinante = modelo2.predict([X,])
+    print("Predicción de aglutinante: ",pred_aglutinante)
+
+   
 
 #haz_prediccion_ejemplo()
 #haz_prediccion_regresion_lineal()
     
-haz_prediccion_regresion_logistica()
+#haz_prediccion_regresion_logistica()
+    
+#haz_prediccion_perceptron()
+haz_prediccion_regresion_lineal_aglutinante_pigmento()
