@@ -22,9 +22,10 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import Perceptron
+
 from sklearn.ensemble import RandomForestClassifier
-# import svm sklearn.svm.SVC
 from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
 
 #Para importar los modelos de evaluación
 from joblib import dump
@@ -200,6 +201,7 @@ def get_svc(ejemplares,etiqueta_a_usar):
     print(classification_report(y_test, y_pred, zero_division=0))
     print("Guardando el modelo")
     guardar_modelo(model,"SVC",etiqueta_a_usar)
+
 
 def recupera_ejemplares():
     ejemplares_c1 = c1.obtener_carbonato_C1()
