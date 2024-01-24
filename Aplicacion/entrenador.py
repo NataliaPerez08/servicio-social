@@ -202,7 +202,7 @@ def get_svc(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"SVC",etiqueta_a_usar)
 
-
+# Función que se encarda de recuperar los ejemplares de las tablas
 def recupera_ejemplares():
     ejemplares_c1 = c1.obtener_carbonato_C1()
     ejemplares_c2 = c2.obtener_carbonato_C2()
@@ -220,8 +220,6 @@ def recupera_ejemplares():
     ejemplares_y6 = y6.obtener_yeso_Y6()
     ejemplares_y7 = y7.obtener_yeso_Y7()
 
-
-
     ejemplares = ejemplares_c1+ejemplares_c2+ejemplares_c3+ejemplares_c4+ejemplares_c5+ejemplares_c6+ejemplares_c7+ejemplares_y1+ejemplares_y3+ejemplares_y5+ejemplares_y6+ejemplares_y4+ejemplares_y7
 
     return ejemplares
@@ -230,6 +228,14 @@ def obtener_ejemplares_X_y():
     ejemplares = recupera_ejemplares()
     X,y = get_X_y_Tabla(ejemplares)
     return X,y
+
+def aplicar_PCA(X,y):
+    pca = PCA(n_components=2)
+    pca.fit(X)
+    X_pca = pca.transform(X)
+    print("Original shape:   ", X.shape)
+    print("Transformed shape:", X_pca.shape)
+    return X_pca
 
 
 if __name__ == "__main__":
@@ -267,13 +273,17 @@ if __name__ == "__main__":
     print('Aglutinante')
     get_random_forest(ejemplares, 'aglutinante')
 
-
     print("SVM")
     print('Pigmento')
     get_svc(ejemplares, 'pigmento')
     print('Aglutinante')
     get_svc(ejemplares, 'aglutinante')
     """
+
+    ejemplares = c1.obtener_carbonato_C1()
+    X,y = get_X_y_Tabla(ejemplares,'pigmento')
+    X_pca = aplicar_PCA(X,y)
+    print(X_pca)
 
 
 

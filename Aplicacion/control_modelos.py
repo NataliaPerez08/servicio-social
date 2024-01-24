@@ -180,7 +180,7 @@ def haz_prediccion_RandomForest(ruta_predecir):
 
 
 if __name__ == "__main__":
-    ruta_predecir = "Espectros_FORS_2\Tablas 1\C1\A100000.asd"
+    ruta_predecir = "Espectros_FORS_2\Tablas 1\Y1\A100003.asd"
     #path2="reflexion/Echave.001.txt"
     #ruta_predecir = path2
     print(ruta_predecir)
