@@ -1,12 +1,8 @@
+from json import tool
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QPushButton, QLabel
 from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5.QtWidgets import QAction
 from PyQt5.QtWidgets import QMainWindow, QLabel, QToolBar, QToolButton
-from PyQt5.QtCore import QSize
-from PyQt5 import QtGui
-from matplotlib import widgets
 
-import recoverRegister as rr 
 import print_specs_control as psc
 import control_modelos as cm
 
@@ -16,13 +12,14 @@ class Aplicacion(QMainWindow):
         super().__init__()
         self.initUI()
         self.setWindowTitle('Subir Archivo')
-        self.setGeometry(100, 100, 400, 400)
+        self.setGeometry(100, 100, 600, 400)
         self.show()
 
     def initUI(self):
+        self.ruta = ""
         self.label = QLabel(self)
-        self.label.move(150, 150)
-        self.label.resize(100, 100)
+        self.label.move(10, 10)
+        self.label.resize(500, 200)
 
         toolbar = QToolBar()
         self.addToolBar(toolbar)
@@ -69,8 +66,6 @@ class Aplicacion(QMainWindow):
         toolButoon.clicked.connect(self.button6_clicked)
         toolbar.addWidget(toolButoon)
 
-
-
     def abrirArchivo(self):
         nombreArchivo, _ = QFileDialog.getOpenFileName(self, 'Abrir Archivo')
         if nombreArchivo != '':
@@ -82,14 +77,20 @@ class Aplicacion(QMainWindow):
         if texto == "Error":
             self.label.setText("Error")
             return
-        #self.label.setText(texto)
-        ruta = texto
-        psc.print_spec_from_ruta(ruta)
+        self.label.setText(texto.split("/")[-1])
+        self.ruta = texto 
+        psc.print_spec_from_ruta(self.ruta)
+
 
 
     def button1_clicked(self):
         print("Perceptron")
-        print("Botón 1 presionado")
+        if self.ruta == "":
+            self.label.setText("No hay archivo")
+        else:
+            print("Nombre archivo: ",self.ruta)
+            resultado = cm.haz_prediccion_perceptron(self.ruta)
+            self.label.setText(resultado)
 
     def button2_clicked(self):
         print("Botón 2 presionado")

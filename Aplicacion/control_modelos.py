@@ -2,6 +2,7 @@
 import encodings
 from os import error
 from joblib import  load
+from numpy import str_
 from sklearn.metrics import accuracy_score, classification_report, precision_score
 from sklearn.metrics import explained_variance_score
 
@@ -73,7 +74,7 @@ def haz_prediccion_ejemplo():
             break
 
 def haz_prediccion_regresion_logistica(ruta_predecir):
-    print("\nHaciendo predicción con regresión logística")
+    mensaje = "\nHaciendo predicción con regresión logística"
     # Cambiar el path del espectro para pigmento
     path = "./Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
     modelo1 = extraer_modelo(path)
@@ -85,13 +86,18 @@ def haz_prediccion_regresion_logistica(ruta_predecir):
     X=obtener_X(ruta_predecir)
 
     pred_pigmento = modelo1.predict([X,])
-    print("Predicción de  pigmento:",pred_pigmento)
+    mensaje += "\nPredicción de  pigmento:"+str(pred_pigmento)
+    #print("Predicción de  pigmento:",pred_pigmento)
   
     pred_aglutinante = modelo2.predict([X,])
-    print("Predicción de aglutinante: ",pred_aglutinante)
+    #print("Predicción de aglutinante: ",pred_aglutinante)
+    mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
+    
+    return mensaje
 
 def haz_prediccion_perceptron(ruta_predecir):
-    print("\nHaciendo predicción con perceptron")
+    mensaje = "\nHaciendo predicción con perceptron"
+    #print("\nHaciendo predicción con perceptron")
     # Cambiar el path del espectro para pigmento
     path = "./Modelos/Perceptron/Perceptronpigmento.joblib"
     modelo1 = extraer_modelo(path)
@@ -101,13 +107,18 @@ def haz_prediccion_perceptron(ruta_predecir):
 
     X=obtener_X(ruta_predecir)
     pred_pigmento = modelo1.predict([X,])
-    print("Predicción de  pigmento:",pred_pigmento)
+    mensaje += "\nPredicción de  pigmento:"+str(pred_pigmento)
+    #print("Predicción de  pigmento:",pred_pigmento)
   
     pred_aglutinante = modelo2.predict([X,])
-    print("Predicción de aglutinante: ",pred_aglutinante)
+    mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
+    #print("Predicción de aglutinante: ",pred_aglutinante)
+
+    return mensaje
 
 def haz_prediccion_regresion_lineal(ruta_predecir):
-    print("\nHaciendo predicción con regresión lineal")
+    mensaje = "\nHaciendo predicción con regresión lineal"
+    #print("\nHaciendo predicción con regresión lineal")
     # Cambiar el path del espectro para pigmento
     path = "Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
     modelo1 = extraer_modelo(path)
@@ -119,13 +130,16 @@ def haz_prediccion_regresion_lineal(ruta_predecir):
     X=obtener_X(ruta_predecir)
 
     pred_pigmento = modelo1.predict([X,])
-    print("Predicción de  pigmento:",pred_pigmento)
+    mensaje += "\nPredicción de  pigmento:"+str(pred_pigmento)
   
     pred_aglutinante = modelo2.predict([X,])
-    print("Predicción de aglutinante: ",pred_aglutinante)
+    mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
+
+    return mensaje
 
 def haz_prediccion_GaussianNB(ruta_predecir):
-    print("\nHaciendo predicción con GaussianNB")
+    mensaje = "\nHaciendo predicción con GaussianNB"
+
     # Cambiar el path del espectro para pigmento
     path = "Modelos/GaussianNB/GaussianNBpigmento.joblib"
     modelo1 = extraer_modelo(path)
@@ -137,13 +151,16 @@ def haz_prediccion_GaussianNB(ruta_predecir):
     X=obtener_X(ruta_predecir)
 
     pred_pigmento = modelo1.predict([X,])
-    print("Predicción de  pigmento:",pred_pigmento)
+    mensaje += "\nPredicción de  pigmento:"+str(pred_pigmento)
 
     pred_aglutinante = modelo2.predict([X,])
-    print("Predicción de aglutinante: ",pred_aglutinante)
+    mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
+
+    return mensaje
 
 def haz_prediccion_SVC(ruta_predecir):
-    print("\nHaciendo predicción con SVC")
+    mensaje = "\nHaciendo predicción con SVC"
+
     # Cambiar el path del espectro para pigmento
     path = "Modelos/SVC/SVCpigmento.joblib"
     modelo1 = extraer_modelo(path)
@@ -155,13 +172,16 @@ def haz_prediccion_SVC(ruta_predecir):
     X=obtener_X(ruta_predecir)
 
     pred_pigmento = modelo1.predict([X,])
-    print("Predicción de  pigmento:",pred_pigmento)
+    mensaje += "\nPredicción de  pigmento:"+str(pred_pigmento)
 
     pred_aglutinante = modelo2.predict([X,])
-    print("Predicción de aglutinante: ",pred_aglutinante)
+    mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
+
+    return mensaje
 
 def haz_prediccion_RandomForest(ruta_predecir):
-    print("'\nHaciendo predicción con RandomForest")
+    mensaje = "\nHaciendo predicción con RandomForest"
+
     # Cambiar el path del espectro para pigmento
     path = "Modelos/RandomForest/RandomForestpigmento.joblib"
     modelo1 = extraer_modelo(path)
@@ -173,21 +193,28 @@ def haz_prediccion_RandomForest(ruta_predecir):
     X=obtener_X(ruta_predecir)
 
     pred_pigmento = modelo1.predict([X,])
-    print("Predicción de  pigmento:",pred_pigmento)
+    mensaje += "\nPredicción de  pigmento:"+str(pred_pigmento)
 
     pred_aglutinante = modelo2.predict([X,])
-    print("Predicción de aglutinante: ",pred_aglutinante)
+    mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
 
+    return mensaje
 
 if __name__ == "__main__":
     ruta_predecir = "Espectros_FORS_2/Tablas 1/Y1/A100003.asd"
     #path2="reflexion/Echave.001.txt"
     #ruta_predecir = path2
     print(ruta_predecir)
-    haz_prediccion_ejemplo()
-    haz_prediccion_GaussianNB(ruta_predecir)
-    haz_prediccion_regresion_lineal(ruta_predecir)
-    haz_prediccion_regresion_logistica(ruta_predecir)
-    haz_prediccion_RandomForest(ruta_predecir)
-    haz_prediccion_SVC(ruta_predecir)
-    haz_prediccion_perceptron(ruta_predecir)
+    #haz_prediccion_ejemplo()
+    hp1 = haz_prediccion_GaussianNB(ruta_predecir)
+    hp2 = haz_prediccion_regresion_lineal(ruta_predecir)
+    hp3 = haz_prediccion_regresion_logistica(ruta_predecir)
+    hp4 = haz_prediccion_RandomForest(ruta_predecir)
+    hp5 = haz_prediccion_SVC(ruta_predecir)
+    hp6 = haz_prediccion_perceptron(ruta_predecir)
+    print(hp1)
+    print(hp2)
+    print(hp3)
+    print(hp4)
+    print(hp5)
+    print(hp6)
