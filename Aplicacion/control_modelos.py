@@ -1,7 +1,6 @@
-# pandas
-
 #Para importar los modelos de evaluación
-from turtle import pen
+import encodings
+from os import error
 from joblib import  load
 from sklearn.metrics import accuracy_score, classification_report, precision_score
 from sklearn.metrics import explained_variance_score
@@ -17,7 +16,8 @@ def extraer_modelo(path):
 def extraer_labels(path):
     # Crear diccionario de labels
     d_labels = {}
-    with open(path) as f:
+    with open(path,errors='replace') as f:
+        #labels = f.readlines()
         labels = f.readlines()
     
     for label in labels:
@@ -60,7 +60,7 @@ def haz_prediccion_ejemplo():
     #evaluar_modelo(modelo,X,y)
 
     path2="reflexion/Echave.001.txt"
-    path = "Espectros_FORS_2\Tablas 1\C1\A100000.asd"
+    path = "Espectros_FORS_2/Tablas 1/C1/A100000.asd"
 
     X=obtener_X(path)
     pred = modelo.predict([X,])
@@ -180,7 +180,7 @@ def haz_prediccion_RandomForest(ruta_predecir):
 
 
 if __name__ == "__main__":
-    ruta_predecir = "Espectros_FORS_2\Tablas 1\Y1\A100003.asd"
+    ruta_predecir = "Espectros_FORS_2/Tablas 1/Y1/A100003.asd"
     #path2="reflexion/Echave.001.txt"
     #ruta_predecir = path2
     print(ruta_predecir)

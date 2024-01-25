@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 import specdal as specdal
+import recoverRegister as rr
 
 def print_spec(specs_df,ruta):
     etiqueta=ruta.split('/')[2]
@@ -31,6 +32,17 @@ def print_spec_from_df(specs_df,titulo=""):
     plt.title(titulo)
     plt.show()
 
+def print_spec_from_ruta(ruta,titulo=""):
+    ext = ruta.split(".")[-1]
+    if ext == "txt":
+        df = rr.create_df_from_txt(ruta)
+        print_spec_from_df(df,titulo)
+
+    elif ext == "asd":
+        df = rr.get_df_from_asd(ruta)
+        print_spec_from_df(df,titulo)
+    else:
+        print("Error")
 
 #archivos_txt=process_spectrum_tabla2()
 #for atxt in archivos_txt:
