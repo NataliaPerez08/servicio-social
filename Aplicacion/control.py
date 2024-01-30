@@ -13,12 +13,3 @@ def controlador_busqueda(filtros):
     # consulta la base de datos
     resultados = consulta_db(consulta)
     return resultados
-
-# Construye consulta para la insercion de un nuevo espectro
-def controlador_nuevo_espectro(filtros):
-    consulta = "INSERT INTO registro_espectros (Espectro, Carpeta, Tabla, Pigmento, Aglutinante, Base_de_preparacion) VALUES ("
-    for llave, valor in filtros.items():
-        consulta = consulta + "'" + valor + "', "
-    consulta = consulta[:-2] + ")"
-    # consulta la base de datos
-    consulta_db(consulta)

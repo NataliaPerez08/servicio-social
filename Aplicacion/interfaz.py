@@ -117,8 +117,8 @@ class HelloWindow(QMainWindow):
         self.ventana.setLayout(boxLayout2)
         split_espectro = espectro.split(",")
         carpeta = split_espectro[0]
-        tabla = split_espectro[1].replace(" ","")
-        espectro_name = split_espectro[2].replace(" ","")
+        tabla = split_espectro[1].strip()#.replace(" ","")
+        espectro_name = split_espectro[2].strip()#.replace(" ","")
         pigmento = split_espectro[3]
         aglutinante = split_espectro[4]
         base = split_espectro[5]
