@@ -298,7 +298,8 @@ if __name__ == "__main__":
     get_svc(ejemplares, 'pigmento')
     print('Aglutinante')
     get_svc(ejemplares, 'aglutinante')
-    """
+
+
     print("Logistic Regression")
     #print('Pigmento')
     #get_logistic_Regression(ejemplares, 'pigmento')
@@ -310,5 +311,6 @@ if __name__ == "__main__":
     #haz_pca_regresion_logistica(ejemplares, 'pigmento')
     print('Aglutinante')
     haz_pca_regresion_logistica(ejemplares, 'aglutinante')
+    """
    
 

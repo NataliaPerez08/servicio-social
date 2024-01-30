@@ -1,4 +1,3 @@
-from calendar import c
 import sqlite3
 # Modelo de la aplicación
 # Funcion para crear la tabla de registro_espectros 
