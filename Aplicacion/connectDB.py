@@ -1,14 +1,15 @@
 import sqlite3
 # Modelo de la aplicación
 # Funcion para crear la tabla de registro_espectros 
+database_file = "Aplicacion/db_app.db"
+msg = "La base de datos no existe"
 def create_table_registro_espectros():
     # Establece el nombre de la base de datos
-    database_file = "Aplicacion/db_app.db"
     # Revisa si la base de datos existe
     try:
         open(database_file)
     except IOError:
-        print("La base de datos no existe")
+        print(msg)
         exit()
     # Crea la conexion a la base de datos
     connection = sqlite3.connect(database_file)
@@ -25,13 +26,11 @@ def create_table_registro_espectros():
 
 # Funcion para crear la tabla de registro de espectros
 def create_table_registro_espectro():
-    # Establece el nombre de la base de datos
-    database_file = "Aplicacion/db_app.db"
     # Revisa si la base de datos existe
     try:
         open(database_file)
     except IOError:
-        print("La base de datos no existe")
+        print(msg)
         exit()
     # Crea la conexion a la base de datos
     connection = sqlite3.connect(database_file)
@@ -48,13 +47,11 @@ def create_table_registro_espectro():
 
 # Funcion para realizar una consulta a la base de datos
 def consulta_db(consulta):
-    # Establece el nombre de la base de datos
-    database_file = "Aplicacion/db_app.db"
     # Revisa si la base de datos existe
     try:
         open(database_file)
     except IOError:
-        print("La base de datos no existe")
+        print(msg)
         exit()
     # Crea la conexion a la base de datos
     connection = sqlite3.connect(database_file)

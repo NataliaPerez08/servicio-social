@@ -37,7 +37,7 @@ def haz_pca_regresion_logistica(X,y,componentes: int,etiqueta_a_usar):
 # Función que se encarda de recuperar los ejemplares de las tablas
 def recupera_ejemplares():
     # Consulta la base de datos
-    resultados = consulta_db("SELECT * FROM registro_espectros  WHERE Tabla LIKE 'Tablas2'")
+    resultados = consulta_db("SELECT * FROM registro_espectros WHERE Carpeta LIKE 'Tablas2'")
     # Recupera los ejemplares
     ejemplares = []
     for resultado in resultados:
@@ -51,12 +51,12 @@ def recupera_ejemplares():
         ejemplares.append(ejemplar)
     return ejemplares
 
+print("Recuperando espectros")
 ejemplares = recupera_ejemplares()
 # Recupera los espectros
-print("Recuperando espectros")
 espectros = []
 for ejemplar in ejemplares:
-   #print("Ejemplar: ",ejemplar)
+    print("Ejemplar: ",ejemplar[0])
     # Contruye la ruta del espectro
     carpeta = ejemplar[0]
     etiqueta = ejemplar[1]

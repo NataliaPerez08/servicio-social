@@ -1,6 +1,7 @@
 import sys
+from tkinter import E
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QScrollArea, QListWidget, QListWidgetItem, QGridLayout,QDialog
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QScrollArea, QListWidget, QListWidgetItem, QGridLayout,QVBoxLayout
 from PyQt5.QtCore import QSize
 from PyQt5 import QtGui
 import matplotlib
@@ -21,16 +22,16 @@ class HelloWindow(QMainWindow):
         self.setMinimumSize(QSize(640, 480))    
         self.setWindowTitle("Registros de Espectros FORS") 
 
-        centralWidget = QWidget(self)          
-        self.setCentralWidget(centralWidget)   
+        central_widget = QWidget(self)          
+        self.setCentralWidget(central_widget)   
 
-        boxLayout = QVBoxLayout(self)
-        centralWidget.setLayout(boxLayout)
+        box_layout = QVBoxLayout(self)
+        central_widget.setLayout(box_layout)
 
         #  Selecciona entre los filtros disponibles
         lfiltro = QLabel("Buscar por: ", self)
         lfiltro.setAlignment(QtCore.Qt.AlignTop)
-        boxLayout.addWidget(lfiltro)
+        box_layout.addWidget(lfiltro)
 
 
         # Selecciona entre los filtros disponibles
@@ -42,23 +43,23 @@ class HelloWindow(QMainWindow):
         cbfiltro.addItem("Aglutinante")
         cbfiltro.addItem("Base de preparacion")
         lfiltro.setAlignment(QtCore.Qt.AlignTop)
-        boxLayout.addWidget(cbfiltro)
+        box_layout.addWidget(cbfiltro)
 
         # Para cada filtro se debe crear un campo de texto para ingresar el filtro
         # y un boton para agregarlo a la lista de filtros
         # Se crea el campo de texto
         self.textbox = QtWidgets.QLineEdit(self)
-        boxLayout.addWidget(self.textbox)
+        box_layout.addWidget(self.textbox)
         # Se crea el boton
         self.button = QtWidgets.QPushButton('Agregar', self)
-        boxLayout.addWidget(self.button)
+        box_layout.addWidget(self.button)
 
 
         # Se conecta el boton con la funcion que agrega el filtro
         # Presenta los filtros aplicados
         self.lfiltros = QtWidgets.QLabel("Filtros: ")
         self.lfiltros.setAlignment(QtCore.Qt.AlignTop)
-        boxLayout.addWidget(self.lfiltros)
+        box_layout.addWidget(self.lfiltros)
 
         self.button.clicked.connect(lambda: self.agregarFiltro(cbfiltro.currentText(), self.textbox.text()))
         # Imprime bonito los filtros aplicados
@@ -67,35 +68,35 @@ class HelloWindow(QMainWindow):
         scroll = QScrollArea()
         scroll.adjustSize()
         scroll.setWidgetResizable(True)
-        scrollContent = QWidget(scroll)
-        scrollLayout = QVBoxLayout(scrollContent)
-        scrollContent.setLayout(scrollLayout)
-        scroll.setWidget(scrollContent)
+        scroll_content = QWidget(scroll)
+        scroll_layout = QVBoxLayout(scroll_content)
+        scroll_content.setLayout(scroll_layout)
+        scroll.setWidget(scroll_content)
         
         # Se crea el boton para buscar
         self.button = QtWidgets.QPushButton('Buscar', self)
-        boxLayout.addWidget(self.button)
+        box_layout.addWidget(self.button)
         # Se conecta el boton con la funcion que busca
         self.button.clicked.connect(lambda: self.buscar(scroll))
-        boxLayout.addWidget(scroll)
+        box_layout.addWidget(scroll)
         
     # Funcion para buscar el espectro en la base de datos usando el buscador 
     def buscar(self, scroll):
         resultados = controlador_busqueda(self.filtros)
         # Create layout and add widgets
-        boxWidget = QListWidget()
-        boxLayout2 = QVBoxLayout()
-        boxWidget.setLayout(boxLayout2)
+        box_widget = QListWidget()
+        box_layout2 = QVBoxLayout()
+        box_widget.setLayout(box_layout2)
 
         for i in range(len(resultados)):
             # limpia resultado
             resultado = str(resultados[i]).replace("(","").replace(")","").replace("'","")
             qitem = QListWidgetItem(resultado)
-            boxWidget.addItem(qitem)
-        scroll.setWidget(boxWidget)
+            box_widget.addItem(qitem)
+        scroll.setWidget(box_widget)
         ventanas = []
         # Se conecta el boton con la funcion que selecciona el espectro
-        boxWidget.itemClicked.connect(lambda: self.seleccionar(boxWidget.currentItem().text(),ventanas))
+        box_widget.itemClicked.connect(lambda: self.seleccionar(box_widget.currentItem().text(),ventanas))
 
     # Funcion para agregar un filtro a la lista de filtros
     def agregarFiltro(self, llave, text):
@@ -113,8 +114,8 @@ class HelloWindow(QMainWindow):
         ventanas.append(self.ventana)
         
         # Imprime info el espectro
-        boxLayout2 = QVBoxLayout(self.ventana)
-        self.ventana.setLayout(boxLayout2)
+        box_layout2 = QVBoxLayout(self.ventana)
+        self.ventana.setLayout(box_layout2)
         split_espectro = espectro.split(",")
         carpeta = split_espectro[0]
         tabla = split_espectro[1].strip()#.replace(" ","")
@@ -123,12 +124,12 @@ class HelloWindow(QMainWindow):
         aglutinante = split_espectro[4]
         base = split_espectro[5]
 
-        boxLayout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta))
-        boxLayout2.addWidget(QtWidgets.QLabel("Tabla: "+tabla))
-        boxLayout2.addWidget(QtWidgets.QLabel("Espectro: "+espectro_name))
-        boxLayout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
-        boxLayout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
-        boxLayout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
+        box_layout2.addWidget(QtWidgets.QLabel("Carpeta: "+carpeta))
+        box_layout2.addWidget(QtWidgets.QLabel("Tabla: "+tabla))
+        box_layout2.addWidget(QtWidgets.QLabel("Espectro: "+espectro_name))
+        box_layout2.addWidget(QtWidgets.QLabel("Pigmento: "+pigmento))
+        box_layout2.addWidget(QtWidgets.QLabel("Aglutinante: "+aglutinante))
+        box_layout2.addWidget(QtWidgets.QLabel("Base de preparacion: "+base))
 
         # Plot espectro
         #get_df(carpeta,tabla,espectro_name)
@@ -136,7 +137,7 @@ class HelloWindow(QMainWindow):
         # Include the matplotlib figure
         self.figure = Figure()
         self.canvas = FigureCanvasQTAgg(self.figure)
-        boxLayout2.addWidget(self.canvas)
+        box_layout2.addWidget(self.canvas)
         self.ax = self.figure.add_subplot(111)
         df = get_df(carpeta,tabla,espectro_name)
         x=df.columns[0]
@@ -151,7 +152,7 @@ class HelloWindow(QMainWindow):
         self.ventana.show()
         # Crear el boton para combinar ventanas
         self.button = QtWidgets.QPushButton('Combinar ventanas', self.ventana)
-        boxLayout2.addWidget(self.button)
+        box_layout2.addWidget(self.button)
         # Se conecta el boton con la funcion que combina ventanas
         self.button.clicked.connect(lambda: combinar_ventanas(self,ventanas))
 
@@ -163,8 +164,6 @@ def combinar_ventanas(self,ventanas):
     espectros = []
     print("Combinando ventanas")
     for i in range(len(ventanas)):
-        #print(ventanas[i])
-        #print(ventanas[i].children())
         hijos = ventanas[i].children()
         for j in range(len(hijos)):
             tipo_hijo = type(hijos[j])
@@ -198,11 +197,11 @@ def combinar_ventanas(self,ventanas):
     self.ventana.setWindowTitle("Espectro")
     self.ventana.setMinimumSize(QSize(640, 480))
 
-    boxLayout2 = QGridLayout(self.ventana)#QVBoxLayout(self.ventana)
-    self.ventana.setLayout(boxLayout2)
+    box_layout2 = QGridLayout(self.ventana)#QVBox_layout(self.ventana)
+    self.ventana.setLayout(box_layout2)
 
     # Imprime los nombres de los espectros
-    #boxLayout2.addWidget(QtWidgets.QLabel("Espectros: \n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
+    #box_layout2.addWidget(QtWidgets.QLabel("Espectros: \n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
     self.info = QtWidgets.QWidget()
     # Crear la ventana para mostrar la informacion de los espectros ligeramente a la izquierda de la ventana de combinacion
     self.info.move(100,600)
@@ -214,19 +213,19 @@ def combinar_ventanas(self,ventanas):
     scroll = QScrollArea()
     scroll.adjustSize()
     scroll.setWidgetResizable(True)
-    scrollContent = QWidget(scroll)
+    scroll_content = QWidget(scroll)
     
-    scroll.setWidget(scrollContent)
+    scroll.setWidget(scroll_content)
     self.info.layout().addWidget(scroll)
-    boxWidget = QListWidget()
-    boxLayout2 = QVBoxLayout()
-    boxWidget.setLayout(boxLayout2)
+    box_widget = QListWidget()
+    box_layout2 = QVBoxLayout()
+    box_widget.setLayout(box_layout2)
     for i in range(len(labels)):
         qitem = QListWidgetItem(labels[i])
         if "Espectro" in labels[i]:
             qitem.setBackground(QtGui.QColor("yellow"))
-        boxWidget.addItem(qitem)
-    scroll.setWidget(boxWidget)
+        box_widget.addItem(qitem)
+    scroll.setWidget(box_widget)
     
     self.info.show()
         
@@ -254,8 +253,8 @@ def combinar_ventanas(self,ventanas):
 
 def create():
     app = QtWidgets.QApplication(sys.argv)
-    mainWin = HelloWindow()
-    mainWin.show()
+    main_win = HelloWindow()
+    main_win.show()
     sys.exit( app.exec_() )
 
 create()
