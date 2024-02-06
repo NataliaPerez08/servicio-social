@@ -43,13 +43,3 @@ def print_spec_from_ruta(ruta,titulo=""):
         print_spec_from_df(df,titulo)
     else:
         print("Error")
-
-#archivos_txt=process_spectrum_tabla2()
-#for atxt in archivos_txt:
-#    print(atxt)
-#    for ar in atxt.rutas:
-#        print(ar)
-
-#archivosY4 = process_spectrum_tablaY4()
-#for a in archivosY4:
-#    print(a)

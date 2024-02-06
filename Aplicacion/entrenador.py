@@ -238,7 +238,7 @@ def realizar_entrenamiento():
 
 if __name__ == "__main__":
     print("Entrenando modelos")
-    ejemplares = recupera_espectros()
-    realizar_entrenamiento()
-    print("Entrenamiento terminado")
+    #ejemplares = recupera_espectros()
+    #realizar_entrenamiento()
+    #print("Entrenamiento terminado")
 
