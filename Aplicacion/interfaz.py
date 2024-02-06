@@ -1,5 +1,4 @@
 import sys
-from tkinter import E
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QScrollArea, QListWidget, QListWidgetItem, QGridLayout,QVBoxLayout
 from PyQt5.QtCore import QSize

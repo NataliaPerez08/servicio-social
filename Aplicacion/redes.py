@@ -5,6 +5,7 @@ import torch.optim as optim
 
 from torch.utils.data import Dataset, DataLoader
 
+import control_entrenador as ce
 
 class Estandar(nn.Module):
     def __init__(self):

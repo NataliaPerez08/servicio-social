@@ -59,9 +59,4 @@ def recibe_csv_actualiza_db(ruta: str):
         print("El archivo no existe")
         exit()
 
-#print("espectros.csv")
-#recibe_csv_actualiza_db("espectros.csv")
-
-#print("Espectros_FORS_2/Datos tabla.csv")
-#recibe_csv_actualiza_db("Espectros_FORS_2/Datos tabla.csv")
 
