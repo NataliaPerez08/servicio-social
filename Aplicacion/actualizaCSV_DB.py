@@ -24,9 +24,6 @@ def insertar_lista_a_registro_espectros(espectros: list):
     aglutinante = espectros[4]
     base = espectros[5]
 
-    
-
-
     #qery = "INSERT INTO registro_espectros (Espectro, Carpeta, Tabla, Pigmento, Aglutinante) VALUES (?, ?, ?, ?, ?, ?)", (espectro, carpeta, tabla, pigmento, aglutinante, base)
     # Ejecuta la consulta
     qery = "INSERT INTO registro_espectros (Espectro, Carpeta, Tabla, Pigmento, Aglutinante, Base_de_preparacion) VALUES ('" + espectro + "', '" + carpeta + "', '" + tabla + "', '" + pigmento + "', '" + aglutinante + "', '" + base + "')"
@@ -48,14 +45,13 @@ def recibe_csv_actualiza_db(ruta: str):
         with open(ruta, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             # Recorre cada renglon del csv
-
             for row in reader:
                 espectro = row['Espectro']
                 carpeta = row['Carpeta']
                 tabla = row['Tabla']
                 pigmento = row['Pigmento']
                 aglutinante = row['Aglutinante']
-                base = row['Base de preparacion']
+                base = row[reader.fieldnames[-1]]
 
                 insertar_lista_a_registro_espectros([espectro, carpeta, tabla, pigmento, aglutinante, base])
             
@@ -63,6 +59,9 @@ def recibe_csv_actualiza_db(ruta: str):
         print("El archivo no existe")
         exit()
 
-print("Espectros_FORS_2/Datos tabla.csv")
-recibe_csv_actualiza_db("Espectros_FORS_2/Datos tabla.csv")
+#print("espectros.csv")
+#recibe_csv_actualiza_db("espectros.csv")
+
+#print("Espectros_FORS_2/Datos tabla.csv")
+#recibe_csv_actualiza_db("Espectros_FORS_2/Datos tabla.csv")
 

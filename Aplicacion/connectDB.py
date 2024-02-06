@@ -24,27 +24,6 @@ def create_table_registro_espectros():
     # Cierre de la conexion a la base de datos
     connection.close()
 
-# Funcion para crear la tabla de registro de espectros
-def create_table_registro_espectro():
-    # Revisa si la base de datos existe
-    try:
-        open(database_file)
-    except IOError:
-        print(msg)
-        exit()
-    # Crea la conexion a la base de datos
-    connection = sqlite3.connect(database_file)
-    # Crea el cursor para ejecutar las consultas
-    cursor = connection.cursor()
-
-    # Crea la tabla de registro de espectros
-    cursor.execute("CREATE TABLE IF NOT EXISTS registro_espectro (Espectro text,  wavelenght text, reflectance text)")
-    # Confirma la creacion de la tabla
-    connection.commit()
-
-    # Cierre de la conexion a la base de datos
-    connection.close()  
-
 # Funcion para realizar una consulta a la base de datos
 def consulta_db(consulta):
     # Revisa si la base de datos existe
