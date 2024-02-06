@@ -47,7 +47,7 @@ for i in range(200,no_ejem,10):
         max_accuracy = accuracy
         max_componentes = i
 
-print("Maxima accuracy: ",max_accuracy)
+print("Maxima accuracy: ",max_accuracy)|
 print("Numero de componentes: ",max_componentes)
 # Guardar el modelo
 guardar_modelo(model,"./ModelosPCAs/LogisticRegression/LogisticRegressionpigmento.joblib")
