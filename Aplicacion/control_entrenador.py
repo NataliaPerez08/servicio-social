@@ -61,7 +61,6 @@ def recupera_espectros():
         dataframe['wavelength'] = df['Wavelength']
         ext = espectro.split(".")[-1]
         if ext == "txt":
-            nombre = espectro.replace(".txt","")
             nombre = espectro.replace("."+ext,"")
             dataframe['reflectance'] = df[nombre]
         elif ext == "asd":

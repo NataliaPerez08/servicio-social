@@ -2,12 +2,6 @@ import csv
 import specdal 
 import pandas as pd
 
-registro=set()
-with open('pr.csv') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        registro.add(str(row))
-
 def get_df_from_txt(file):
     data = pd.read_csv(file,delimiter='\t')
     return data
@@ -32,9 +26,3 @@ def get_df_from_asd(file):
     df['Wavelength'] = data_wl.index
     df['reflectance'] = data_wl.values
     return df
-
-#print(n_regs[0])
-#specs_df=n_regs[0]['Dataframe']
-#etiqueta=n_regs[0]['Etiqueta']
-#base=n_regs[0]['Base']
-#print_spec(specs_df,etiqueta,base)

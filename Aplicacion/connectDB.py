@@ -1,7 +1,7 @@
 import sqlite3
 # Modelo de la aplicación
 # Funcion para crear la tabla de registro_espectros 
-database_file = "Aplicacion/db_app.db"
+database_file = "../Aplicacion/db_app.db"
 msg = "La base de datos no existe"
 def create_table_registro_espectros():
     # Establece el nombre de la base de datos

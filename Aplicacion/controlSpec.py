@@ -5,13 +5,13 @@ def obten_spec(carpeta,tabla,espectro):
     #print("Tratando de obtener",carpeta,tabla,espectro)
     if carpeta == 'Tablas1' or carpeta == 'Tablas 1':
       # print("Espectros_FORS_2/Tablas 1/"+tabla+"/"+espectro)
-        return "Espectros_FORS_2/Tablas 1/"+tabla+"/"+espectro
+        return "../Espectros_FORS_2/Tablas 1/"+tabla+"/"+espectro
     elif carpeta == 'Tablas2':
-        return "Espectros_FORS_2/Tablas 2/Tabla_"+tabla+"/"+espectro
+        return "../Espectros_FORS_2/Tablas 2/Tabla_"+tabla+"/"+espectro
     else:
         # Tratamos de obtener el espetro
-        print("Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro)
-        return "Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro
+        #print("Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro)
+        return "../Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro
     
 
 def imprimir_spec(carpeta,tabla,espectro):
