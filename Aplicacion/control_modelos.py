@@ -76,11 +76,11 @@ def haz_prediccion_ejemplo():
 def haz_prediccion_regresion_logistica(ruta_predecir):
     mensaje = "\nHaciendo predicción con regresión logística"
     # Cambiar el path del espectro para pigmento
-    path = "./Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
+    path = "../Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
     modelo1 = extraer_modelo(path)
 
     # Cambiar el path del modelo para aglutinante
-    path = "./Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"
+    path = "../Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"
     modelo2 = extraer_modelo(path)
     
     X=obtener_X(ruta_predecir)
@@ -99,10 +99,10 @@ def haz_prediccion_perceptron(ruta_predecir):
     mensaje = "\nHaciendo predicción con perceptron"
     #print("\nHaciendo predicción con perceptron")
     # Cambiar el path del espectro para pigmento
-    path = "./Modelos/Perceptron/Perceptronpigmento.joblib"
+    path = "../Modelos/Perceptron/Perceptronpigmento.joblib"
     modelo1 = extraer_modelo(path)
     # Cambiar el path del modelo para aglutinante
-    path = "./Modelos/Perceptron/Perceptronaglutinante.joblib"
+    path = "../Modelos/Perceptron/Perceptronaglutinante.joblib"
     modelo2 = extraer_modelo(path)
 
     X=obtener_X(ruta_predecir)
@@ -120,11 +120,11 @@ def haz_prediccion_regresion_lineal(ruta_predecir):
     mensaje = "\nHaciendo predicción con regresión lineal"
     #print("\nHaciendo predicción con regresión lineal")
     # Cambiar el path del espectro para pigmento
-    path = "Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
+    path = "../Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"
     modelo1 = extraer_modelo(path)
 
     # Cambiar el path del modelo para aglutinante
-    path = "Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"
+    path = "../Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"
     modelo2 = extraer_modelo(path)
 
     X=obtener_X(ruta_predecir)
@@ -141,11 +141,11 @@ def haz_prediccion_GaussianNB(ruta_predecir):
     mensaje = "\nHaciendo predicción con GaussianNB"
 
     # Cambiar el path del espectro para pigmento
-    path = "Modelos/GaussianNB/GaussianNBpigmento.joblib"
+    path = "../Modelos/GaussianNB/GaussianNBpigmento.joblib"
     modelo1 = extraer_modelo(path)
 
     # Cambiar el path del modelo para aglutinante
-    path = "Modelos/GaussianNB/GaussianNBaglutinante.joblib"
+    path = "../Modelos/GaussianNB/GaussianNBaglutinante.joblib"
     modelo2 = extraer_modelo(path)
 
     X=obtener_X(ruta_predecir)
@@ -162,11 +162,11 @@ def haz_prediccion_SVC(ruta_predecir):
     mensaje = "\nHaciendo predicción con SVC"
 
     # Cambiar el path del espectro para pigmento
-    path = "Modelos/SVC/SVCpigmento.joblib"
+    path = "../Modelos/SVC/SVCpigmento.joblib"
     modelo1 = extraer_modelo(path)
 
     # Cambiar el path del modelo para aglutinante
-    path = "Modelos/SVC/SVCaglutinante.joblib"
+    path = "../Modelos/SVC/SVCaglutinante.joblib"
     modelo2 = extraer_modelo(path)
 
     X=obtener_X(ruta_predecir)
@@ -183,11 +183,11 @@ def haz_prediccion_RandomForest(ruta_predecir):
     mensaje = "\nHaciendo predicción con RandomForest"
 
     # Cambiar el path del espectro para pigmento
-    path = "Modelos/RandomForest/RandomForestpigmento.joblib"
+    path = "../Modelos/RandomForest/RandomForestpigmento.joblib"
     modelo1 = extraer_modelo(path)
 
     # Cambiar el path del modelo para aglutinante
-    path = "Modelos/RandomForest/RandomForestaglutinante.joblib"
+    path = "../Modelos/RandomForest/RandomForestaglutinante.joblib"
     modelo2 = extraer_modelo(path)
 
     X=obtener_X(ruta_predecir)
@@ -199,22 +199,3 @@ def haz_prediccion_RandomForest(ruta_predecir):
     mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
 
     return mensaje
-
-if __name__ == "__main__":
-    ruta_predecir = "Espectros_FORS_2/Tablas 1/Y1/A100003.asd"
-    #path2="reflexion/Echave.001.txt"
-    #ruta_predecir = path2
-    print(ruta_predecir)
-    #haz_prediccion_ejemplo()
-    hp1 = haz_prediccion_GaussianNB(ruta_predecir)
-    hp2 = haz_prediccion_regresion_lineal(ruta_predecir)
-    hp3 = haz_prediccion_regresion_logistica(ruta_predecir)
-    hp4 = haz_prediccion_RandomForest(ruta_predecir)
-    hp5 = haz_prediccion_SVC(ruta_predecir)
-    hp6 = haz_prediccion_perceptron(ruta_predecir)
-    print(hp1)
-    print(hp2)
-    print(hp3)
-    print(hp4)
-    print(hp5)
-    print(hp6)

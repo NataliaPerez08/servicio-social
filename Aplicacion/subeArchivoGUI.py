@@ -93,19 +93,54 @@ class Aplicacion(QMainWindow):
             self.label.setText(resultado)
 
     def button2_clicked(self):
-        print("Botón 2 presionado")
+        print("Logistic Regression")
+        if self.ruta == "":
+            self.label.setText("No hay archivo")
+        else:
+            print("Nombre archivo: ",self.ruta)
+            resultado = cm.haz_prediccion_regresion_logistica(self.ruta)
+            self.label.setText(resultado)
+
 
     def button3_clicked(self):
-        print("Botón 3 presionado")
+        print("Linear Regression")
+        if self.ruta == "":
+            self.label.setText("No hay archivo")
+        else:
+            print("Nombre archivo: ",self.ruta)
+            resultado = cm.haz_prediccion_regresion_lineal(self.ruta)
+            self.label.setText(resultado)
+
 
     def button4_clicked(self):
-        print("Botón 4 presionado")
+        print("Naive Bayes")
+        if self.ruta == "":
+            self.label.setText("No hay archivo")
+        else:
+            print("Nombre archivo: ",self.ruta)
+            resultado = cm.haz_prediccion_GaussianNB(self.ruta)
+            self.label.setText(resultado)
+
 
     def button5_clicked(self):
-        print("Botón 5 presionado")
+        print("Random Forest")
+        if self.ruta == "":
+            self.label.setText("No hay archivo")
+        else:
+            print("Nombre archivo: ",self.ruta)
+            resultado = cm.haz_prediccion_RandomForest(self.ruta)
+            self.label.setText(resultado)
+
 
     def button6_clicked(self):
-        print("Botón 6 presionado")
+        print("SVM")
+        if self.ruta == "":
+            self.label.setText("No hay archivo")
+        else:
+            print("Nombre archivo: ",self.ruta)
+            resultado = cm.haz_prediccion_SVC(self.ruta)
+            self.label.setText(resultado)
+
 
 # Hilo que lee el archivo
 class Hilo(QThread):
