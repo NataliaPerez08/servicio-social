@@ -10,7 +10,7 @@ def obten_spec(carpeta,tabla,espectro):
         return "Espectros_FORS_2/Tablas 2/Tabla_"+tabla+"/"+espectro
     else:
         # Tratamos de obtener el espetro
-        print("Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro)
+        #print("Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro)
         return "Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro
     
 

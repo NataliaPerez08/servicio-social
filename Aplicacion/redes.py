@@ -5,6 +5,7 @@ import torch.optim as optim
 
 from torch.utils.data import Dataset, DataLoader
 
+import control_entrenador as ce
 
 class Estandar(nn.Module):
     def __init__(self):
@@ -29,15 +30,37 @@ else:
 
 model = Estandar()
 print(model)
-criterion = nn.MSELoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
-X = torch.rand(2151, device=device)
-logits = model(X)
-print(logits)
-pred_probab = nn.Softmax(dim=0)(logits)
-y_pred = pred_probab.argmax(-1)
-print(f"Predicted class: {y_pred}")
+espectros = ce.recupera_espectros()
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+
+def train(model, loss_fn, optimizer):
+    for e in espectros:
+        X, y = ce.get_x_y(e,'pigmento')
+        X, y = X.to(device), y.to(device)
+
+        # Compute prediction error
+        pred = model(X)
+        loss = loss_fn(pred, y)
+
+        # Backpropagation
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        if batch % 100 == 0:
+            loss, current = loss.item(), batch * len(X)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
+
+epochs = 5
+
+train(model, criterion, optimizer)
+"""
+for t in range(epochs):
+    print(f"Epoch {t+1}\n-------------------------------")
+    train(train_dataloader, model, criterion, optimizer)
+print("Done!")
+"""
+
