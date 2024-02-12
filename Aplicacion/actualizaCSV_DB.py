@@ -4,6 +4,12 @@ import entrenador
 """
     Este modulo se encarga de actualizar la base de datos con una lista de espectro
 """
+
+"""
+    Método que recibe una lista de espectros y los inserta en la base de datos
+    args:
+        espectros: lista de espectros        
+"""
 def insertar_lista_a_registro_espectros(espectros: list):
     # Establece el nombre de la base de datos
     database_file = "Aplicacion/db_app.db"
@@ -65,13 +71,18 @@ def recibe_csv_actualiza_db(ruta: str):
         print("El archivo no existe")
         exit()
 
+"""
+Método que recibe la ruta de un csv, actualiza la base de datos y entrena los modelos
+args:
+    ruta: ruta del csv
+"""
 def actualiza_y_entrena(ruta:str):
     recibe_csv_actualiza_db(ruta)
     entrenador.realizar_entrenamiento()
 
 
 if __name__ == "__main__":
-    print("Introducir nombre de ls carpeta: ")
+    print("Introducir nombre del archivo csv: ")
     ruta = str(input())
 
 

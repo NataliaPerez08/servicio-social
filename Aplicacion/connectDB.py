@@ -11,7 +11,7 @@ DATABASE_FILE = "../Aplicacion/db_app.db"
 msg = "La base de datos no existe"
 
 """
-Este
+Metodo para crear la tabla de registro de espectros
 """
 def create_table_registro_espectros():
     # Establece el nombre de la base de datos
@@ -34,7 +34,14 @@ def create_table_registro_espectros():
     # Cierre de la conexion a la base de datos
     connection.close()
 
-# Funcion para realizar una consulta a la base de datos
+
+"""
+Metodo para realizar una consulta a la base de datos
+    Args:
+        consulta: consulta (query) a realizar
+    Returns:
+        resultados: resultados de la consulta
+"""
 def consulta_db(consulta):
     # Revisa si la base de datos existe
     try:

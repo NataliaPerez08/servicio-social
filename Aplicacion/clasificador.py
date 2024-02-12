@@ -6,7 +6,9 @@ from PyQt5.QtWidgets import QMainWindow, QLabel, QToolBar, QToolButton
 import print_specs_control as psc
 import control_modelos as cm
 
-# Aplicacion que recibe un archivo e imprime su contenido
+"""
+Clase principal de la aplicación de clasificación
+"""
 class Aplicacion(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -15,6 +17,7 @@ class Aplicacion(QMainWindow):
         self.setGeometry(100, 100, 600, 400)
         self.show()
 
+    """"  Inicializa la interfaz de usuario"""
     def initUI(self):
         self.ruta = ""
         self.label = QLabel(self)
@@ -66,6 +69,7 @@ class Aplicacion(QMainWindow):
         toolButoon.clicked.connect(self.button6_clicked)
         toolbar.addWidget(toolButoon)
 
+    """ Método que abre el archivo y lo envia al hilo para ser leido"""
     def abrirArchivo(self):
         nombreArchivo, _ = QFileDialog.getOpenFileName(self, 'Abrir Archivo')
         if nombreArchivo != '':
@@ -73,6 +77,8 @@ class Aplicacion(QMainWindow):
             self.hilo.start()
             self.hilo.enviarTexto.connect(self.mostrarTexto)
 
+
+    """ Método que busca el archivo y lo muestra en la interfaz"""
     def mostrarTexto(self, texto):
         if texto == "Error":
             self.label.setText("Error")
@@ -81,8 +87,7 @@ class Aplicacion(QMainWindow):
         self.ruta = texto 
         psc.print_spec_from_ruta(self.ruta)
 
-
-
+    """ Método que realiza la predicción con el modelo de perceptron"""
     def button1_clicked(self):
         print("Perceptron")
         if self.ruta == "":
@@ -92,6 +97,7 @@ class Aplicacion(QMainWindow):
             resultado = cm.haz_prediccion_perceptron(self.ruta)
             self.label.setText(resultado)
 
+    """ Método que realiza la predicción con el modelo de regresión logística"""
     def button2_clicked(self):
         print("Logistic Regression")
         if self.ruta == "":
@@ -101,7 +107,7 @@ class Aplicacion(QMainWindow):
             resultado = cm.haz_prediccion_regresion_logistica(self.ruta)
             self.label.setText(resultado)
 
-
+    """ Método que realiza la predicción con el modelo de regresión lineal"""
     def button3_clicked(self):
         print("Linear Regression")
         if self.ruta == "":
@@ -111,7 +117,7 @@ class Aplicacion(QMainWindow):
             resultado = cm.haz_prediccion_regresion_lineal(self.ruta)
             self.label.setText(resultado)
 
-
+    """ Método que realiza la predicción con el modelo de Naive Bayes"""
     def button4_clicked(self):
         print("Naive Bayes")
         if self.ruta == "":
@@ -121,7 +127,7 @@ class Aplicacion(QMainWindow):
             resultado = cm.haz_prediccion_GaussianNB(self.ruta)
             self.label.setText(resultado)
 
-
+    """ Método que realiza la predicción con el modelo de Random Forest"""
     def button5_clicked(self):
         print("Random Forest")
         if self.ruta == "":
@@ -131,7 +137,7 @@ class Aplicacion(QMainWindow):
             resultado = cm.haz_prediccion_RandomForest(self.ruta)
             self.label.setText(resultado)
 
-
+    """ Método que realiza la predicción con el modelo de SVM"""
     def button6_clicked(self):
         print("SVM")
         if self.ruta == "":
@@ -142,7 +148,7 @@ class Aplicacion(QMainWindow):
             self.label.setText(resultado)
 
 
-# Hilo que lee el archivo
+""" Clase que lee el archivo"""
 class Hilo(QThread):
     enviarTexto = pyqtSignal(str)
 
@@ -150,6 +156,7 @@ class Hilo(QThread):
         super().__init__()
         self.nombreArchivo = nombreArchivo
 
+    """ Método que lee el archivo y envia el texto al hilo principal"""
     def run(self):
         print("Nombre archivo: ",self.nombreArchivo)
         # Obtener extension del archivo

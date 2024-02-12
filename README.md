@@ -16,11 +16,9 @@ Desde el navegador de documentos de la carpeta 'servicio-social' dar click derec
 ![alt text](image/image.png)
 
 Ejecutar lo siguiente:
-1. cd env_ss
-2. cd Scripts
+1. cd ss
+2. cd bin
 3. activate
-4. 
-![alt text](image/image-1.png)
 
 Si fue activado exitosamente vera algo similar
 
@@ -42,11 +40,22 @@ Ejecutar
 Ejecutar: python clasificador.py
 ![alt text](image/image-5.png)
 
+## Actualizar Base de Datos para el programa
 
+Para ingresar una nueva tabla de mediciones es necesario incluir la nueva carpeta en 
+
+
+Ejecutar el archivo actualizaCSV_DB.py, e introducir el nombre del archivo csv que debe estar en la misma carpeta que actualizaCSV_DB.py
+
+![alt text](image/actualiza.png)
 
 ## PROGRAMA:ORGANIZADOR
 
 El objetivo de este programa es proveer con una interfaz para mantener organizadas mediciones de espectros FORS proporcionando filtros y la posibilidad de gráficar y combinar gráficas. Notemos un ejemplo para utilizar los filtros:
 
-|*
+|| Filtro  | Descripción | Ejemplo |
+|:------------- |:---------------:| -------------:|
+| Carpeta       | El nombre de la carpeta donde se encuentran las tablas      | Tabla 3     |
+| Tablas     | *Italic*        | Cell 6        |
+| Row 3         | ~~Strike~~      | Cell 9        |
 

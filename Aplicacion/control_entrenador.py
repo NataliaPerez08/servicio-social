@@ -1,3 +1,7 @@
+
+"""
+Modulo encargado de recuperar los ejemplares de la base de datos
+"""
 import numpy as np
 # Conexion a la base de datos
 from connectDB import consulta_db
@@ -8,6 +12,16 @@ from controlSpec import get_df
 import pandas as pd
 
 # Función para obtener los datos de entrenamiento y prueba
+
+"""
+Método encargado de obtener los datos de entrenamiento y prueba
+    Args:
+        ejemplares: lista de ejemplares
+        etiqueta_a_usar: etiqueta a usar (Aglutinante, Pigmento)
+    Returns:
+        X: datos de entrenamiento
+        y: etiquetas
+"""
 def get_x_y(ejemplares,etiqueta_a_usar):
     aux_y = list()
     aux_x = list()
