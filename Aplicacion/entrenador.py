@@ -192,6 +192,8 @@ def haz_pca_regresion_logistica(ejemplares,etiqueta_a_usar):
 
 
 def realizar_entrenamiento():
+    ejemplares = recupera_espectros()
+    
     print("Perceptron")
     print('Pigmento')
     get_perceptron(ejemplares, 'pigmento')
@@ -238,7 +240,6 @@ def realizar_entrenamiento():
 
 if __name__ == "__main__":
     print("Entrenando modelos")
-    #ejemplares = recupera_espectros()
     #realizar_entrenamiento()
     #print("Entrenamiento terminado")
 

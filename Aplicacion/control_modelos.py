@@ -1,41 +1,31 @@
-#Para importar los modelos de evaluación
-import encodings
-from os import error
+"""
+Este módulo se encarga de hacer la predicción con los modelos de clasificación
+"""
+
+# Para importar los modelos de evaluación
 from joblib import  load
-from numpy import str_
 from sklearn.metrics import accuracy_score, classification_report, precision_score
 from sklearn.metrics import explained_variance_score
-
 
 # Para importar los datos para hacer predicciones
 import recoverRegister as rr
 
+""" 
+Método encargado de cargar el modelo en la ruta especificada    
+    Args:
+        path: ruta del modelo a cargar
+"""
 def extraer_modelo(path):
     modelo = load(path)
     return modelo
 
-def extraer_labels(path):
-    # Crear diccionario de labels
-    d_labels = {}
-    with open(path,errors='replace') as f:
-        #labels = f.readlines()
-        labels = f.readlines()
-    
-    for label in labels:
-        tmp_dic = eval(label)
-        d_labels.update(tmp_dic)
-        
-    return d_labels
-
-def evaluar_modelo(modelo,X,y):
-    y_pred = modelo.predict(X)
-    print("Accuracy: ",accuracy_score(y,y_pred))
-    print("Precision: ",precision_score(y,y_pred,average='macro'))
-    print("Reporte de clasificación: \n",classification_report(y,y_pred))
-    print("Varianza explicada: ",explained_variance_score(y,y_pred))
-    return y_pred
-
+"""
+Método encargado de obtener el espectro a predecir
+    Args:
+        ruta: ruta del espectro a predecir
+"""
 def obtener_X(ruta):
+    # verificar si es un archivo txt o asd
     ext = ruta.split(".")[-1]
     if ext == "txt":
         df = rr.create_df_from_txt(ruta)
@@ -43,36 +33,15 @@ def obtener_X(ruta):
         df = rr.get_df_from_asd(ruta)
     else:
         print("Error")
+    # Extraer la columna de reflectancia
     X = df['reflectance'].to_numpy()
     return X
 
-def haz_prediccion_ejemplo():
-    path_modelo = "./Modelos/modeloRF/modeloRF.joblib"
-    modelo = extraer_modelo(path_modelo)
-
-    path_labels = "./Modelos/modeloRF/labels/modeloRF_labels.txt"
-    labels = extraer_labels(path_labels)
-
-
-    print("Modelo: ",modelo)
-    #print("Labels: ",labels)
-
-    #X,y = obtener_ejemplares_X_y()
-    #evaluar_modelo(modelo,X,y)
-
-    path2="reflexion/Echave.001.txt"
-    path = "Espectros_FORS_2/Tablas 1/C1/A100000.asd"
-
-    X=obtener_X(path)
-    pred = modelo.predict([X,])
-    print("Predicción: ",modelo.predict([X,]))   
-
-    # Buscar valores en el diccionario
-    for key, value in labels.items():
-        if value == pred[0]:
-            print("Label: ",key)
-            break
-
+"""
+Método encargado de hacer la predicción con el modelo de regresión logística
+    Args:
+        ruta_predecir: ruta del espectro a predecir
+"""
 def haz_prediccion_regresion_logistica(ruta_predecir):
     mensaje = "\nHaciendo predicción con regresión logística"
     # Cambiar el path del espectro para pigmento
@@ -84,7 +53,6 @@ def haz_prediccion_regresion_logistica(ruta_predecir):
     modelo2 = extraer_modelo(path)
     
     X=obtener_X(ruta_predecir)
-
     pred_pigmento = modelo1.predict([X,])
     mensaje += "\nPredicción de  pigmento:"+str(pred_pigmento)
     #print("Predicción de  pigmento:",pred_pigmento)
@@ -94,7 +62,11 @@ def haz_prediccion_regresion_logistica(ruta_predecir):
     mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
     
     return mensaje
-
+"""
+Método encargado de hacer la predicción con el modelo de perceptron
+    Args:
+        ruta_predecir: ruta del espectro a predecir 
+"""
 def haz_prediccion_perceptron(ruta_predecir):
     mensaje = "\nHaciendo predicción con perceptron"
     #print("\nHaciendo predicción con perceptron")
@@ -116,6 +88,11 @@ def haz_prediccion_perceptron(ruta_predecir):
 
     return mensaje
 
+"""
+Método encargado de hacer la predicción con el modelo de regresión lineal
+    Args:
+        ruta_predecir: ruta del espectro a predecir
+"""
 def haz_prediccion_regresion_lineal(ruta_predecir):
     mensaje = "\nHaciendo predicción con regresión lineal"
     #print("\nHaciendo predicción con regresión lineal")
@@ -136,7 +113,11 @@ def haz_prediccion_regresion_lineal(ruta_predecir):
     mensaje += "\nPredicción de aglutinante: "+str(pred_aglutinante)
 
     return mensaje
-
+"""
+Método encargado de hacer la predicción con el modelo de Gaussian Naive Bayes
+    Args:
+        ruta_predecir: ruta del espectro a predecir
+"""
 def haz_prediccion_GaussianNB(ruta_predecir):
     mensaje = "\nHaciendo predicción con GaussianNB"
 
@@ -158,6 +139,11 @@ def haz_prediccion_GaussianNB(ruta_predecir):
 
     return mensaje
 
+"""
+Método encargado de hacer la predicción con el modelo de C-Support Vector Classification.
+    Args:
+        ruta_predecir: ruta del espectro a predecir
+"""
 def haz_prediccion_SVC(ruta_predecir):
     mensaje = "\nHaciendo predicción con SVC"
 
@@ -179,6 +165,12 @@ def haz_prediccion_SVC(ruta_predecir):
 
     return mensaje
 
+"""
+Método encargado de hacer la predicción con el modelo de Random Forest Classifier
+    Args:
+        ruta_predecir: ruta del espectro a predecir
+
+"""
 def haz_prediccion_RandomForest(ruta_predecir):
     mensaje = "\nHaciendo predicción con RandomForest"
 

@@ -1,12 +1,15 @@
 import csv
 import sqlite3
-
-# Conecta a la base de datos
+import entrenador
+"""
+    Este modulo se encarga de actualizar la base de datos con una lista de espectro
+"""
 def insertar_lista_a_registro_espectros(espectros: list):
     # Establece el nombre de la base de datos
     database_file = "Aplicacion/db_app.db"
     # Revisa si la base de datos existe
     try:
+        # Conecta a la base de datos
         open(database_file)
     except IOError:
         print("La base de datos no existe")
@@ -24,8 +27,7 @@ def insertar_lista_a_registro_espectros(espectros: list):
     aglutinante = espectros[4]
     base = espectros[5]
 
-    #qery = "INSERT INTO registro_espectros (Espectro, Carpeta, Tabla, Pigmento, Aglutinante) VALUES (?, ?, ?, ?, ?, ?)", (espectro, carpeta, tabla, pigmento, aglutinante, base)
-    # Ejecuta la consulta
+    
     qery = "INSERT INTO registro_espectros (Espectro, Carpeta, Tabla, Pigmento, Aglutinante, Base_de_preparacion) VALUES ('" + espectro + "', '" + carpeta + "', '" + tabla + "', '" + pigmento + "', '" + aglutinante + "', '" + base + "')"
     print(qery)
 
@@ -38,6 +40,10 @@ def insertar_lista_a_registro_espectros(espectros: list):
     connection.close()
 
 # Recibe la ruta de un csv y actualiza la base de datos
+    
+"""
+Método que recibe la ruta de un csv
+"""
 def recibe_csv_actualiza_db(ruta: str):
     print("Recibiendo csv")
     # Lee el csv
@@ -58,5 +64,14 @@ def recibe_csv_actualiza_db(ruta: str):
     except FileNotFoundError:
         print("El archivo no existe")
         exit()
+
+def actualiza_y_entrena(ruta:str):
+    recibe_csv_actualiza_db(ruta)
+    entrenador.realizar_entrenamiento()
+
+
+if __name__ == "__main__":
+    print("Introducir nombre de ls carpeta: ")
+    ruta = str(input())
 
 

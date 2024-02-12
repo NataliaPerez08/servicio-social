@@ -1,18 +1,28 @@
+"""
+Este modulo contiene las funciones para crear la tabla de registro de espectros y para realizar consultas a la base de datos
+"""
+
 import sqlite3
-# Modelo de la aplicación
-# Funcion para crear la tabla de registro_espectros 
-database_file = "../Aplicacion/db_app.db"
+
+""" Localización de la base de datos """
+DATABASE_FILE = "../Aplicacion/db_app.db"
+
+# Mensaje a mostrar
 msg = "La base de datos no existe"
+
+"""
+Este
+"""
 def create_table_registro_espectros():
     # Establece el nombre de la base de datos
     # Revisa si la base de datos existe
     try:
-        open(database_file)
+        open(DATABASE_FILE)
     except IOError:
         print(msg)
         exit()
     # Crea la conexion a la base de datos
-    connection = sqlite3.connect(database_file)
+    connection = sqlite3.connect(DATABASE_FILE)
     # Crea el cursor para ejecutar las consultas
     cursor = connection.cursor()
 
@@ -28,12 +38,12 @@ def create_table_registro_espectros():
 def consulta_db(consulta):
     # Revisa si la base de datos existe
     try:
-        open(database_file)
+        open(DATABASE_FILE)
     except IOError:
         print(msg)
         exit()
     # Crea la conexion a la base de datos
-    connection = sqlite3.connect(database_file)
+    connection = sqlite3.connect(DATABASE_FILE)
     # Crea el cursor para ejecutar las consultas
     cursor = connection.cursor()
     # Ejecuta la consulta
