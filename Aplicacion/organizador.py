@@ -250,10 +250,8 @@ def combinar_ventanas(self,ventanas):
     if self.ventana.destroyed and not self.info.destroyed:
         self.info.close()
 
-def create():
+if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     main_win = HelloWindow()
     main_win.show()
     sys.exit( app.exec_() )
-
-create()

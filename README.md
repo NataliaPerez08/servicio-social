@@ -4,7 +4,7 @@
 Instalación de python 3.11.4
 Se puede descargar el instalador en https://www.python.org/downloads/release/python-3117/
 
-[alt text](image/install_python.png)
+![alt text](image/install_python.png)
 
 Elegir  el recomendado: Windows installer (64-bit)
 
@@ -42,7 +42,19 @@ Ejecutar: python clasificador.py
 
 ## Actualizar Base de Datos para el programa
 
-Para ingresar una nueva tabla de mediciones es necesario incluir la nueva carpeta en 
+Para ingresar una nueva tabla de mediciones es necesario incluir la nueva carpeta dentro de Espectros_FORS_2. En la misma altura que Tabla 3, Tablas 1, etc.
+
+![alt text](image.png)
+
+De forma que la estructura es la siguiente
+![alt text](image-2.png)
+
+Y la ruta a un espectro será: Espec
+
+Crear un archivo csv con la siguiente estructura:
+| Carpeta  | Tabla | Ejemplo |
+|:------------- |:---------------:| -------------:|
+
 
 
 Ejecutar el archivo actualizaCSV_DB.py, e introducir el nombre del archivo csv que debe estar en la misma carpeta que actualizaCSV_DB.py
@@ -53,9 +65,16 @@ Ejecutar el archivo actualizaCSV_DB.py, e introducir el nombre del archivo csv q
 
 El objetivo de este programa es proveer con una interfaz para mantener organizadas mediciones de espectros FORS proporcionando filtros y la posibilidad de gráficar y combinar gráficas. Notemos un ejemplo para utilizar los filtros:
 
-|| Filtro  | Descripción | Ejemplo |
+| Filtro  | Descripción | Ejemplo |
 |:------------- |:---------------:| -------------:|
-| Carpeta       | El nombre de la carpeta donde se encuentran las tablas      | Tabla 3     |
-| Tablas     | *Italic*        | Cell 6        |
-| Row 3         | ~~Strike~~      | Cell 9        |
+| Carpeta       | El nombre de la carpeta donde se encuentran las tablas  | Tabla 3     |
+| Tabla    | El nombre, o etiqueta, de la tabla        | C1       |
+| Espectro         | Nombre del archivo     | A100000.asd |
+| Pigmento         | Pigmento del espectro     | Ocre de mina ingles      |
+| Aglutinante         | Aglutinante del espectro    | Aceite de linaza     |
+| Base_de_preparacion         | Base de preparación del espectro     | Carbonato de calcio      |
 
+
+## PROGRAMA:CLASIFICADOR
+
+El objetivo de este programa es proveer con una interfaz que permita subir un archivo de una medición FORS en formato asd o txt y realizar una clasificación a partir del entranamiento realizado sobre la base de datos del organizador
