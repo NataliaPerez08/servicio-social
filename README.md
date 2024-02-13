@@ -47,14 +47,14 @@ Para ingresar una nueva tabla de mediciones es necesario incluir la nueva carpet
 ![alt text](image.png)
 
 De forma que la estructura es la siguiente
+
 ![alt text](image-2.png)
 
-Y la ruta a un espectro será: Espec
+Y la ruta a un espectro será: Espectros_FORS_2/Nueva_carpeta/n1espectro.asd.txt
 
 Crear un archivo csv con la siguiente estructura:
-| Carpeta  | Tabla | Ejemplo |
-|:------------- |:---------------:| -------------:|
 
+|![alt text](image-3.png)
 
 
 Ejecutar el archivo actualizaCSV_DB.py, e introducir el nombre del archivo csv que debe estar en la misma carpeta que actualizaCSV_DB.py
@@ -77,4 +77,5 @@ El objetivo de este programa es proveer con una interfaz para mantener organizad
 
 ## PROGRAMA:CLASIFICADOR
 
-El objetivo de este programa es proveer con una interfaz que permita subir un archivo de una medición FORS en formato asd o txt y realizar una clasificación a partir del entranamiento realizado sobre la base de datos del organizador
+El objetivo de este programa es proveer con una interfaz que permita subir un archivo de una medición FORS en formato asd o txt y realizar una clasificación a partir del entranamiento realizado sobre la base de datos del organizador.
+    

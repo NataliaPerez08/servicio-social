@@ -1,3 +1,7 @@
+""" 
+Modulo encargado de realizar la reducción de dimensionalidad y la regresión logística.
+Sin embargo, no se usa en el entrenamiento
+"""
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -5,7 +9,16 @@ from sklearn.metrics import accuracy_score, precision_score, classification_repo
 from entrenador import guardar_modelo
 from control_entrenador import get_x_y, recupera_ejemplares, recupera_espectros
 
-# Función que se encarga de realizar la reducción de dimensionalidad y la regresión logística
+"""
+Método encargado de realizar la reducción de dimensionalidad y la regresión logística
+    Args:
+        X: ejemplares a usar
+        y: etiqueta a usar
+        componentes: número de componentes
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+    Returns:
+        modelo y precisión
+"""
 def haz_pca_regresion_logistica(X,y,componentes: int,etiqueta_a_usar):
     pca = PCA(n_components=componentes)
     pca.fit(X)
@@ -47,7 +60,7 @@ for i in range(200,no_ejem,10):
         max_accuracy = accuracy
         max_componentes = i
 
-print("Maxima accuracy: ",max_accuracy)|
+print("Maxima accuracy: ",max_accuracy)
 print("Numero de componentes: ",max_componentes)
 # Guardar el modelo
 guardar_modelo(model,"./ModelosPCAs/LogisticRegression/LogisticRegressionpigmento.joblib")

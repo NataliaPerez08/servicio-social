@@ -1,3 +1,6 @@
+"""
+Este modulo contiene la vista de la aplicacion, la cual permite buscar espectros en la base de datos
+"""
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QScrollArea, QListWidget, QListWidgetItem, QGridLayout,QVBoxLayout
@@ -79,7 +82,7 @@ class HelloWindow(QMainWindow):
         self.button.clicked.connect(lambda: self.buscar(scroll))
         box_layout.addWidget(scroll)
         
-    # Funcion para buscar el espectro en la base de datos usando el buscador 
+    """Método encargado de buscar el espectro en la base de datos usando el buscador"""
     def buscar(self, scroll):
         resultados = controlador_busqueda(self.filtros)
         # Create layout and add widgets
@@ -97,12 +100,12 @@ class HelloWindow(QMainWindow):
         # Se conecta el boton con la funcion que selecciona el espectro
         box_widget.itemClicked.connect(lambda: self.seleccionar(box_widget.currentItem().text(),ventanas))
 
-    # Funcion para agregar un filtro a la lista de filtros
+    """Método encargado de agregar un filtro a la lista de filtros"""
     def agregarFiltro(self, llave, text):
         self.filtros.update({llave: text})
         return self.filtros
 
-    # Funcion para dar el espectro seleccionado
+    """Método encargado de seleccionar el espectro y mostrarlo"""
     def seleccionar(self, espectro,ventanas):
         print("Seleccionado: "+espectro+" para mostrar")
         # Crea la ventana para mostrar el espectro
@@ -133,6 +136,7 @@ class HelloWindow(QMainWindow):
         # Plot espectro
         #get_df(carpeta,tabla,espectro_name)
         #imprimir_spec(carpeta,tabla,espectro_name)
+        
         # Include the matplotlib figure
         self.figure = Figure()
         self.canvas = FigureCanvasQTAgg(self.figure)
@@ -155,7 +159,7 @@ class HelloWindow(QMainWindow):
         # Se conecta el boton con la funcion que combina ventanas
         self.button.clicked.connect(lambda: combinar_ventanas(self,ventanas))
 
-        
+""" Método encargado de combinar las ventanas de los espectros seleccionados """
 def combinar_ventanas(self,ventanas):
     eje_X = []
     lista_ys = []
@@ -199,15 +203,12 @@ def combinar_ventanas(self,ventanas):
     box_layout2 = QGridLayout(self.ventana)#QVBox_layout(self.ventana)
     self.ventana.setLayout(box_layout2)
 
-    # Imprime los nombres de los espectros
-    #box_layout2.addWidget(QtWidgets.QLabel("Espectros: \n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
     self.info = QtWidgets.QWidget()
     # Crear la ventana para mostrar la informacion de los espectros ligeramente a la izquierda de la ventana de combinacion
     self.info.move(100,600)
     self.info.setLayout(QGridLayout())
     self.info.setWindowTitle("Información espectros")
     self.info.setMinimumSize(QSize(440, 380))
-    #self.info.layout().addWidget(QtWidgets.QLabel("Espectros:  \n"+str(labels).replace("[","").replace("]","").replace("'","").replace(",","\n")))
     
     scroll = QScrollArea()
     scroll.adjustSize()
@@ -219,6 +220,7 @@ def combinar_ventanas(self,ventanas):
     box_widget = QListWidget()
     box_layout2 = QVBoxLayout()
     box_widget.setLayout(box_layout2)
+
     for i in range(len(labels)):
         qitem = QListWidgetItem(labels[i])
         if "Espectro" in labels[i]:
@@ -227,7 +229,6 @@ def combinar_ventanas(self,ventanas):
     scroll.setWidget(box_widget)
     
     self.info.show()
-        
 
     self.ventana.show()
 

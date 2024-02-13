@@ -1,7 +1,15 @@
+"""
+Este archivo contiene las funciones para imprimir las gráficas de los espectros
+"""
 from matplotlib import pyplot as plt
 import specdal as specdal
 import recoverRegister as rr
 
+""" Este método se encarga de imprimir el espectro a partir de un dataframe y una ruta
+    Args:
+        specs_df: dataframe con los espectros
+        ruta: ruta del espectro
+"""
 def print_spec(specs_df,ruta):
     etiqueta=ruta.split('/')[2]
     base= ruta.split('/')[1]
@@ -21,6 +29,11 @@ def print_spec(specs_df,ruta):
     plt.title(t)
     plt.show()
 
+""" Este método se encarga de imprimir el espectro a partir de un dataframe
+    Args:
+        specs_df: dataframe con los espectros
+        titulo (opcional): título de la gráfica
+"""
 def print_spec_from_df(specs_df,titulo=""):
     x=specs_df.columns[0]
     y=specs_df.columns[1]
@@ -32,6 +45,11 @@ def print_spec_from_df(specs_df,titulo=""):
     plt.title(titulo)
     plt.show()
 
+""" Este método se encarga de imprimir el espectro a partir de una ruta
+    Args:
+        ruta: ruta del espectro
+        titulo (opcional): título de la gráfica
+"""
 def print_spec_from_ruta(ruta,titulo=""):
     ext = ruta.split(".")[-1]
     if ext == "txt":

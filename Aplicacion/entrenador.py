@@ -1,3 +1,6 @@
+"""
+Este módulo se encarga de entrenar los modelos de clasificación y regresión
+"""
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LinearRegression
@@ -9,7 +12,7 @@ from sklearn.svm import SVC
 
 #Para importar los modelos de evaluación
 from joblib import dump
-from sklearn.metrics import accuracy_score, classification_report, mean_squared_error, precision_score
+from sklearn.metrics import accuracy_score, classification_report, precision_score
 from sklearn.metrics import r2_score
 from sklearn.decomposition import PCA
 
@@ -21,14 +24,26 @@ from control_entrenador import get_x_y,recupera_espectros
 
 GUARDANDO_MODELO_MSG = "Guardando el modelo"
 
+"""
+Método encargado de guardar el modelo
+    Args:
+        modelo: modelo a guardar
+        nombre: nombre del modelo
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+"""
 def guardar_modelo(modelo,nombre,etiqueta_a_usar):
     print(GUARDANDO_MODELO_MSG)
     carpeta = "Modelos/"+nombre
     if not os.path.exists(carpeta):
         os.makedirs(carpeta) 
     dump(modelo, carpeta+"/"+nombre+etiqueta_a_usar+".joblib")
-
-# Función para obtener el modelo de Naive Bayes
+ 
+"""
+Método encargado de obtener el modelo de Naive Bayes
+    Args:
+        ejemplares: ejemplares a usar
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+"""
 def get_GNB(ejemplares,etiqueta_a_usar):
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
@@ -49,6 +64,12 @@ def get_GNB(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"GaussianNB",etiqueta_a_usar)
 
+"""
+Método encargado de obtener el modelo de regresión lineal
+    Args:
+        ejemplares: ejemplares a usar
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+"""
 def get_linear_regression(ejemplares,etiqueta_a_usar):
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     lb = LabelEncoder()
@@ -71,7 +92,12 @@ def get_linear_regression(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"LinearRegression",etiqueta_a_usar)
 
-
+"""
+Método encargado de obtener el modelo de regresión logística
+    Args:
+        ejemplares: ejemplares a usar
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+"""
 def get_logistic_Regression(ejemplares,etiqueta_a_usar):
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
@@ -93,6 +119,12 @@ def get_logistic_Regression(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"LogisticRegression",etiqueta_a_usar)
 
+"""
+Método encargado de obtener el modelo de perceptrón
+    Args:
+        ejemplares: ejemplares a usar
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo        
+"""
 def get_perceptron(ejemplares,etiqueta_a_usar):
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
 
@@ -114,7 +146,12 @@ def get_perceptron(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"Perceptron",etiqueta_a_usar)
 
-
+"""
+Método encargado de obtener el modelo de Random Forest
+    Args:
+        ejemplares: ejemplares a usar
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+"""
 def get_random_forest(ejemplares,etiqueta_a_usar):
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
@@ -139,6 +176,12 @@ def get_random_forest(ejemplares,etiqueta_a_usar):
 
 
 # Función para obtener el modelo de SVM Support Vector Machine  
+"""
+Método encargado de obtener el modelo de SVM Support Vector Machine
+Args:
+    ejemplares: ejemplares a usar
+    etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+"""
 def get_svc(ejemplares,etiqueta_a_usar):
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.35, random_state = 42)
@@ -159,6 +202,12 @@ def get_svc(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"SVC",etiqueta_a_usar)
 
+"""
+Método encargado de aplicar PCA. Sin embargo, no se usa en el entrenamiento
+    Args:
+        X: ejemplares a usar
+        y: etiqueta a usar
+"""
 def aplicar_PCA(X,y):
     pca = PCA(n_components=200)
     pca.fit(X)
@@ -167,7 +216,12 @@ def aplicar_PCA(X,y):
     print("Transformed shape:", X_pca.shape)
     return X_pca
 
-
+"""
+Método encargado de aplicar PCA y obtener el modelo de regresión logística
+    Args:
+        ejemplares: ejemplares a usar
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+"""
 def haz_pca_regresion_logistica(ejemplares,etiqueta_a_usar):
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_pca = aplicar_PCA(X,y)
@@ -190,7 +244,9 @@ def haz_pca_regresion_logistica(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"LogisticRegressionPCA",etiqueta_a_usar)
 
-
+"""
+Método encargado de realizar el entrenamiento de los modelos: Perceptron, Naive Bayes, Linear Regression, Logistic Regression, Random Forest, SVM
+"""
 def realizar_entrenamiento():
     ejemplares = recupera_espectros()
     
@@ -237,9 +293,4 @@ def realizar_entrenamiento():
     get_logistic_Regression(ejemplares, 'pigmento')
     print('Aglutinante')
     get_logistic_Regression(ejemplares, 'aglutinante')
-
-if __name__ == "__main__":
-    print("Entrenando modelos")
-    #realizar_entrenamiento()
-    #print("Entrenamiento terminado")
 
