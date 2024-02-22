@@ -51,3 +51,5 @@ ss/*
 
 env_ss/bin/
 env_ss/*
+*/my_venv/*
+Aplicacion/my_venv/*
