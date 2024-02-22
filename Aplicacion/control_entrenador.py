@@ -25,7 +25,6 @@ Método encargado de obtener los datos de entrenamiento y prueba
 def get_x_y(ejemplares,etiqueta_a_usar):
     aux_y = list()
     aux_x = list()
-    #for ejemplar
 
     for e in ejemplares:
         eti = str(e[etiqueta_a_usar][0])
@@ -35,7 +34,11 @@ def get_x_y(ejemplares,etiqueta_a_usar):
     y = np.array(aux_y)
     return X,y
 
-# Función que se encarda de recuperar los ejemplares de las tablas
+"""
+Método encargado de recuperar los ejemplares de las tablas
+    Returns:
+        ejemplares: lista de ejemplares
+"""
 def recupera_ejemplares():
     # Consulta la base de datos
     resultados = consulta_db("SELECT * FROM registro_espectros")
@@ -52,13 +55,17 @@ def recupera_ejemplares():
         ejemplares.append(ejemplar)
     return ejemplares
 
-print("Recuperando espectros")
+
 # Recupera los espectros
+"""
+Método encargado de recuperar los espectros
+    Returns:
+        espectros: lista de espectros en formato DataFrame
+"""
 def recupera_espectros():
     ejemplares = recupera_ejemplares()
     espectros = []
     for ejemplar in ejemplares:
-        #print("Ejemplar: ",ejemplar[0])
         carpeta = ejemplar[0]
         etiqueta = ejemplar[1]
         espectro = ejemplar[2]
