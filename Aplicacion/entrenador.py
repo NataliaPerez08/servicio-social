@@ -293,4 +293,3 @@ def realizar_entrenamiento():
     get_logistic_Regression(ejemplares, 'pigmento')
     print('Aglutinante')
     get_logistic_Regression(ejemplares, 'aglutinante')
-
