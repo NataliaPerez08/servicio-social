@@ -1,10 +1,13 @@
-from json import tool
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QPushButton, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QLabel, QVBoxLayout
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QMainWindow, QLabel, QToolBar, QToolButton
 
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.figure import Figure
+
 import print_specs_control as psc
 import control_modelos as cm
+import recoverRegister as rr
 
 """
 Clase principal de la aplicación de clasificación
@@ -14,7 +17,7 @@ class Aplicacion(QMainWindow):
         super().__init__()
         self.initUI()
         self.setWindowTitle('Subir Archivo')
-        self.setGeometry(100, 100, 600, 400)
+        self.setGeometry(100, 100, 900, 500)
         self.show()
 
     """"  Inicializa la interfaz de usuario"""
@@ -36,38 +39,40 @@ class Aplicacion(QMainWindow):
         toolButoon = QToolButton()
         toolButoon.setText("Perceptron")
         toolButoon.setCheckable(True)
-        toolButoon.clicked.connect(self.button1_clicked)
+        toolButoon.clicked.connect(self.perceptron_clicked)
         toolbar.addWidget(toolButoon)
 
         toolButoon = QToolButton()
         toolButoon.setText("Logistic Regression")
         toolButoon.setCheckable(True)
-        toolButoon.clicked.connect(self.button2_clicked)
+        toolButoon.clicked.connect(self.regresion_logistica_clicked)
         toolbar.addWidget(toolButoon)
 
         toolButoon = QToolButton()
         toolButoon.setText("Linear Regression")
         toolButoon.setCheckable(True)
-        toolButoon.clicked.connect(self.button3_clicked)
+        toolButoon.clicked.connect(self.regresion_lineal_clicked)
         toolbar.addWidget(toolButoon)
 
         toolButoon = QToolButton()
         toolButoon.setText("Naive Bayes")
         toolButoon.setCheckable(True)
-        toolButoon.clicked.connect(self.button4_clicked)
+        toolButoon.clicked.connect(self.gaussianNB_clicked)
         toolbar.addWidget(toolButoon)
 
         toolButoon = QToolButton()
         toolButoon.setText("Random Forest")
         toolButoon.setCheckable(True)
-        toolButoon.clicked.connect(self.button5_clicked)
+        toolButoon.clicked.connect(self.randomForest_clicked)
         toolbar.addWidget(toolButoon)
 
         toolButoon = QToolButton()
         toolButoon.setText("SVM")
         toolButoon.setCheckable(True)
-        toolButoon.clicked.connect(self.button6_clicked)
+        toolButoon.clicked.connect(self.svc_clicked)
         toolbar.addWidget(toolButoon)
+
+        self.ventana = QMainWindow()
 
     """ Método que abre el archivo y lo envia al hilo para ser leido"""
     def abrirArchivo(self):
@@ -85,66 +90,67 @@ class Aplicacion(QMainWindow):
             return
         self.label.setText(texto.split("/")[-1])
         self.ruta = texto 
-        psc.print_spec_from_ruta(self.ruta)
+        
+        psc.print_spec_from_ruta(self.ruta, texto.split("/")[-1])
 
     """ Método que realiza la predicción con el modelo de perceptron"""
-    def button1_clicked(self):
+    def perceptron_clicked(self):
         print("Perceptron")
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
-            print("Nombre archivo: ",self.ruta)
-            resultado = cm.haz_prediccion_perceptron(self.ruta)
+            nombre = self.ruta.split("/")[-1]
+            resultado = nombre+"\n"+cm.haz_prediccion_perceptron(self.ruta)
             self.label.setText(resultado)
 
     """ Método que realiza la predicción con el modelo de regresión logística"""
-    def button2_clicked(self):
+    def regresion_logistica_clicked(self):
         print("Logistic Regression")
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
-            print("Nombre archivo: ",self.ruta)
-            resultado = cm.haz_prediccion_regresion_logistica(self.ruta)
+            nombre = self.ruta.split("/")[-1]
+            resultado = nombre+"\n"+cm.haz_prediccion_regresion_logistica(self.ruta)
             self.label.setText(resultado)
 
     """ Método que realiza la predicción con el modelo de regresión lineal"""
-    def button3_clicked(self):
+    def regresion_lineal_clicked(self):
         print("Linear Regression")
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
-            print("Nombre archivo: ",self.ruta)
-            resultado = cm.haz_prediccion_regresion_lineal(self.ruta)
+            nombre = self.ruta.split("/")[-1]
+            resultado = nombre+"\n"+cm.haz_prediccion_regresion_lineal(self.ruta)
             self.label.setText(resultado)
 
     """ Método que realiza la predicción con el modelo de Naive Bayes"""
-    def button4_clicked(self):
+    def gaussianNB_clicked(self):
         print("Naive Bayes")
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
-            print("Nombre archivo: ",self.ruta)
-            resultado = cm.haz_prediccion_GaussianNB(self.ruta)
+            nombre = self.ruta.split("/")[-1]
+            resultado = nombre+"\n"+cm.haz_prediccion_GaussianNB(self.ruta)
             self.label.setText(resultado)
 
     """ Método que realiza la predicción con el modelo de Random Forest"""
-    def button5_clicked(self):
+    def randomForest_clicked(self):
         print("Random Forest")
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
-            print("Nombre archivo: ",self.ruta)
-            resultado = cm.haz_prediccion_RandomForest(self.ruta)
+            nombre = self.ruta.split("/")[-1]
+            resultado = nombre+"\n"+cm.haz_prediccion_RandomForest(self.ruta)
             self.label.setText(resultado)
 
     """ Método que realiza la predicción con el modelo de SVM"""
-    def button6_clicked(self):
+    def svc_clicked(self):
         print("SVM")
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
-            print("Nombre archivo: ",self.ruta)
-            resultado = cm.haz_prediccion_SVC(self.ruta)
+            nombre = self.ruta.split("/")[-1]
+            resultado = nombre+"\n"+cm.haz_prediccion_SVC(self.ruta)
             self.label.setText(resultado)
 
 

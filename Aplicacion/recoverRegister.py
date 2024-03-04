@@ -43,3 +43,20 @@ def get_df_from_asd(file):
     df['Wavelength'] = data_wl.index
     df['reflectance'] = data_wl.values
     return df
+
+
+""" 
+Este método se encarga de obtener un dataframe a partir de una ruta.
+    Args:
+        ruta: ruta del archivo
+    Returns:
+        DataFrame
+"""
+def get_df_from_ruta(ruta):
+    ext = ruta.split(".")[-1]
+    if ext == "txt":
+        return get_df_from_txt(ruta)
+    elif ext == "asd":
+        return get_df_from_asd(ruta)
+    else:
+        return None
