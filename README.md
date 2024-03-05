@@ -7,7 +7,22 @@ Se puede descargar el instalador en https://www.python.org/downloads/release/pyt
 ![install_python](https://github.com/NataliaPerez08/servicio-social/assets/65318136/e44c056d-e57b-409b-846f-ee9bce14f6be)
 
 
-Elegir  el recomendado: Windows installer (64-bit)
+Elegir  el recomendado: Windows installer (64-bit).
+
+Añadir python  a las variables entorno:
+
+Usando el instalador seleccionar opciones avanzadas, seleccionar Add Python to environment variables
+![image](https://github.com/NataliaPerez08/servicio-social/assets/65318136/02c97a01-bb13-42fe-80ff-8b4e64ef54ad)
+
+Usando las propiedades de sistema, ingrese a configuración avanzada del sistema, elija variables de entorno, editar variables de usario, añadir la ruta C:\ruta-a-python3.11.4\ 
+![image](https://github.com/NataliaPerez08/servicio-social/assets/65318136/efa5755c-9a5e-44cc-b1ca-9a65800d32c2)
+
+Para más información consulte en https://www.scielo.org.mx/avaliacao/manual_marcacion/instalacion_markup_paths.html
+
+## Descargar proyecto
+Dentro del repositorio se encuentra la opcion de releases (https://github.com/NataliaPerez08/servicio-social/releases/tag/1.0) descargar el ZIP AplicacionModelosEspectros.zip.
+
+Desempaquetar en el direcctorio de su preferencia, desde simbolo de sistema (cmd) entrar y ejecutar el ambiente.
 
 ### Ejecutar ambiente
 Para ejecutar cualquiera de los programas es necesario iniciar un ambiente virtual de python
@@ -36,14 +51,15 @@ Luego instalar requerimientos en Aplicacion\requi.txt
 
 Una vez activo el ambiente, instalar requerimientos:
 ```sh
-pip install -r Aplicacion/requi.txt
+pip install -r Aplicacrequi.txt
 ```
 
 ### Utilizando script de python
-Ejecutar desde la carpeta del proyecto:
+Ejecutar desde la carpeta del proyecto Aplicacion:
 ```sh
-python Aplicacion/setup.py
+python setup.py
 ```
+Puede tardar unos segundos, ya que crea el ambiente e instala las librerías necesarias.
 
 ## Actualizar Base de Datos para el programa
 
