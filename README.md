@@ -4,7 +4,8 @@
 Instalación de python 3.11.4
 Se puede descargar el instalador en https://www.python.org/downloads/release/python-3117/
 
-![alt text](image/install_python.png)
+![install_python](https://github.com/NataliaPerez08/servicio-social/assets/65318136/e44c056d-e57b-409b-846f-ee9bce14f6be)
+
 
 Elegir  el recomendado: Windows installer (64-bit)
 
@@ -63,7 +64,7 @@ Crear un archivo csv con la siguiente estructura:
 
 Ejecutar el archivo actualizaCSV_DB.py, e introducir el nombre del archivo csv que debe estar en la misma carpeta que actualizaCSV_DB.py
 
-![alt text](image/actualiza.png)
+![image](https://github.com/NataliaPerez08/servicio-social/assets/65318136/2d0e6936-e4d4-4113-9415-bc9229ad066a)
 
 ## PROGRAMA:ORGANIZADOR
 
@@ -111,14 +112,14 @@ En el campo de las Redes Neuronales, el perceptrón, creado por Frank Rosenblatt
 
 ### Regresion lineal
 
-En estadística, la regresión lineal o ajuste lineal es un modelo matemático usado para aproximar la relación de dependencia entre una variable dependiente ${\displaystyle Y}$, 
-${\displaystyle m}$ variables independientes 
-${\displaystyle X_{i}}$ con 
-${\displaystyle m\in \mathbb {Z} ^{+}}$ y un término aleatorio ${\displaystyle \varepsilon}$. 
+En estadística, la regresión lineal o ajuste lineal es un modelo matemático usado para aproximar la relación de dependencia entre una variable dependiente $Y$,  $m$ variables independientes 
+$X_{i}$ con 
+$m \in \mathbb {Z} ^{+}$ y un término aleatorio $\varepsilon$. 
 
 Este modelo puede ser expresado como:
 
-${\displaystyle Y=\beta _{0}+\beta _{1}X_{1}+\cdots +\beta _{m}X_{m}+\varepsilon }$
+![image](https://github.com/NataliaPerez08/servicio-social/assets/65318136/a98c310b-0209-4ed1-aa4b-cb134ae1bbb2)
+
 donde:
 
 ${\displaystyle Y}$ es la variable dependiente o variable de respuesta.
@@ -132,6 +133,7 @@ el término  ${\displaystyle \beta _{0}}$ es la intersección o término "consta
 
 Un clasificador de Naive Bayes asume que la presencia o ausencia de una característica particular no está relacionada con la presencia o ausencia de cualquier otra característica, dada la clase variable. Por ejemplo, una fruta puede ser considerada como una manzana si es roja, redonda y de alrededor de 7 cm de diámetro. Un clasificador de Naive Bayes considera que cada una de estas características contribuye de manera independiente a la probabilidad de que esta fruta sea una manzana, independientemente de la presencia o ausencia de las otras características.
 El clasificador Bayer (la función ${\displaystyle \mathrm {classify} })$ se define como:
+
 ![alt text](image-8.png)
 
 ### C-Support Vector Classification.
