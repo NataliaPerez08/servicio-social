@@ -1,0 +1,93 @@
+\doxysection{entrenador\+Reduccion.\+py}
+\label{entrenador_reduccion_8py_source}\index{Aplicacion/entrenadorReduccion.py@{Aplicacion/entrenadorReduccion.py}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{stringliteral}{"{}"{}"{}\ }}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{Modulo\ encargado\ de\ realizar\ la\ reducción\ de\ dimensionalidad\ y\ la\ regresión\ logística.}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{Sin\ embargo,\ no\ se\ usa\ en\ el\ entrenamiento}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{from}\ sklearn.decomposition\ \textcolor{keyword}{import}\ PCA}
+\DoxyCodeLine{00006\ \textcolor{keyword}{from}\ sklearn.model\_selection\ \textcolor{keyword}{import}\ train\_test\_split}
+\DoxyCodeLine{00007\ \textcolor{keyword}{from}\ sklearn.linear\_model\ \textcolor{keyword}{import}\ LogisticRegression}
+\DoxyCodeLine{00008\ \textcolor{keyword}{from}\ sklearn.metrics\ \textcolor{keyword}{import}\ accuracy\_score,\ precision\_score,\ classification\_report}
+\DoxyCodeLine{00009\ \textcolor{keyword}{from}\ entrenador\ \textcolor{keyword}{import}\ guardar\_modelo}
+\DoxyCodeLine{00010\ \textcolor{keyword}{from}\ control\_entrenador\ \textcolor{keyword}{import}\ get\_x\_y,\ recupera\_ejemplares,\ recupera\_espectros}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{def\ }haz\_pca\_regresion\_logistica(X,y,componentes:\ int,etiqueta\_a\_usar):}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ realizar\ la\ reducción\ de\ dimensionalidad\ y\ la\ regresión\ logística}}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:}}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ X:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ y:\ etiqueta\ a\ usar}}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ componentes:\ número\ de\ componentes}}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @returns:}}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ modelo\ y\ precisión}}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00023\ \ \ \ \ pca\ =\ PCA(n\_components=componentes)}
+\DoxyCodeLine{00024\ \ \ \ \ pca.fit(X)}
+\DoxyCodeLine{00025\ \ \ \ \ X\_pca\ =\ pca.transform(X)}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X\_pca,y,test\_size\ =\ 0.35,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{\#\ Create\ Logistic\ Regression\ object}}
+\DoxyCodeLine{00029\ \ \ \ \ LRclf\ =\ LogisticRegression(penalty=\textcolor{stringliteral}{'l2'},solver=\textcolor{stringliteral}{'lbfgs'},\ max\_iter=10500)}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00031\ \ \ \ \ model\ =\ LRclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00032\ \ \ \ \ print(\textcolor{stringliteral}{"{}Numero\ de\ features:\ "{}},LRclf.n\_features\_in\_)}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00034\ \ \ \ \ y\_pred\ =\ model.predict(X\_test)}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00037\ \ \ \ \ accuracy\ =\ accuracy\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00038\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00039\ \ \ \ \ print(precision\_score(y\_test,\ y\_pred,\ average=\textcolor{stringliteral}{'macro'},\ zero\_division=0))}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ print(classification\_report(y\_test,\ y\_pred,\ zero\_division=0))}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ model,accuracy}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ etiqueta\_a\_usar\ =\ \textcolor{stringliteral}{'pigmento'}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\#\ Recupera\ los\ ejemplares}}
+\DoxyCodeLine{00047\ ejemplares\ =\ recupera\_espectros()}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ no\_ejem\ =\ len(ejemplares)}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{\#\ Maxima\ accuracy}}
+\DoxyCodeLine{00052\ max\_accuracy\ =\ 0}
+\DoxyCodeLine{00053\ \textcolor{comment}{\#\ Numero\ de\ componentes\ }}
+\DoxyCodeLine{00054\ max\_componentes\ =\ 0}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(200,no\_ejem,10):}
+\DoxyCodeLine{00057\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00058\ \ \ \ \ model,accuracy\ =\ haz\_pca\_regresion\_logistica(X,y,i,etiqueta\_a\_usar)}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ accuracy\ >\ max\_accuracy:}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ max\_accuracy\ =\ accuracy}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ max\_componentes\ =\ i}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ print(\textcolor{stringliteral}{"{}Maxima\ accuracy:\ "{}},max\_accuracy)}
+\DoxyCodeLine{00064\ print(\textcolor{stringliteral}{"{}Numero\ de\ componentes:\ "{}},max\_componentes)}
+\DoxyCodeLine{00065\ \textcolor{comment}{\#\ Guardar\ el\ modelo}}
+\DoxyCodeLine{00066\ guardar\_modelo(model,\textcolor{stringliteral}{"{}./ModelosPCAs/LogisticRegression/LogisticRegressionpigmento.joblib"{}})}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ etiqueta\_a\_usar\ =\ \textcolor{stringliteral}{'aglutinante'}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\#\ Recupera\ los\ ejemplares}}
+\DoxyCodeLine{00070\ ejemplares\ =\ recupera\_espectros()}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{comment}{\#\ Maxima\ accuracy}}
+\DoxyCodeLine{00073\ max\_accuracy\ =\ 0}
+\DoxyCodeLine{00074\ \textcolor{comment}{\#\ Numero\ de\ componentes}}
+\DoxyCodeLine{00075\ max\_componentes\ =\ 0}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(200,no\_ejem,step=10):}
+\DoxyCodeLine{00078\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00079\ \ \ \ \ model,accuracy\ =\ haz\_pca\_regresion\_logistica(X,y,i,etiqueta\_a\_usar)}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{if}\ accuracy\ >\ max\_accuracy:}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ max\_accuracy\ =\ accuracy}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ max\_componentes\ =\ i}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ print(\textcolor{stringliteral}{"{}Maxima\ accuracy:\ "{}},max\_accuracy)}
+\DoxyCodeLine{00085\ print(\textcolor{stringliteral}{"{}Numero\ de\ componentes:\ "{}},max\_componentes)}
+\DoxyCodeLine{00086\ \textcolor{comment}{\#\ Guardar\ el\ modelo}}
+\DoxyCodeLine{00087\ guardar\_modelo(model,\textcolor{stringliteral}{"{}./ModelosPCAs/LogisticRegression/LogisticRegressionaglutinante.joblib"{}})}
+
+\end{DoxyCode}

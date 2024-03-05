@@ -1,0 +1,69 @@
+\doxysection{print\+\_\+specs\+\_\+control.\+py}
+\label{print__specs__control_8py_source}\index{Aplicacion/print\_specs\_control.py@{Aplicacion/print\_specs\_control.py}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{Este\ archivo\ contiene\ las\ funciones\ para\ imprimir\ las\ gráficas\ de\ los\ espectros}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00004\ \textcolor{keyword}{from}\ matplotlib\ \textcolor{keyword}{import}\ pyplot\ \textcolor{keyword}{as}\ plt}
+\DoxyCodeLine{00005\ \textcolor{keyword}{import}\ specdal\ \textcolor{keyword}{as}\ specdal}
+\DoxyCodeLine{00006\ \textcolor{keyword}{import}\ recoverRegister\ \textcolor{keyword}{as}\ rr}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{def\ }print\_spec(specs\_df,ruta):}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ }}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{\ \ \ \ Este\ método\ se\ encarga\ de\ imprimir\ el\ espectro\ a\ partir\ de\ un\ dataframe\ y\ una\ ruta}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ specs\_df:\ dataframe\ con\ los\ espectros}}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ ruta:\ ruta\ del\ espectro}}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00014\ \ \ \ \ etiqueta=ruta.split(\textcolor{stringliteral}{'/'})[2]}
+\DoxyCodeLine{00015\ \ \ \ \ base=\ ruta.split(\textcolor{stringliteral}{'/'})[1]}
+\DoxyCodeLine{00016\ \ \ \ \ print(ruta.split(\textcolor{stringliteral}{'/'}))}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ len(ruta.split(\textcolor{stringliteral}{'/'}))\ >\ 3:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ tabla=\ ruta.split(\textcolor{stringliteral}{'/'})[3]}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ tabla=\textcolor{stringliteral}{''}}
+\DoxyCodeLine{00021\ \ \ \ \ x=specs\_df.columns[0]}
+\DoxyCodeLine{00022\ \ \ \ \ y=specs\_df.columns[1]}
+\DoxyCodeLine{00023\ \ \ \ \ dev\_x\ =\ specs\_df[x].to\_numpy()}
+\DoxyCodeLine{00024\ \ \ \ \ dev\_y\ =\ specs\_df[y].to\_numpy()}
+\DoxyCodeLine{00025\ \ \ \ \ plt.plot(dev\_x,\ dev\_y)}
+\DoxyCodeLine{00026\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'Wavelength'})}
+\DoxyCodeLine{00027\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'Reflectance'})}
+\DoxyCodeLine{00028\ \ \ \ \ t\ =\ base,etiqueta,tabla}
+\DoxyCodeLine{00029\ \ \ \ \ plt.title(t)}
+\DoxyCodeLine{00030\ \ \ \ \ plt.show()}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{def\ }print\_spec\_from\_df(specs\_df,titulo="{}"{}):}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ }}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ Este\ método\ se\ encarga\ de\ imprimir\ el\ espectro\ a\ partir\ de\ un\ dataframe}}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ specs\_df:\ dataframe\ con\ los\ espectros}}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ titulo\ (opcional):\ título\ de\ la\ gráfica}}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00038\ \ \ \ \ x=specs\_df.columns[0]}
+\DoxyCodeLine{00039\ \ \ \ \ y=specs\_df.columns[1]}
+\DoxyCodeLine{00040\ \ \ \ \ dev\_x\ =\ specs\_df[x].to\_numpy()}
+\DoxyCodeLine{00041\ \ \ \ \ dev\_y\ =\ specs\_df[y].to\_numpy()}
+\DoxyCodeLine{00042\ \ \ \ \ plt.plot(dev\_x,\ dev\_y)}
+\DoxyCodeLine{00043\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'Wavelength'})}
+\DoxyCodeLine{00044\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'Reflectance'})}
+\DoxyCodeLine{00045\ \ \ \ \ plt.title(titulo)}
+\DoxyCodeLine{00046\ \ \ \ \ plt.show()}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{def\ }print\_spec\_from\_ruta(ruta,titulo="{}"{}):}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ }}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ Este\ método\ se\ encarga\ de\ imprimir\ el\ espectro\ a\ partir\ de\ una\ ruta}}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ ruta:\ ruta\ del\ espectro}}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ titulo\ (opcional):\ título\ de\ la\ gráfica}}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00054\ \ \ \ \ ext\ =\ ruta.split(\textcolor{stringliteral}{"{}."{}})[-\/1]}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{if}\ ext\ ==\ \textcolor{stringliteral}{"{}txt"{}}:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ df\ =\ rr.create\_df\_from\_txt(ruta)}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ print\_spec\_from\_df(df,titulo)}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{elif}\ ext\ ==\ \textcolor{stringliteral}{"{}asd"{}}:}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ df\ =\ rr.get\_df\_from\_asd(ruta)}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ print\_spec\_from\_df(df,titulo)}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Error"{}})}
+
+\end{DoxyCode}

@@ -1,6 +1,12 @@
-
 """
 Modulo encargado de recuperar los ejemplares de la base de datos
+"""
+
+"""
+@import: numpy as np
+@import: consulta_db
+@import: get_df
+@import: pandas as pd
 """
 import numpy as np
 # Conexion a la base de datos

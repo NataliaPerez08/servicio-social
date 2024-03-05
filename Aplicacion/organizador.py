@@ -16,9 +16,16 @@ from matplotlib.figure import Figure
 
 # Vista de la aplicacion
 class HelloWindow(QMainWindow):
+    """
+    Clase encargada de la vista de la aplicacion
+    """
+
     def __init__(self):
+        """
+        Método encargado de inicializar la vista de la aplicacion
+        """
         QMainWindow.__init__(self)
-        # lista de filtro aplicados
+        """Lista de filtros aplicados"""
         self.filtros = {'Carpeta': '','Tabla': '','Espectro': '','Pigmento': '','Aglutinante': '','Base de preparacion': ''}
 
         self.setMinimumSize(QSize(640, 480))    
@@ -82,8 +89,11 @@ class HelloWindow(QMainWindow):
         self.button.clicked.connect(lambda: self.buscar(scroll))
         box_layout.addWidget(scroll)
         
-    """Método encargado de buscar el espectro en la base de datos usando el buscador"""
     def buscar(self, scroll):
+        """
+        Método encargado de buscar el espectro en la base de datos usando el buscador
+            @param scroll: scroll para mostrar los resultados
+        """
         resultados = controlador_busqueda(self.filtros)
         # Create layout and add widgets
         box_widget = QListWidget()
@@ -100,13 +110,22 @@ class HelloWindow(QMainWindow):
         # Se conecta el boton con la funcion que selecciona el espectro
         box_widget.itemClicked.connect(lambda: self.seleccionar(box_widget.currentItem().text(),ventanas))
 
-    """Método encargado de agregar un filtro a la lista de filtros"""
     def agregarFiltro(self, llave, text):
+        """
+        Método encargado de agregar un filtro a la lista de filtros
+            @param llave: llave del filtro
+            @param text: texto del filtro
+            @return: lista de filtros
+        """
         self.filtros.update({llave: text})
         return self.filtros
 
-    """Método encargado de seleccionar el espectro y mostrarlo"""
     def seleccionar(self, espectro,ventanas):
+        """
+        Método encargado de seleccionar el espectro y mostrarlo
+        @param espectro: espectro seleccionado
+        @param ventanas: lista de ventanas
+        """
         print("Seleccionado: "+espectro+" para mostrar")
         # Crea la ventana para mostrar el espectro
         self.ventana = QtWidgets.QWidget()
@@ -159,8 +178,12 @@ class HelloWindow(QMainWindow):
         # Se conecta el boton con la funcion que combina ventanas
         self.button.clicked.connect(lambda: combinar_ventanas(self,ventanas))
 
-""" Método encargado de combinar las ventanas de los espectros seleccionados """
 def combinar_ventanas(self,ventanas):
+    """ 
+    Método encargado de combinar las ventanas de los espectros seleccionados 
+    @param self: vista de la aplicacion
+    @param ventanas: lista de ventanas
+    """
     eje_X = []
     lista_ys = []
     labels = []
@@ -194,13 +217,12 @@ def combinar_ventanas(self,ventanas):
         ventanas[i].close() 
 
     # Crea un matplotlib para combinar los espectros
-    # Include the matplotlib figure
     self.ventana = QtWidgets.QWidget()
     self.ventana.move(100,100)
     self.ventana.setWindowTitle("Espectro")
     self.ventana.setMinimumSize(QSize(640, 480))
 
-    box_layout2 = QGridLayout(self.ventana)#QVBox_layout(self.ventana)
+    box_layout2 = QGridLayout(self.ventana)
     self.ventana.setLayout(box_layout2)
 
     self.info = QtWidgets.QWidget()

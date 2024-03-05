@@ -1,0 +1,268 @@
+.TH "clasificador.Aplicacion" 3 "Version 1" "Servicio-Social-Clasificador-Organizador" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+clasificador.Aplicacion
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QMainWindow\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB__init__\fP (self)"
+.br
+.ti -1c
+.RI "\fBinitUI\fP (self)"
+.br
+.ti -1c
+.RI "\fBabrirArchivo\fP (self)"
+.br
+.ti -1c
+.RI "\fBmostrarTexto\fP (self, texto)"
+.br
+.ti -1c
+.RI "\fBperceptron_clicked\fP (self)"
+.br
+.ti -1c
+.RI "\fBregresion_logistica_clicked\fP (self)"
+.br
+.ti -1c
+.RI "\fBregresion_lineal_clicked\fP (self)"
+.br
+.ti -1c
+.RI "\fBgaussianNB_clicked\fP (self)"
+.br
+.ti -1c
+.RI "\fBrandomForest_clicked\fP (self)"
+.br
+.ti -1c
+.RI "\fBsvc_clicked\fP (self)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBruta\fP"
+.br
+.ti -1c
+.RI "\fBlabel\fP"
+.br
+.ti -1c
+.RI "\fBabrirArchivo\fP"
+.br
+.ti -1c
+.RI "\fBperceptron_clicked\fP"
+.br
+.ti -1c
+.RI "\fBregresion_logistica_clicked\fP"
+.br
+.ti -1c
+.RI "\fBregresion_lineal_clicked\fP"
+.br
+.ti -1c
+.RI "\fBgaussianNB_clicked\fP"
+.br
+.ti -1c
+.RI "\fBrandomForest_clicked\fP"
+.br
+.ti -1c
+.RI "\fBsvc_clicked\fP"
+.br
+.ti -1c
+.RI "\fBventana\fP"
+.br
+.ti -1c
+.RI "\fBhilo\fP"
+.br
+.ti -1c
+.RI "\fBmostrarTexto\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Clase principal de la aplicación de clasificación
+@param QMainWindow: Clase de la libreria PyQt5
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB12\fP of file \fBclasificador\&.py\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "clasificador\&.Aplicacion\&.__init__ ( self)"
+
+.PP
+.nf
+Constructor de la clase\&. Crea la ventana principal de la aplicación
+@param self: instancia de la clase
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB17\fP of file \fBclasificador\&.py\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "clasificador\&.Aplicacion\&.abrirArchivo ( self)"
+
+.PP
+.nf
+Método que abre el archivo y lo envia al hilo para ser leido
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB84\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.gaussianNB_clicked ( self)"
+
+.PP
+.nf
+Método que realiza la predicción con el modelo de Naive Bayes
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB141\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.initUI ( self)"
+
+.PP
+.nf
+'  
+Inicializa la interfaz de usuario 
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB28\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.mostrarTexto ( self,  texto)"
+
+.PP
+.nf
+Método que busca el archivo y lo muestra en la interfaz
+@param texto: texto del archivo
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB95\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.perceptron_clicked ( self)"
+
+.PP
+.nf
+Método que realiza la predicción con el modelo de perceptron
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB108\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.randomForest_clicked ( self)"
+
+.PP
+.nf
+Método que realiza la predicción con el modelo de Random Forest
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB152\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.regresion_lineal_clicked ( self)"
+
+.PP
+.nf
+Método que realiza la predicción con el modelo de regresión lineal
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB130\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.regresion_logistica_clicked ( self)"
+
+.PP
+.nf
+Método que realiza la predicción con el modelo de regresión logística
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB119\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.svc_clicked ( self)"
+
+.PP
+.nf
+Método que realiza la predicción con el modelo de SVM
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB163\fP of file \fBclasificador\&.py\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "clasificador\&.Aplicacion\&.abrirArchivo"
+
+.PP
+Definition at line \fB43\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.gaussianNB_clicked"
+
+.PP
+Definition at line \fB67\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.hilo"
+
+.PP
+Definition at line \fB90\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.label"
+
+.PP
+Definition at line \fB33\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.mostrarTexto"
+
+.PP
+Definition at line \fB92\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.perceptron_clicked"
+
+.PP
+Definition at line \fB49\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.randomForest_clicked"
+
+.PP
+Definition at line \fB73\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.regresion_lineal_clicked"
+
+.PP
+Definition at line \fB61\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.regresion_logistica_clicked"
+
+.PP
+Definition at line \fB55\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.ruta"
+
+.PP
+Definition at line \fB32\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.svc_clicked"
+
+.PP
+Definition at line \fB79\fP of file \fBclasificador\&.py\fP\&.
+.SS "clasificador\&.Aplicacion\&.ventana"
+
+.PP
+Definition at line \fB82\fP of file \fBclasificador\&.py\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Servicio-Social-Clasificador-Organizador from the source code\&.

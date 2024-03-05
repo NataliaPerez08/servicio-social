@@ -17,34 +17,35 @@ from sklearn.metrics import r2_score
 from sklearn.decomposition import PCA
 
 # One hot encoding
-from sklearn.preprocessing import MultiLabelBinarizer, LabelEncoder
+from sklearn.preprocessing import LabelEncoder
 import os
 
 from control_entrenador import get_x_y,recupera_espectros
 
+# Mensaje de guardado
 GUARDANDO_MODELO_MSG = "Guardando el modelo"
 
-"""
-Método encargado de guardar el modelo
-    Args:
+def guardar_modelo(modelo,nombre,etiqueta_a_usar):
+    """
+    Método encargado de guardar el modelo
+    @args:
         modelo: modelo a guardar
         nombre: nombre del modelo
         etiqueta_a_usar: etiqueta que se usará para guardar el modelo
-"""
-def guardar_modelo(modelo,nombre,etiqueta_a_usar):
+    """
     print(GUARDANDO_MODELO_MSG)
     carpeta = "Modelos/"+nombre
     if not os.path.exists(carpeta):
         os.makedirs(carpeta) 
     dump(modelo, carpeta+"/"+nombre+etiqueta_a_usar+".joblib")
  
-"""
-Método encargado de obtener el modelo de Naive Bayes
-    Args:
+def get_GNB(ejemplares,etiqueta_a_usar):
+    """
+    Método encargado de obtener el modelo de Naive Bayes
+    @args:
         ejemplares: ejemplares a usar
         etiqueta_a_usar: etiqueta que se usará para guardar el modelo
-"""
-def get_GNB(ejemplares,etiqueta_a_usar):
+    """
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
 
@@ -64,13 +65,13 @@ def get_GNB(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"GaussianNB",etiqueta_a_usar)
 
-"""
-Método encargado de obtener el modelo de regresión lineal
-    Args:
+def get_linear_regression(ejemplares,etiqueta_a_usar):
+    """
+    Método encargado de obtener el modelo de regresión lineal
+    @args:
         ejemplares: ejemplares a usar
         etiqueta_a_usar: etiqueta que se usará para guardar el modelo
-"""
-def get_linear_regression(ejemplares,etiqueta_a_usar):
+    """
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     lb = LabelEncoder()
     y = lb.fit_transform(y)
@@ -119,13 +120,13 @@ def get_logistic_Regression(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"LogisticRegression",etiqueta_a_usar)
 
-"""
-Método encargado de obtener el modelo de perceptrón
-    Args:
+def get_perceptron(ejemplares,etiqueta_a_usar):
+    """
+    Método encargado de obtener el modelo de perceptrón
+    @args:
         ejemplares: ejemplares a usar
         etiqueta_a_usar: etiqueta que se usará para guardar el modelo        
-"""
-def get_perceptron(ejemplares,etiqueta_a_usar):
+    """
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
 
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
@@ -146,13 +147,13 @@ def get_perceptron(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"Perceptron",etiqueta_a_usar)
 
-"""
-Método encargado de obtener el modelo de Random Forest
-    Args:
+def get_random_forest(ejemplares,etiqueta_a_usar):
+    """
+    Método encargado de obtener el modelo de Random Forest
+    @args:
         ejemplares: ejemplares a usar
         etiqueta_a_usar: etiqueta que se usará para guardar el modelo
-"""
-def get_random_forest(ejemplares,etiqueta_a_usar):
+    """
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 42)
 
@@ -176,13 +177,13 @@ def get_random_forest(ejemplares,etiqueta_a_usar):
 
 
 # Función para obtener el modelo de SVM Support Vector Machine  
-"""
-Método encargado de obtener el modelo de SVM Support Vector Machine
-Args:
-    ejemplares: ejemplares a usar
-    etiqueta_a_usar: etiqueta que se usará para guardar el modelo
-"""
 def get_svc(ejemplares,etiqueta_a_usar):
+    """
+    Método encargado de obtener el modelo de SVM Support Vector Machine
+    @args:
+        ejemplares: ejemplares a usar
+        etiqueta_a_usar: etiqueta que se usará para guardar el modelo
+    """
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.35, random_state = 42)
 
@@ -202,13 +203,13 @@ def get_svc(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"SVC",etiqueta_a_usar)
 
-"""
-Método encargado de aplicar PCA. Sin embargo, no se usa en el entrenamiento
-    Args:
+def aplicar_PCA(X,y):
+    """
+    Método encargado de aplicar PCA. Sin embargo, no se usa en el entrenamiento
+    @args:
         X: ejemplares a usar
         y: etiqueta a usar
-"""
-def aplicar_PCA(X,y):
+    """
     pca = PCA(n_components=200)
     pca.fit(X)
     X_pca = pca.transform(X)
@@ -216,13 +217,13 @@ def aplicar_PCA(X,y):
     print("Transformed shape:", X_pca.shape)
     return X_pca
 
-"""
-Método encargado de aplicar PCA y obtener el modelo de regresión logística
-    Args:
+def haz_pca_regresion_logistica(ejemplares,etiqueta_a_usar):
+    """
+    Método encargado de aplicar PCA y obtener el modelo de regresión logística
+    @args:
         ejemplares: ejemplares a usar
         etiqueta_a_usar: etiqueta que se usará para guardar el modelo
-"""
-def haz_pca_regresion_logistica(ejemplares,etiqueta_a_usar):
+    """
     X,y = get_x_y(ejemplares,etiqueta_a_usar)
     X_pca = aplicar_PCA(X,y)
 
@@ -244,10 +245,10 @@ def haz_pca_regresion_logistica(ejemplares,etiqueta_a_usar):
     print("Guardando el modelo")
     guardar_modelo(model,"LogisticRegressionPCA",etiqueta_a_usar)
 
-"""
-Método encargado de realizar el entrenamiento de los modelos: Perceptron, Naive Bayes, Linear Regression, Logistic Regression, Random Forest, SVM
-"""
 def realizar_entrenamiento():
+    """
+    Método encargado de realizar el entrenamiento de los modelos: Perceptron, Naive Bayes, Linear Regression, Logistic Regression, Random Forest, SVM
+    """
     ejemplares = recupera_espectros()
     
     print("Perceptron")
@@ -286,7 +287,6 @@ def realizar_entrenamiento():
     get_svc(ejemplares, 'pigmento')
     print('Aglutinante')
     get_svc(ejemplares, 'aglutinante')
-
 
     print("Logistic Regression")
     print('Pigmento')

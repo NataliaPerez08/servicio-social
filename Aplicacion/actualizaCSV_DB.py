@@ -1,16 +1,20 @@
-import csv
-import sqlite3
-import entrenador
 """
     Este modulo se encarga de actualizar la base de datos con una lista de espectro
 """
+"""
+@import csv
+@import sqlite3
+@import entrenador
+"""
+import csv
+import sqlite3
+import entrenador
 
-"""
-    Método que recibe una lista de espectros y los inserta en la base de datos
-    args:
-        espectros: lista de espectros        
-"""
 def insertar_lista_a_registro_espectros(espectros: list):
+    """
+        Método que recibe una lista de espectros y los inserta en la base de datos
+        @param espectros: lista de espectros     
+    """
     # Establece el nombre de la base de datos
     database_file = "Aplicacion/db_app.db"
     # Revisa si la base de datos existe
@@ -25,7 +29,6 @@ def insertar_lista_a_registro_espectros(espectros: list):
     # Crea el cursor para ejecutar las consultas
     cursor = connection.cursor()
 
-    
     espectro = espectros[0]
     carpeta = espectros[1]
     tabla = espectros[2]
@@ -33,9 +36,7 @@ def insertar_lista_a_registro_espectros(espectros: list):
     aglutinante = espectros[4]
     base = espectros[5]
 
-    
     qery = "INSERT INTO registro_espectros (Espectro, Carpeta, Tabla, Pigmento, Aglutinante, Base_de_preparacion) VALUES ('" + espectro + "', '" + carpeta + "', '" + tabla + "', '" + pigmento + "', '" + aglutinante + "', '" + base + "')"
-    print(qery)
 
     cursor.execute(qery)
 
@@ -44,14 +45,12 @@ def insertar_lista_a_registro_espectros(espectros: list):
 
     # Cierre de la conexion a la base de datos
     connection.close()
-
-# Recibe la ruta de un csv y actualiza la base de datos
     
-"""
-Método que recibe la ruta de un csv
-"""
 def recibe_csv_actualiza_db(ruta: str):
-    print("Recibiendo csv")
+    """
+    Método que recibe la ruta de un csv y actualiza la base de datos
+    @param ruta: ruta del csv
+    """
     # Lee el csv
     try:
         with open(ruta, newline='') as csvfile:
@@ -71,12 +70,11 @@ def recibe_csv_actualiza_db(ruta: str):
         print("El archivo no existe")
         exit()
 
-"""
-Método que recibe la ruta de un csv, actualiza la base de datos y entrena los modelos
-args:
-    ruta: ruta del csv
-"""
 def actualiza_y_entrena(ruta:str):
+    """
+    Método que recibe la ruta de un csv, actualiza la base de datos y entrena los modelos
+    @param ruta: ruta del csv
+    """
     recibe_csv_actualiza_db(ruta)
     entrenador.realizar_entrenamiento()
 

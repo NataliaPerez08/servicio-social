@@ -1,0 +1,325 @@
+\doxysection{clasificador.\+Aplicacion Class Reference}
+\label{classclasificador_1_1_aplicacion}\index{clasificador.Aplicacion@{clasificador.Aplicacion}}
+Inheritance diagram for clasificador.\+Aplicacion\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classclasificador_1_1_aplicacion}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ \+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+\textbf{ init\+UI} (self)
+\item 
+\textbf{ abrir\+Archivo} (self)
+\item 
+\textbf{ mostrar\+Texto} (self, texto)
+\item 
+\textbf{ perceptron\+\_\+clicked} (self)
+\item 
+\textbf{ regresion\+\_\+logistica\+\_\+clicked} (self)
+\item 
+\textbf{ regresion\+\_\+lineal\+\_\+clicked} (self)
+\item 
+\textbf{ gaussian\+NB\+\_\+clicked} (self)
+\item 
+\textbf{ random\+Forest\+\_\+clicked} (self)
+\item 
+\textbf{ svc\+\_\+clicked} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ruta}
+\item 
+\textbf{ label}
+\item 
+\textbf{ abrir\+Archivo}
+\item 
+\textbf{ perceptron\+\_\+clicked}
+\item 
+\textbf{ regresion\+\_\+logistica\+\_\+clicked}
+\item 
+\textbf{ regresion\+\_\+lineal\+\_\+clicked}
+\item 
+\textbf{ gaussian\+NB\+\_\+clicked}
+\item 
+\textbf{ random\+Forest\+\_\+clicked}
+\item 
+\textbf{ svc\+\_\+clicked}
+\item 
+\textbf{ ventana}
+\item 
+\textbf{ hilo}
+\item 
+\textbf{ mostrar\+Texto}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Clase principal de la aplicación de clasificación
+@param QMainWindow: Clase de la libreria PyQt5
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 12} of file \textbf{ clasificador.\+py}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\label{classclasificador_1_1_aplicacion_ab5d94dd45e13f7503daa6e4b9f62cfe3} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{\_\_init\_\_()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor de la clase. Crea la ventana principal de la aplicación
+@param self: instancia de la clase
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 17} of file \textbf{ clasificador.\+py}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\label{classclasificador_1_1_aplicacion_a035dbc2a4ecd1c8ac306019aea5714af} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!abrirArchivo@{abrirArchivo}}
+\index{abrirArchivo@{abrirArchivo}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{abrirArchivo()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+abrir\+Archivo (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que abre el archivo y lo envia al hilo para ser leido
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 84} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a6162c3f27c51e2549e6ab52a1ba6f907} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!gaussianNB\_clicked@{gaussianNB\_clicked}}
+\index{gaussianNB\_clicked@{gaussianNB\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{gaussianNB\_clicked()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+gaussian\+NB\+\_\+clicked (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que realiza la predicción con el modelo de Naive Bayes
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 141} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a4b89014c0b37ca29ee1d9d2e29308207} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!initUI@{initUI}}
+\index{initUI@{initUI}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{initUI()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+init\+UI (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}"  
+Inicializa la interfaz de usuario 
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 28} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a15e5439826550da1eb503c36ee030c3b} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!mostrarTexto@{mostrarTexto}}
+\index{mostrarTexto@{mostrarTexto}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{mostrarTexto()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+mostrar\+Texto (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{texto }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que busca el archivo y lo muestra en la interfaz
+@param texto: texto del archivo
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 95} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_aa20c482443c234d0ea5fcecc26472b1a} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!perceptron\_clicked@{perceptron\_clicked}}
+\index{perceptron\_clicked@{perceptron\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{perceptron\_clicked()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+perceptron\+\_\+clicked (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que realiza la predicción con el modelo de perceptron
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 108} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_abdf74898dad3379dc3097b2c3e3177f2} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!randomForest\_clicked@{randomForest\_clicked}}
+\index{randomForest\_clicked@{randomForest\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{randomForest\_clicked()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+random\+Forest\+\_\+clicked (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que realiza la predicción con el modelo de Random Forest
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 152} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a8ba54b1441bdc54c882aaffc995968eb} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!regresion\_lineal\_clicked@{regresion\_lineal\_clicked}}
+\index{regresion\_lineal\_clicked@{regresion\_lineal\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{regresion\_lineal\_clicked()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+regresion\+\_\+lineal\+\_\+clicked (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que realiza la predicción con el modelo de regresión lineal
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 130} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a9f416af2ceccccafbb501656bc5acb72} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!regresion\_logistica\_clicked@{regresion\_logistica\_clicked}}
+\index{regresion\_logistica\_clicked@{regresion\_logistica\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{regresion\_logistica\_clicked()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+regresion\+\_\+logistica\+\_\+clicked (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que realiza la predicción con el modelo de regresión logística
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 119} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_aaaa9029024903b8454f80d81ba321212} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!svc\_clicked@{svc\_clicked}}
+\index{svc\_clicked@{svc\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{svc\_clicked()}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+svc\+\_\+clicked (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método que realiza la predicción con el modelo de SVM
+\end{DoxyVerb}
+ 
+
+Definition at line \textbf{ 163} of file \textbf{ clasificador.\+py}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\label{classclasificador_1_1_aplicacion_a2240fcf877f9830d347a0fdeb4d49da8} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!abrirArchivo@{abrirArchivo}}
+\index{abrirArchivo@{abrirArchivo}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{abrirArchivo}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+abrir\+Archivo}
+
+
+
+Definition at line \textbf{ 43} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a3239d03b7280a263a3e8213a46ab6aba} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!gaussianNB\_clicked@{gaussianNB\_clicked}}
+\index{gaussianNB\_clicked@{gaussianNB\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{gaussianNB\_clicked}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+gaussian\+NB\+\_\+clicked}
+
+
+
+Definition at line \textbf{ 67} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a27a5a140b2910607ec361e219e8dd4e8} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!hilo@{hilo}}
+\index{hilo@{hilo}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{hilo}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+hilo}
+
+
+
+Definition at line \textbf{ 90} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a1d6489d4fae7b2ce800516f3f69f4719} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!label@{label}}
+\index{label@{label}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{label}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+label}
+
+
+
+Definition at line \textbf{ 33} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a21433828e7d210fb210062845fdce736} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!mostrarTexto@{mostrarTexto}}
+\index{mostrarTexto@{mostrarTexto}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{mostrarTexto}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+mostrar\+Texto}
+
+
+
+Definition at line \textbf{ 92} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a77169dda8e989228752286f5b7c2d4ff} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!perceptron\_clicked@{perceptron\_clicked}}
+\index{perceptron\_clicked@{perceptron\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{perceptron\_clicked}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+perceptron\+\_\+clicked}
+
+
+
+Definition at line \textbf{ 49} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_acefde0d2e158f4b2edeaf819795d2131} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!randomForest\_clicked@{randomForest\_clicked}}
+\index{randomForest\_clicked@{randomForest\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{randomForest\_clicked}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+random\+Forest\+\_\+clicked}
+
+
+
+Definition at line \textbf{ 73} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a9c41b40d51fe594249a6a7ceee805175} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!regresion\_lineal\_clicked@{regresion\_lineal\_clicked}}
+\index{regresion\_lineal\_clicked@{regresion\_lineal\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{regresion\_lineal\_clicked}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+regresion\+\_\+lineal\+\_\+clicked}
+
+
+
+Definition at line \textbf{ 61} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_aefd46abceab41fabb87d826262c98c70} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!regresion\_logistica\_clicked@{regresion\_logistica\_clicked}}
+\index{regresion\_logistica\_clicked@{regresion\_logistica\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{regresion\_logistica\_clicked}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+regresion\+\_\+logistica\+\_\+clicked}
+
+
+
+Definition at line \textbf{ 55} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_a96dd8cc933e26920be8d349b3ce5fc6e} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!ruta@{ruta}}
+\index{ruta@{ruta}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{ruta}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+ruta}
+
+
+
+Definition at line \textbf{ 32} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_aa54223d723702284e497325b5a326f6f} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!svc\_clicked@{svc\_clicked}}
+\index{svc\_clicked@{svc\_clicked}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{svc\_clicked}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+svc\+\_\+clicked}
+
+
+
+Definition at line \textbf{ 79} of file \textbf{ clasificador.\+py}.
+
+\label{classclasificador_1_1_aplicacion_aafaeaa222a9c98a9791ab451b7d47ce1} 
+\index{clasificador.Aplicacion@{clasificador.Aplicacion}!ventana@{ventana}}
+\index{ventana@{ventana}!clasificador.Aplicacion@{clasificador.Aplicacion}}
+\doxysubsubsection{ventana}
+{\footnotesize\ttfamily clasificador.\+Aplicacion.\+ventana}
+
+
+
+Definition at line \textbf{ 82} of file \textbf{ clasificador.\+py}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Aplicacion/clasificador.\+py\end{DoxyCompactItemize}

@@ -1,0 +1,302 @@
+\doxysection{entrenador.\+py}
+\label{entrenador_8py_source}\index{Aplicacion/entrenador.py@{Aplicacion/entrenador.py}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{Este\ módulo\ se\ encarga\ de\ entrenar\ los\ modelos\ de\ clasificación\ y\ regresión}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00004\ \textcolor{keyword}{from}\ sklearn.model\_selection\ \textcolor{keyword}{import}\ train\_test\_split}
+\DoxyCodeLine{00005\ \textcolor{keyword}{from}\ sklearn.naive\_bayes\ \textcolor{keyword}{import}\ GaussianNB}
+\DoxyCodeLine{00006\ \textcolor{keyword}{from}\ sklearn.linear\_model\ \textcolor{keyword}{import}\ LinearRegression}
+\DoxyCodeLine{00007\ \textcolor{keyword}{from}\ sklearn.linear\_model\ \textcolor{keyword}{import}\ LogisticRegression}
+\DoxyCodeLine{00008\ \textcolor{keyword}{from}\ sklearn.linear\_model\ \textcolor{keyword}{import}\ Perceptron}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{from}\ sklearn.ensemble\ \textcolor{keyword}{import}\ RandomForestClassifier}
+\DoxyCodeLine{00011\ \textcolor{keyword}{from}\ sklearn.svm\ \textcolor{keyword}{import}\ SVC}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{\#Para\ importar\ los\ modelos\ de\ evaluación}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{from}\ joblib\ \textcolor{keyword}{import}\ dump}
+\DoxyCodeLine{00015\ \textcolor{keyword}{from}\ sklearn.metrics\ \textcolor{keyword}{import}\ accuracy\_score,\ classification\_report,\ precision\_score}
+\DoxyCodeLine{00016\ \textcolor{keyword}{from}\ sklearn.metrics\ \textcolor{keyword}{import}\ r2\_score}
+\DoxyCodeLine{00017\ \textcolor{keyword}{from}\ sklearn.decomposition\ \textcolor{keyword}{import}\ PCA}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{\#\ One\ hot\ encoding}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{from}\ sklearn.preprocessing\ \textcolor{keyword}{import}\ LabelEncoder}
+\DoxyCodeLine{00021\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{from}\ control\_entrenador\ \textcolor{keyword}{import}\ get\_x\_y,recupera\_espectros}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{\#\ Mensaje\ de\ guardado}}
+\DoxyCodeLine{00026\ GUARDANDO\_MODELO\_MSG\ =\ \textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{def\ }guardar\_modelo(modelo,nombre,etiqueta\_a\_usar):}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00030\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ guardar\ el\ modelo}}
+\DoxyCodeLine{00031\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ modelo:\ modelo\ a\ guardar}}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ nombre:\ nombre\ del\ modelo}}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00036\ \ \ \ \ print(GUARDANDO\_MODELO\_MSG)}
+\DoxyCodeLine{00037\ \ \ \ \ carpeta\ =\ \textcolor{stringliteral}{"{}Modelos/"{}}+nombre}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(carpeta):}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ os.makedirs(carpeta)\ }
+\DoxyCodeLine{00040\ \ \ \ \ dump(modelo,\ carpeta+\textcolor{stringliteral}{"{}/"{}}+nombre+etiqueta\_a\_usar+\textcolor{stringliteral}{"{}.joblib"{}})}
+\DoxyCodeLine{00041\ \ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{def\ }get\_GNB(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ obtener\ el\ modelo\ de\ Naive\ Bayes}}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00049\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00050\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X,y,test\_size\ =\ 0.2,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{\#\ Create\ Gaussian\ Naive\ Bayes\ object\ with\ prior\ probabilities\ of\ each\ label}}
+\DoxyCodeLine{00053\ \ \ \ \ GNBclf\ =\ GaussianNB()}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00055\ \ \ \ \ model\ =\ GNBclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00058\ \ \ \ \ y\_pred\ =\ \ model.predict(X\_test)}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00061\ \ \ \ \ accuracy\ =\ accuracy\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00062\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00063\ \ \ \ \ print(classification\_report(y\_test,\ y\_pred,\ zero\_division=0))}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ print(\textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}})}
+\DoxyCodeLine{00066\ \ \ \ \ guardar\_modelo(model,\textcolor{stringliteral}{"{}GaussianNB"{}},etiqueta\_a\_usar)}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{def\ }get\_linear\_regression(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ obtener\ el\ modelo\ de\ regresión\ lineal}}
+\DoxyCodeLine{00071\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00075\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00076\ \ \ \ \ lb\ =\ LabelEncoder()}
+\DoxyCodeLine{00077\ \ \ \ \ y\ =\ lb.fit\_transform(y)}
+\DoxyCodeLine{00078\ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X,y,test\_size\ =\ 0.2,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{\#\ Create\ Linear\ Regression\ object}}
+\DoxyCodeLine{00082\ \ \ \ \ LRclf\ =\ LinearRegression()}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00084\ \ \ \ \ model\ =\ LRclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00087\ \ \ \ \ y\_pred\ =\ \ model.predict(X\_test)}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00089\ \ \ \ \ accuracy\ =\ r2\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{\#accuracy\ =\ explained\_variance\_score(y\_test,\ y\_pred)}}
+\DoxyCodeLine{00091\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ print(\textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}})}
+\DoxyCodeLine{00094\ \ \ \ \ guardar\_modelo(model,\textcolor{stringliteral}{"{}LinearRegression"{}},etiqueta\_a\_usar)}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00097\ \textcolor{stringliteral}{Método\ encargado\ de\ obtener\ el\ modelo\ de\ regresión\ logística}}
+\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00102\ \textcolor{keyword}{def\ }get\_logistic\_Regression(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00103\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00104\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X,y,test\_size\ =\ 0.2,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{\#\ Create\ Logistic\ Regression\ object}}
+\DoxyCodeLine{00106\ \ \ \ \ LRclf\ =\ LogisticRegression(penalty=\textcolor{stringliteral}{'l2'},solver=\textcolor{stringliteral}{'lbfgs'},\ max\_iter=10500)}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00108\ \ \ \ \ model\ =\ LRclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00109\ \ \ \ \ print(\textcolor{stringliteral}{"{}Numero\ de\ features:\ "{}},LRclf.n\_features\_in\_)}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00112\ \ \ \ \ y\_pred\ =\ model.predict(X\_test)}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00115\ \ \ \ \ accuracy\ =\ accuracy\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00116\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00117\ \ \ \ \ print(precision\_score(y\_test,\ y\_pred,\ average=\textcolor{stringliteral}{'macro'},\ zero\_division=0))}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ print(classification\_report(y\_test,\ y\_pred,\ zero\_division=0))}
+\DoxyCodeLine{00120\ \ \ \ \ print(\textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}})}
+\DoxyCodeLine{00121\ \ \ \ \ guardar\_modelo(model,\textcolor{stringliteral}{"{}LogisticRegression"{}},etiqueta\_a\_usar)}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{def\ }get\_perceptron(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00125\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ obtener\ el\ modelo\ de\ perceptrón}}
+\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00129\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00130\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X,y,test\_size\ =\ 0.2,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00133\ \ \ \ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{\#\ Create\ Perceptron\ object}}
+\DoxyCodeLine{00135\ \ \ \ \ Pclf\ =\ Perceptron()}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00137\ \ \ \ \ model\ =\ Pclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00140\ \ \ \ \ y\_pred\ =\ \ model.predict(X\_test)}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00143\ \ \ \ \ accuracy\ =\ accuracy\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00144\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00145\ \ \ \ \ print(precision\_score(y\_test,\ y\_pred,\ average=\textcolor{stringliteral}{'macro'},\ zero\_division=0))}
+\DoxyCodeLine{00146\ \ \ \ \ print(classification\_report(y\_test,\ y\_pred,\ zero\_division=0))}
+\DoxyCodeLine{00147\ \ \ \ \ print(\textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}})}
+\DoxyCodeLine{00148\ \ \ \ \ guardar\_modelo(model,\textcolor{stringliteral}{"{}Perceptron"{}},etiqueta\_a\_usar)}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{keyword}{def\ }get\_random\_forest(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00152\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ obtener\ el\ modelo\ de\ Random\ Forest}}
+\DoxyCodeLine{00153\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00154\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00155\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00156\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00157\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00158\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X,y,test\_size\ =\ 0.2,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{\#\ Create\ Random\ Forest\ object}}
+\DoxyCodeLine{00161\ \ \ \ \ RFclf\ =\ RandomForestClassifier()}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00163\ \ \ \ \ model\ =\ RFclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00166\ \ \ \ \ y\_pred\ =\ \ model.predict(X\_test)}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00169\ \ \ \ \ accuracy\ =\ accuracy\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00170\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00171\ \ \ \ \ print(precision\_score(y\_test,\ y\_pred,\ average=\textcolor{stringliteral}{'macro'},\ zero\_division=0))}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ print(classification\_report(y\_test,\ y\_pred,\ zero\_division=0))}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ print(\textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}})}
+\DoxyCodeLine{00176\ \ \ \ \ guardar\_modelo(model,\textcolor{stringliteral}{"{}RandomForest"{}},etiqueta\_a\_usar)}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \textcolor{comment}{\#\ Función\ para\ obtener\ el\ modelo\ de\ SVM\ Support\ Vector\ Machine\ \ }}
+\DoxyCodeLine{00180\ \textcolor{keyword}{def\ }get\_svc(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00182\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ obtener\ el\ modelo\ de\ SVM\ Support\ Vector\ Machine}}
+\DoxyCodeLine{00183\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00184\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00185\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00186\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00187\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00188\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X,y,test\_size\ =\ 0.35,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{comment}{\#\ Create\ Support\ Vector\ Classification}}
+\DoxyCodeLine{00191\ \ \ \ \ SVCclf\ =\ SVC()}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00193\ \ \ \ \ model\ =\ SVCclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00195\ \ \ \ \ y\_pred\ =\ \ model.predict(X\_test)}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00198\ \ \ \ \ accuracy\ =\ accuracy\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00199\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00200\ \ \ \ \ print(precision\_score(y\_test,\ y\_pred,\ average=\textcolor{stringliteral}{'macro'},\ zero\_division=0))}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ print(classification\_report(y\_test,\ y\_pred,\ zero\_division=0))}
+\DoxyCodeLine{00203\ \ \ \ \ print(\textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}})}
+\DoxyCodeLine{00204\ \ \ \ \ guardar\_modelo(model,\textcolor{stringliteral}{"{}SVC"{}},etiqueta\_a\_usar)}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{keyword}{def\ }aplicar\_PCA(X,y):}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00208\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ aplicar\ PCA.\ Sin\ embargo,\ no\ se\ usa\ en\ el\ entrenamiento}}
+\DoxyCodeLine{00209\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00210\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ X:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00211\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ y:\ etiqueta\ a\ usar}}
+\DoxyCodeLine{00212\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00213\ \ \ \ \ pca\ =\ PCA(n\_components=200)}
+\DoxyCodeLine{00214\ \ \ \ \ pca.fit(X)}
+\DoxyCodeLine{00215\ \ \ \ \ X\_pca\ =\ pca.transform(X)}
+\DoxyCodeLine{00216\ \ \ \ \ print(\textcolor{stringliteral}{"{}Original\ shape:\ \ \ "{}},\ X.shape)}
+\DoxyCodeLine{00217\ \ \ \ \ print(\textcolor{stringliteral}{"{}Transformed\ shape:"{}},\ X\_pca.shape)}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{return}\ X\_pca}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \textcolor{keyword}{def\ }haz\_pca\_regresion\_logistica(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00222\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ aplicar\ PCA\ y\ obtener\ el\ modelo\ de\ regresión\ logística}}
+\DoxyCodeLine{00223\ \textcolor{stringliteral}{\ \ \ \ @args:}}
+\DoxyCodeLine{00224\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ ejemplares\ a\ usar}}
+\DoxyCodeLine{00225\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ que\ se\ usará\ para\ guardar\ el\ modelo}}
+\DoxyCodeLine{00226\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00227\ \ \ \ \ X,y\ =\ get\_x\_y(ejemplares,etiqueta\_a\_usar)}
+\DoxyCodeLine{00228\ \ \ \ \ X\_pca\ =\ aplicar\_PCA(X,y)}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ X\_train,\ X\_test,\ y\_train,\ y\_test\ =\ train\_test\_split(X\_pca,y,test\_size\ =\ 0.35,\ random\_state\ =\ 42)}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{comment}{\#\ Create\ Logistic\ Regression\ object}}
+\DoxyCodeLine{00232\ \ \ \ \ LRclf\ =\ LogisticRegression(penalty=\textcolor{stringliteral}{'l2'},solver=\textcolor{stringliteral}{'lbfgs'},\ max\_iter=10500)}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{\#\ Train\ model}}
+\DoxyCodeLine{00234\ \ \ \ \ model\ =\ LRclf.fit(X\_train,\ y\_train)}
+\DoxyCodeLine{00235\ \ \ \ \ print(\textcolor{stringliteral}{"{}Numero\ de\ features:\ "{}},LRclf.n\_features\_in\_)}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{\#\ Make\ predictions}}
+\DoxyCodeLine{00237\ \ \ \ \ y\_pred\ =\ model.predict(X\_test)}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{comment}{\#\ View\ accuracy\ score}}
+\DoxyCodeLine{00240\ \ \ \ \ accuracy\ =\ accuracy\_score(y\_test,\ y\_pred)}
+\DoxyCodeLine{00241\ \ \ \ \ print(\textcolor{stringliteral}{"{}Precisión\ del\ modelo:"{}},\ accuracy)}
+\DoxyCodeLine{00242\ \ \ \ \ print(precision\_score(y\_test,\ y\_pred,\ average=\textcolor{stringliteral}{'macro'},\ zero\_division=0))}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \ \ print(classification\_report(y\_test,\ y\_pred,\ zero\_division=0))}
+\DoxyCodeLine{00245\ \ \ \ \ print(\textcolor{stringliteral}{"{}Guardando\ el\ modelo"{}})}
+\DoxyCodeLine{00246\ \ \ \ \ guardar\_modelo(model,\textcolor{stringliteral}{"{}LogisticRegressionPCA"{}},etiqueta\_a\_usar)}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \textcolor{keyword}{def\ }realizar\_entrenamiento():}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00250\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ realizar\ el\ entrenamiento\ de\ los\ modelos:\ Perceptron,\ Naive\ Bayes,\ Linear\ Regression,\ Logistic\ Regression,\ Random\ Forest,\ SVM}}
+\DoxyCodeLine{00251\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00252\ \ \ \ \ ejemplares\ =\ recupera\_espectros()}
+\DoxyCodeLine{00253\ \ \ \ \ }
+\DoxyCodeLine{00254\ \ \ \ \ print(\textcolor{stringliteral}{"{}Perceptron"{}})}
+\DoxyCodeLine{00255\ \ \ \ \ print(\textcolor{stringliteral}{'Pigmento'})}
+\DoxyCodeLine{00256\ \ \ \ \ get\_perceptron(ejemplares,\ \textcolor{stringliteral}{'pigmento'})}
+\DoxyCodeLine{00257\ \ \ \ \ print(\textcolor{stringliteral}{'Aglutinante'})}
+\DoxyCodeLine{00258\ \ \ \ \ get\_perceptron(ejemplares,\ \textcolor{stringliteral}{'aglutinante'})}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \ \ print(\textcolor{stringliteral}{"{}Naive\ Bayes"{}})}
+\DoxyCodeLine{00261\ \ \ \ \ print(\textcolor{stringliteral}{'Pigmento'})}
+\DoxyCodeLine{00262\ \ \ \ \ get\_GNB(ejemplares,\ \textcolor{stringliteral}{'pigmento'})}
+\DoxyCodeLine{00263\ \ \ \ \ print(\textcolor{stringliteral}{'Aglutinante'})}
+\DoxyCodeLine{00264\ \ \ \ \ get\_GNB(ejemplares,\ \textcolor{stringliteral}{'aglutinante'})}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ print(\textcolor{stringliteral}{"{}Linear\ Regression"{}})}
+\DoxyCodeLine{00267\ \ \ \ \ print(\textcolor{stringliteral}{'Pigmento'})}
+\DoxyCodeLine{00268\ \ \ \ \ get\_linear\_regression(ejemplares,\ \textcolor{stringliteral}{'pigmento'})}
+\DoxyCodeLine{00269\ \ \ \ \ print(\textcolor{stringliteral}{'Aglutinante'})}
+\DoxyCodeLine{00270\ \ \ \ \ get\_linear\_regression(ejemplares,\ \textcolor{stringliteral}{'aglutinante'})}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \ \ \ \ print(\textcolor{stringliteral}{"{}Logistic\ Regression"{}})}
+\DoxyCodeLine{00274\ \ \ \ \ print(\textcolor{stringliteral}{'Pigmento'})}
+\DoxyCodeLine{00275\ \ \ \ \ get\_logistic\_Regression(ejemplares,\ \textcolor{stringliteral}{'pigmento'})}
+\DoxyCodeLine{00276\ \ \ \ \ print(\textcolor{stringliteral}{'Aglutinante'})}
+\DoxyCodeLine{00277\ \ \ \ \ get\_logistic\_Regression(ejemplares,\ \textcolor{stringliteral}{'aglutinante'})}
+\DoxyCodeLine{00278\ \ \ \ \ }
+\DoxyCodeLine{00279\ \ \ \ \ print(\textcolor{stringliteral}{"{}Random\ Forest"{}})}
+\DoxyCodeLine{00280\ \ \ \ \ print(\textcolor{stringliteral}{'Pigmento'})}
+\DoxyCodeLine{00281\ \ \ \ \ get\_random\_forest(ejemplares,\ \textcolor{stringliteral}{'pigmento'})}
+\DoxyCodeLine{00282\ \ \ \ \ print(\textcolor{stringliteral}{'Aglutinante'})}
+\DoxyCodeLine{00283\ \ \ \ \ get\_random\_forest(ejemplares,\ \textcolor{stringliteral}{'aglutinante'})}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \ \ \ \ print(\textcolor{stringliteral}{"{}SVM"{}})}
+\DoxyCodeLine{00286\ \ \ \ \ print(\textcolor{stringliteral}{'Pigmento'})}
+\DoxyCodeLine{00287\ \ \ \ \ get\_svc(ejemplares,\ \textcolor{stringliteral}{'pigmento'})}
+\DoxyCodeLine{00288\ \ \ \ \ print(\textcolor{stringliteral}{'Aglutinante'})}
+\DoxyCodeLine{00289\ \ \ \ \ get\_svc(ejemplares,\ \textcolor{stringliteral}{'aglutinante'})}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \ \ \ \ print(\textcolor{stringliteral}{"{}Logistic\ Regression"{}})}
+\DoxyCodeLine{00292\ \ \ \ \ print(\textcolor{stringliteral}{'Pigmento'})}
+\DoxyCodeLine{00293\ \ \ \ \ get\_logistic\_Regression(ejemplares,\ \textcolor{stringliteral}{'pigmento'})}
+\DoxyCodeLine{00294\ \ \ \ \ print(\textcolor{stringliteral}{'Aglutinante'})}
+\DoxyCodeLine{00295\ \ \ \ \ get\_logistic\_Regression(ejemplares,\ \textcolor{stringliteral}{'aglutinante'})}
+\DoxyCodeLine{00296\ }
+
+\end{DoxyCode}

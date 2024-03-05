@@ -1,0 +1,194 @@
+\doxysection{control\+\_\+modelos.\+py}
+\label{control__modelos_8py_source}\index{Aplicacion/control\_modelos.py@{Aplicacion/control\_modelos.py}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{Este\ módulo\ se\ encarga\ de\ hacer\ la\ predicción\ con\ los\ modelos\ de\ clasificación}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{\#\ Para\ importar\ los\ modelos\ de\ evaluación}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{from}\ joblib\ \textcolor{keyword}{import}\ \ load}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{\#\ Para\ importar\ los\ datos\ para\ hacer\ predicciones}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{import}\ recoverRegister\ \textcolor{keyword}{as}\ rr}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{def\ }extraer\_modelo(path):}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ }}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ cargar\ el\ modelo\ en\ la\ ruta\ especificada\ \ \ \ }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:\ path:\ ruta\ del\ modelo\ a\ cargar}}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return:\ modelo\ cargado\ }}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00017\ \ \ \ \ modelo\ =\ load(path)}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ modelo}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{def\ }obtener\_X(ruta):}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ obtener\ el\ espectro\ a\ predecir}}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:\ ruta:\ ruta\ del\ espectro\ a\ predecir}}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return:\ espectro\ a\ predecir}}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{\#\ verificar\ si\ es\ un\ archivo\ txt\ o\ asd}}
+\DoxyCodeLine{00027\ \ \ \ \ ext\ =\ ruta.split(\textcolor{stringliteral}{"{}."{}})[-\/1]}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ ext\ ==\ \textcolor{stringliteral}{"{}txt"{}}:}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ df\ =\ rr.create\_df\_from\_txt(ruta)}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{elif}\ ext\ ==\ \textcolor{stringliteral}{"{}asd"{}}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ df\ =\ rr.get\_df\_from\_asd(ruta)}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Error"{}})}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{\#\ Extraer\ la\ columna\ de\ reflectancia}}
+\DoxyCodeLine{00035\ \ \ \ \ X\ =\ df[\textcolor{stringliteral}{'reflectance'}].to\_numpy()}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ X}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{def\ }haz\_prediccion\_regresion\_logistica(ruta\_predecir):}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ hacer\ la\ predicción\ con\ el\ modelo\ de\ regresión\ logística}}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:\ ruta\_predecir:\ ruta\ del\ espectro\ a\ predecir}}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return:\ mensaje\ con\ la\ predicción}}
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00044\ \ \ \ \ mensaje\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nHaciendo\ predicción\ con\ regresión\ logística"{}}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ espectro\ para\ pigmento}}
+\DoxyCodeLine{00046\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"{}}}
+\DoxyCodeLine{00047\ \ \ \ \ modelo1\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ modelo\ para\ aglutinante}}
+\DoxyCodeLine{00050\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"{}}}
+\DoxyCodeLine{00051\ \ \ \ \ modelo2\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00052\ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ X=obtener\_X(ruta\_predecir)}
+\DoxyCodeLine{00054\ \ \ \ \ pred\_pigmento\ =\ modelo1.predict([X,])}
+\DoxyCodeLine{00055\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ \ pigmento:"{}}+str(pred\_pigmento)}
+\DoxyCodeLine{00056\ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ pred\_aglutinante\ =\ modelo2.predict([X,])}
+\DoxyCodeLine{00058\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ aglutinante:\ "{}}+str(pred\_aglutinante)}
+\DoxyCodeLine{00059\ \ \ \ \ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ mensaje}
+\DoxyCodeLine{00061\ \textcolor{keyword}{def\ }haz\_prediccion\_perceptron(ruta\_predecir):}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ hacer\ la\ predicción\ con\ el\ modelo\ de\ perceptron}}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ @args:\ ruta\_predecir:\ ruta\ del\ espectro\ a\ predecir}}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ @return:\ mensaje\ con\ la\ predicción}}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00067\ \ \ \ \ mensaje\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nHaciendo\ predicción\ con\ perceptron"{}}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{\#print("{}\(\backslash\)nHaciendo\ predicción\ con\ perceptron"{})}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ espectro\ para\ pigmento}}
+\DoxyCodeLine{00070\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/Perceptron/Perceptronpigmento.joblib"{}}}
+\DoxyCodeLine{00071\ \ \ \ \ modelo1\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ modelo\ para\ aglutinante}}
+\DoxyCodeLine{00073\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/Perceptron/Perceptronaglutinante.joblib"{}}}
+\DoxyCodeLine{00074\ \ \ \ \ modelo2\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ X=obtener\_X(ruta\_predecir)}
+\DoxyCodeLine{00077\ \ \ \ \ pred\_pigmento\ =\ modelo1.predict([X,])}
+\DoxyCodeLine{00078\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ \ pigmento:"{}}+str(pred\_pigmento)}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{\#print("{}Predicción\ de\ \ pigmento:"{},pred\_pigmento)}}
+\DoxyCodeLine{00080\ \ \ }
+\DoxyCodeLine{00081\ \ \ \ \ pred\_aglutinante\ =\ modelo2.predict([X,])}
+\DoxyCodeLine{00082\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ aglutinante:\ "{}}+str(pred\_aglutinante)}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{\#print("{}Predicción\ de\ aglutinante:\ "{},pred\_aglutinante)}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{return}\ mensaje}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{def\ }haz\_prediccion\_regresion\_lineal(ruta\_predecir):}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ hacer\ la\ predicción\ con\ el\ modelo\ de\ regresión\ lineal}}
+\DoxyCodeLine{00090\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:\ ruta\_predecir:\ ruta\ del\ espectro\ a\ predecir}}
+\DoxyCodeLine{00091\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return:\ mensaje\ con\ la\ predicción}}
+\DoxyCodeLine{00092\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00093\ \ \ \ \ mensaje\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nHaciendo\ predicción\ con\ regresión\ lineal"{}}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ espectro\ para\ pigmento}}
+\DoxyCodeLine{00096\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/LogisticRegression/LogisticRegressionpigmento.joblib"{}}}
+\DoxyCodeLine{00097\ \ \ \ \ modelo1\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ modelo\ para\ aglutinante}}
+\DoxyCodeLine{00100\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/LogisticRegression/LogisticRegressionaglutinante.joblib"{}}}
+\DoxyCodeLine{00101\ \ \ \ \ modelo2\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ X=obtener\_X(ruta\_predecir)}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ pred\_pigmento\ =\ modelo1.predict([X,])}
+\DoxyCodeLine{00106\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ \ pigmento:"{}}+str(pred\_pigmento)}
+\DoxyCodeLine{00107\ \ \ }
+\DoxyCodeLine{00108\ \ \ \ \ pred\_aglutinante\ =\ modelo2.predict([X,])}
+\DoxyCodeLine{00109\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ aglutinante:\ "{}}+str(pred\_aglutinante)}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ mensaje}
+\DoxyCodeLine{00112\ \textcolor{keyword}{def\ }haz\_prediccion\_GaussianNB(ruta\_predecir):}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00114\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ hacer\ la\ predicción\ con\ el\ modelo\ de\ Gaussian\ Naive\ Bayes}}
+\DoxyCodeLine{00115\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:\ ruta\_predecir:\ ruta\ del\ espectro\ a\ predecir}}
+\DoxyCodeLine{00116\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return:\ mensaje\ con\ la\ predicción}}
+\DoxyCodeLine{00117\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00118\ \ \ \ \ mensaje\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nHaciendo\ predicción\ con\ GaussianNB"{}}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ espectro\ para\ pigmento}}
+\DoxyCodeLine{00121\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/GaussianNB/GaussianNBpigmento.joblib"{}}}
+\DoxyCodeLine{00122\ \ \ \ \ modelo1\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ modelo\ para\ aglutinante}}
+\DoxyCodeLine{00125\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/GaussianNB/GaussianNBaglutinante.joblib"{}}}
+\DoxyCodeLine{00126\ \ \ \ \ modelo2\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ X=obtener\_X(ruta\_predecir)}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ pred\_pigmento\ =\ modelo1.predict([X,])}
+\DoxyCodeLine{00131\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ \ pigmento:"{}}+str(pred\_pigmento)}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ pred\_aglutinante\ =\ modelo2.predict([X,])}
+\DoxyCodeLine{00134\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ aglutinante:\ "{}}+str(pred\_aglutinante)}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{return}\ mensaje}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{keyword}{def\ }haz\_prediccion\_SVC(ruta\_predecir):}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ hacer\ la\ predicción\ con\ el\ modelo\ de\ C-\/Support\ Vector\ Classification.}}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:\ ruta\_predecir:\ ruta\ del\ espectro\ a\ predecir}}
+\DoxyCodeLine{00142\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return:\ mensaje\ con\ la\ predicción}}
+\DoxyCodeLine{00143\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00144\ \ \ \ \ mensaje\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nHaciendo\ predicción\ con\ SVC"{}}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ espectro\ para\ pigmento}}
+\DoxyCodeLine{00147\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/SVC/SVCpigmento.joblib"{}}}
+\DoxyCodeLine{00148\ \ \ \ \ modelo1\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ modelo\ para\ aglutinante}}
+\DoxyCodeLine{00151\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/SVC/SVCaglutinante.joblib"{}}}
+\DoxyCodeLine{00152\ \ \ \ \ modelo2\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ X=obtener\_X(ruta\_predecir)}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ pred\_pigmento\ =\ modelo1.predict([X,])}
+\DoxyCodeLine{00157\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ \ pigmento:"{}}+str(pred\_pigmento)}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ pred\_aglutinante\ =\ modelo2.predict([X,])}
+\DoxyCodeLine{00160\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ aglutinante:\ "{}}+str(pred\_aglutinante)}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{return}\ mensaje}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{keyword}{def\ }haz\_prediccion\_RandomForest(ruta\_predecir):}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00166\ \textcolor{stringliteral}{\ \ \ \ Método\ encargado\ de\ hacer\ la\ predicción\ con\ el\ modelo\ de\ Random\ Forest\ Classifier}}
+\DoxyCodeLine{00167\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @args:\ ruta\_predecir:\ ruta\ del\ espectro\ a\ predecir}}
+\DoxyCodeLine{00168\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return:\ mensaje\ con\ la\ predicción}}
+\DoxyCodeLine{00169\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00170\ \ \ \ \ mensaje\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nHaciendo\ predicción\ con\ RandomForest"{}}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ espectro\ para\ pigmento}}
+\DoxyCodeLine{00173\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/RandomForest/RandomForestpigmento.joblib"{}}}
+\DoxyCodeLine{00174\ \ \ \ \ modelo1\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{comment}{\#\ Cambiar\ el\ path\ del\ modelo\ para\ aglutinante}}
+\DoxyCodeLine{00177\ \ \ \ \ path\ =\ \textcolor{stringliteral}{"{}../Modelos/RandomForest/RandomForestaglutinante.joblib"{}}}
+\DoxyCodeLine{00178\ \ \ \ \ modelo2\ =\ extraer\_modelo(path)}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ X=obtener\_X(ruta\_predecir)}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ pred\_pigmento\ =\ modelo1.predict([X,])}
+\DoxyCodeLine{00183\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ \ pigmento:"{}}+str(pred\_pigmento)}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ pred\_aglutinante\ =\ modelo2.predict([X,])}
+\DoxyCodeLine{00186\ \ \ \ \ mensaje\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)nPredicción\ de\ aglutinante:\ "{}}+str(pred\_aglutinante)}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{return}\ mensaje}
+
+\end{DoxyCode}

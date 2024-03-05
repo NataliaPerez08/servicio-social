@@ -4,21 +4,21 @@ Este archivo contiene las funciones para recuperar los datos de los archivos
 import specdal 
 import pandas as pd
 
-""" 
-Este método se encarga de obtener un dataframe a partir de un archivo txt 
-    Args:
-        file: archivo txt
-"""
 def get_df_from_txt(file):
+    """ 
+    Este método se encarga de obtener un dataframe a partir de un archivo txt 
+        @param file: archivo txt
+        @return: DataFrame
+    """
     data = pd.read_csv(file,delimiter='\t')
     return data
 
-""" 
-Este método se encarga de obtener un dataframe a partir de un archivo asd
-    Args:
-        file: archivo asd
-"""
 def create_df_from_txt(file):
+    """ 
+    Este método se encarga de crear un dataframe a partir de un archivo txt
+        @param file: archivo asd
+        @return: DataFrame
+    """
     data = pd.read_csv(file,delimiter='\t')
     # create pandas dataframe
     df = pd.DataFrame(columns=['Wavelength','reflectance'])
@@ -29,12 +29,12 @@ def create_df_from_txt(file):
 
     return df
 
-""" 
-Este método se encarga de obtener un dataframe a partir de un archivo asd
-    Args:
-        file: archivo asd
-"""
 def get_df_from_asd(file):
+    """ 
+    Este método se encarga de obtener un dataframe a partir de un archivo asd
+        @param file: archivo asd
+        @return: DataFrame
+    """
     data = specdal.Spectrum(filepath=file)
     data_wl = data.measurement
 
@@ -45,14 +45,12 @@ def get_df_from_asd(file):
     return df
 
 
-""" 
-Este método se encarga de obtener un dataframe a partir de una ruta.
-    Args:
-        ruta: ruta del archivo
-    Returns:
-        DataFrame
-"""
 def get_df_from_ruta(ruta):
+    """ 
+    Este método se encarga de obtener un dataframe a partir de una ruta.
+        @param ruta: ruta del archivo
+        @return: DataFrame
+    """
     ext = ruta.split(".")[-1]
     if ext == "txt":
         return get_df_from_txt(ruta)

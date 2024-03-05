@@ -1,0 +1,155 @@
+.TH "control_modelos" 3 "Version 1" "Servicio-Social-Clasificador-Organizador" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+control_modelos
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBextraer_modelo\fP (path)"
+.br
+.ti -1c
+.RI "\fBobtener_X\fP (ruta)"
+.br
+.ti -1c
+.RI "\fBhaz_prediccion_regresion_logistica\fP (ruta_predecir)"
+.br
+.ti -1c
+.RI "\fBhaz_prediccion_perceptron\fP (ruta_predecir)"
+.br
+.ti -1c
+.RI "\fBhaz_prediccion_regresion_lineal\fP (ruta_predecir)"
+.br
+.ti -1c
+.RI "\fBhaz_prediccion_GaussianNB\fP (ruta_predecir)"
+.br
+.ti -1c
+.RI "\fBhaz_prediccion_SVC\fP (ruta_predecir)"
+.br
+.ti -1c
+.RI "\fBhaz_prediccion_RandomForest\fP (ruta_predecir)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Este módulo se encarga de hacer la predicción con los modelos de clasificación
+
+.fi
+.PP
+ 
+.SH "Function Documentation"
+.PP 
+.SS "control_modelos\&.extraer_modelo ( path)"
+
+.PP
+.nf
+Método encargado de cargar el modelo en la ruta especificada    
+    @args: path: ruta del modelo a cargar
+    @return: modelo cargado 
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB11\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SS "control_modelos\&.haz_prediccion_GaussianNB ( ruta_predecir)"
+
+.PP
+.nf
+Método encargado de hacer la predicción con el modelo de Gaussian Naive Bayes
+    @args: ruta_predecir: ruta del espectro a predecir
+    @return: mensaje con la predicción
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB112\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SS "control_modelos\&.haz_prediccion_perceptron ( ruta_predecir)"
+
+.PP
+.nf
+Método encargado de hacer la predicción con el modelo de perceptron
+   @args: ruta_predecir: ruta del espectro a predecir
+   @return: mensaje con la predicción
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB61\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SS "control_modelos\&.haz_prediccion_RandomForest ( ruta_predecir)"
+
+.PP
+.nf
+Método encargado de hacer la predicción con el modelo de Random Forest Classifier
+    @args: ruta_predecir: ruta del espectro a predecir
+    @return: mensaje con la predicción
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB164\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SS "control_modelos\&.haz_prediccion_regresion_lineal ( ruta_predecir)"
+
+.PP
+.nf
+Método encargado de hacer la predicción con el modelo de regresión lineal
+    @args: ruta_predecir: ruta del espectro a predecir
+    @return: mensaje con la predicción
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB87\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SS "control_modelos\&.haz_prediccion_regresion_logistica ( ruta_predecir)"
+
+.PP
+.nf
+Método encargado de hacer la predicción con el modelo de regresión logística
+    @args: ruta_predecir: ruta del espectro a predecir
+    @return: mensaje con la predicción
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB38\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SS "control_modelos\&.haz_prediccion_SVC ( ruta_predecir)"
+
+.PP
+.nf
+Método encargado de hacer la predicción con el modelo de C-Support Vector Classification\&.
+    @args: ruta_predecir: ruta del espectro a predecir
+    @return: mensaje con la predicción
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB138\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SS "control_modelos\&.obtener_X ( ruta)"
+
+.PP
+.nf
+Método encargado de obtener el espectro a predecir
+    @args: ruta: ruta del espectro a predecir
+    @return: espectro a predecir
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB20\fP of file \fBcontrol_modelos\&.py\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Servicio-Social-Clasificador-Organizador from the source code\&.

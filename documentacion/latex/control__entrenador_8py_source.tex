@@ -1,0 +1,111 @@
+\doxysection{control\+\_\+entrenador.\+py}
+\label{control__entrenador_8py_source}\index{Aplicacion/control\_entrenador.py@{Aplicacion/control\_entrenador.py}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{Modulo\ encargado\ de\ recuperar\ los\ ejemplares\ de\ la\ base\ de\ datos}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{@import:\ numpy\ as\ np}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{@import:\ consulta\_db}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{@import:\ get\_df}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{@import:\ pandas\ as\ pd}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{00012\ \textcolor{comment}{\#\ Conexion\ a\ la\ base\ de\ datos}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{from}\ connectDB\ \textcolor{keyword}{import}\ consulta\_db}
+\DoxyCodeLine{00014\ \textcolor{comment}{\#\ Función\ para\ obtener\ dataframes}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{from}\ controlSpec\ \textcolor{keyword}{import}\ get\_df}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{\#\ Dataframe}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{import}\ pandas\ \textcolor{keyword}{as}\ pd}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{\#\ Función\ para\ obtener\ los\ datos\ de\ entrenamiento\ y\ prueba}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{Método\ encargado\ de\ obtener\ los\ datos\ de\ entrenamiento\ y\ prueba}}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ lista\ de\ ejemplares}}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ etiqueta\_a\_usar:\ etiqueta\ a\ usar\ (Aglutinante,\ Pigmento)}}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ X:\ datos\ de\ entrenamiento}}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ y:\ etiquetas}}
+\DoxyCodeLine{00030\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{def\ }get\_x\_y(ejemplares,etiqueta\_a\_usar):}
+\DoxyCodeLine{00032\ \ \ \ \ aux\_y\ =\ list()}
+\DoxyCodeLine{00033\ \ \ \ \ aux\_x\ =\ list()}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{for}\ e\ \textcolor{keywordflow}{in}\ ejemplares:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ eti\ =\ str(e[etiqueta\_a\_usar][0])}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ aux\_y.append(eti)}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ aux\_x.append(e[\textcolor{stringliteral}{'reflectance'}].to\_numpy())}
+\DoxyCodeLine{00039\ \ \ \ \ X\ =\ np.array(aux\_x)}
+\DoxyCodeLine{00040\ \ \ \ \ y\ =\ np.array(aux\_y)}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ X,y}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{Método\ encargado\ de\ recuperar\ los\ ejemplares\ de\ las\ tablas}}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ejemplares:\ lista\ de\ ejemplares}}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00048\ \textcolor{keyword}{def\ }recupera\_ejemplares():}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{\#\ Consulta\ la\ base\ de\ datos}}
+\DoxyCodeLine{00050\ \ \ \ \ resultados\ =\ consulta\_db(\textcolor{stringliteral}{"{}SELECT\ *\ FROM\ registro\_espectros"{}})}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{\#\ Recupera\ los\ ejemplares}}
+\DoxyCodeLine{00052\ \ \ \ \ ejemplares\ =\ []}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{for}\ resultado\ \textcolor{keywordflow}{in}\ resultados:}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ ejemplar\ =\ []}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ ejemplar.append(resultado[0])}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ ejemplar.append(resultado[1])}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ ejemplar.append(resultado[2])}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ ejemplar.append(resultado[3])}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ ejemplar.append(resultado[4])}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ ejemplar.append(resultado[5])}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ ejemplares.append(ejemplar)}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ ejemplares}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{comment}{\#\ Recupera\ los\ espectros}}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{Método\ encargado\ de\ recuperar\ los\ espectros}}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ espectros:\ lista\ de\ espectros\ en\ formato\ DataFrame}}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00071\ \textcolor{keyword}{def\ }recupera\_espectros():}
+\DoxyCodeLine{00072\ \ \ \ \ ejemplares\ =\ recupera\_ejemplares()}
+\DoxyCodeLine{00073\ \ \ \ \ espectros\ =\ []}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{for}\ ejemplar\ \textcolor{keywordflow}{in}\ ejemplares:}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ carpeta\ =\ ejemplar[0]}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ etiqueta\ =\ ejemplar[1]}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ espectro\ =\ ejemplar[2]}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ pigmento\ =\ ejemplar[3]}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ aglutinante\ =\ ejemplar[4]}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ base\ =\ ejemplar[5]}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ df\ =\ get\_df(carpeta,etiqueta,espectro)}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ df\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Crear\ el\ DataFrame}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ dataframe\ =\ pd.DataFrame(columns=[\textcolor{stringliteral}{'wavelength'},\textcolor{stringliteral}{'reflectance'},\textcolor{stringliteral}{'pigmento'},\textcolor{stringliteral}{'aglutinante'},\textcolor{stringliteral}{'base'},\textcolor{stringliteral}{'carpeta'},\textcolor{stringliteral}{'tabla'},\textcolor{stringliteral}{'espectro'}])}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Agrega\ los\ datos\ al\ DataFrame}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'wavelength'}]\ =\ df[\textcolor{stringliteral}{'Wavelength'}]}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ ext\ =\ espectro.split(\textcolor{stringliteral}{"{}."{}})[-\/1]}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ext\ ==\ \textcolor{stringliteral}{"{}txt"{}}:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ nombre\ =\ espectro.replace(\textcolor{stringliteral}{"{}."{}}+ext,\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'reflectance'}]\ =\ df[nombre]}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ ext\ ==\ \textcolor{stringliteral}{"{}asd"{}}:}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'reflectance'}]\ =\ df[\textcolor{stringliteral}{'reflectance'}]}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'pigmento'}]\ =\ pigmento}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'aglutinante'}]\ =\ aglutinante}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'base'}]\ =\ base}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'carpeta'}]\ =\ carpeta}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'tabla'}]\ =\ etiqueta}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ dataframe[\textcolor{stringliteral}{'espectro'}]\ =\ espectro}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Recupera\ el\ DataFrame\ del\ espectro}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Agrega\ el\ DataFrame\ a\ la\ lista\ de\ espectros}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ espectros.append(dataframe)}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ espectros}
+
+\end{DoxyCode}

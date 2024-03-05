@@ -2,19 +2,23 @@
 Este módulo se encarga de controlar la busqueda de espectros
 """
 
+"""
+@import recoverRegister
+@import print_specs_control
+"""
 from recoverRegister import get_df_from_asd,get_df_from_txt
 from print_specs_control import print_spec
 
-"""
-Método encargado de obtener el espectro de la carpeta y tabla especificada
-    Args:
+def obten_spec(carpeta,tabla,espectro):
+    """
+    Método encargado de obtener el espectro de la carpeta y tabla especificada
+    @args:
         carpeta: carpeta donde se encuentra el espectro
         tabla: tabla donde se encuentra el espectro
         espectro: nombre del espectro
-    Returns:
+    @returns:
         Ruta del espectro
-"""
-def obten_spec(carpeta,tabla,espectro):
+    """
     #print("Tratando de obtener",carpeta,tabla,espectro)
     if carpeta == 'Tablas1' or carpeta == 'Tablas 1':
       # print("Espectros_FORS_2/Tablas 1/"+tabla+"/"+espectro)
@@ -26,14 +30,14 @@ def obten_spec(carpeta,tabla,espectro):
         #print("Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro)
         return "../Espectros_FORS_2/"+carpeta+"/"+tabla+"/"+espectro
 
-"""
-Método encargado de imprimir el espectro de la carpeta y tabla especificada
-    Args:
+def imprimir_spec(carpeta,tabla,espectro):
+    """
+    Método encargado de imprimir el espectro de la carpeta y tabla especificada
+    @args:
         carpeta: carpeta donde se encuentra el espectro
         tabla: tabla donde se encuentra el espectro
         espectro: nombre del espectro
-"""
-def imprimir_spec(carpeta,tabla,espectro):
+    """
     ruta=obten_spec(carpeta,tabla,espectro)
     ext=ruta[-3:]
     if ext == 'txt':
@@ -42,16 +46,16 @@ def imprimir_spec(carpeta,tabla,espectro):
         df=get_df_from_asd(ruta)
     print_spec(df,ruta)
 
-"""
-Método encargado de obtener el espectro de la carpeta y tabla especificada
-    Args:
-        carpeta: carpeta donde se encuentra el espectro
-        tabla: tabla donde se encuentra el espectro
-        espectro: nombre del espectro
-    Returns:
-        Dataframe con el espectro
-"""
 def get_df(carpeta,tabla,espectro):
+    """
+    Método encargado de obtener el espectro de la carpeta y tabla especificada
+        @args:
+            carpeta: carpeta donde se encuentra el espectro
+            tabla: tabla donde se encuentra el espectro
+            espectro: nombre del espectro
+        @returns:
+            Dataframe con el espectro
+    """
     ruta=obten_spec(carpeta,tabla,espectro)
     try:
         ext=ruta[-3:]

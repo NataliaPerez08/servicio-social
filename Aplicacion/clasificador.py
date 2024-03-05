@@ -9,19 +9,26 @@ import print_specs_control as psc
 import control_modelos as cm
 import recoverRegister as rr
 
-"""
-Clase principal de la aplicación de clasificación
-"""
 class Aplicacion(QMainWindow):
+    """
+    Clase principal de la aplicación de clasificación
+    @param QMainWindow: Clase de la libreria PyQt5
+    """
     def __init__(self):
+        """
+        Constructor de la clase. Crea la ventana principal de la aplicación
+        @param self: instancia de la clase
+        """
         super().__init__()
         self.initUI()
         self.setWindowTitle('Subir Archivo')
         self.setGeometry(100, 100, 900, 500)
         self.show()
 
-    """"  Inicializa la interfaz de usuario"""
     def initUI(self):
+        """"  
+        Inicializa la interfaz de usuario 
+        """
         self.ruta = ""
         self.label = QLabel(self)
         self.label.move(10, 10)
@@ -74,8 +81,10 @@ class Aplicacion(QMainWindow):
 
         self.ventana = QMainWindow()
 
-    """ Método que abre el archivo y lo envia al hilo para ser leido"""
     def abrirArchivo(self):
+        """ 
+        Método que abre el archivo y lo envia al hilo para ser leido
+        """
         nombreArchivo, _ = QFileDialog.getOpenFileName(self, 'Abrir Archivo')
         if nombreArchivo != '':
             self.hilo = Hilo(nombreArchivo)
@@ -83,8 +92,11 @@ class Aplicacion(QMainWindow):
             self.hilo.enviarTexto.connect(self.mostrarTexto)
 
 
-    """ Método que busca el archivo y lo muestra en la interfaz"""
     def mostrarTexto(self, texto):
+        """ 
+        Método que busca el archivo y lo muestra en la interfaz
+        @param texto: texto del archivo
+        """
         if texto == "Error":
             self.label.setText("Error")
             return
@@ -93,9 +105,10 @@ class Aplicacion(QMainWindow):
         
         psc.print_spec_from_ruta(self.ruta, texto.split("/")[-1])
 
-    """ Método que realiza la predicción con el modelo de perceptron"""
     def perceptron_clicked(self):
-        print("Perceptron")
+        """
+        Método que realiza la predicción con el modelo de perceptron
+        """   
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
@@ -103,9 +116,10 @@ class Aplicacion(QMainWindow):
             resultado = nombre+"\n"+cm.haz_prediccion_perceptron(self.ruta)
             self.label.setText(resultado)
 
-    """ Método que realiza la predicción con el modelo de regresión logística"""
     def regresion_logistica_clicked(self):
-        print("Logistic Regression")
+        """ 
+        Método que realiza la predicción con el modelo de regresión logística
+        """
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
@@ -113,9 +127,10 @@ class Aplicacion(QMainWindow):
             resultado = nombre+"\n"+cm.haz_prediccion_regresion_logistica(self.ruta)
             self.label.setText(resultado)
 
-    """ Método que realiza la predicción con el modelo de regresión lineal"""
     def regresion_lineal_clicked(self):
-        print("Linear Regression")
+        """ 
+        Método que realiza la predicción con el modelo de regresión lineal
+        """
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
@@ -123,9 +138,10 @@ class Aplicacion(QMainWindow):
             resultado = nombre+"\n"+cm.haz_prediccion_regresion_lineal(self.ruta)
             self.label.setText(resultado)
 
-    """ Método que realiza la predicción con el modelo de Naive Bayes"""
     def gaussianNB_clicked(self):
-        print("Naive Bayes")
+        """ 
+        Método que realiza la predicción con el modelo de Naive Bayes
+        """
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
@@ -133,9 +149,10 @@ class Aplicacion(QMainWindow):
             resultado = nombre+"\n"+cm.haz_prediccion_GaussianNB(self.ruta)
             self.label.setText(resultado)
 
-    """ Método que realiza la predicción con el modelo de Random Forest"""
     def randomForest_clicked(self):
-        print("Random Forest")
+        """
+        Método que realiza la predicción con el modelo de Random Forest
+        """
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
@@ -143,9 +160,10 @@ class Aplicacion(QMainWindow):
             resultado = nombre+"\n"+cm.haz_prediccion_RandomForest(self.ruta)
             self.label.setText(resultado)
 
-    """ Método que realiza la predicción con el modelo de SVM"""
     def svc_clicked(self):
-        print("SVM")
+        """ 
+        Método que realiza la predicción con el modelo de SVM
+        """
         if self.ruta == "":
             self.label.setText("No hay archivo")
         else:
@@ -154,20 +172,28 @@ class Aplicacion(QMainWindow):
             self.label.setText(resultado)
 
 
-""" Clase que lee el archivo"""
 class Hilo(QThread):
+    """ 
+    Clase que lee el archivo
+    @param QThread: Clase de la libreria PyQt5
+    """
     enviarTexto = pyqtSignal(str)
 
     def __init__(self, nombreArchivo):
+        """
+        Constructor de la clase
+        @param self: instancia de la clase
+        @param nombreArchivo: nombre del archivo a leer
+        """
         super().__init__()
         self.nombreArchivo = nombreArchivo
 
-    """ Método que lee el archivo y envia el texto al hilo principal"""
     def run(self):
-        print("Nombre archivo: ",self.nombreArchivo)
+        """ 
+        Método que lee el archivo y envia el texto al hilo principal
+        """
         # Obtener extension del archivo
         ext = self.nombreArchivo.split(".")[-1]
-        print("Extension: ",ext)
         if ext == "txt" or ext == "asd":
             self.enviarTexto.emit(self.nombreArchivo)
         else:

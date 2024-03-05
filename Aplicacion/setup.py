@@ -3,6 +3,10 @@ import sys
 from subprocess import call
 
 def create_virtual_environment(venv_path):
+    """
+    Método que se encarga de crear un entorno virtual
+        @param venv_path: ruta del entorno virtual
+    """
     try:
         # Create a virtual environment
         call([sys.executable, '-m', 'venv', venv_path])
