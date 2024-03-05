@@ -33,7 +33,7 @@ Para más detalles consultar en https://docs.python.org/es/3/tutorial/venv.html
 
 Luego instalar requerimientos en Aplicacion\requi.txt
 
-Una vez activo el ambiente, instalar requrimentos:
+Una vez activo el ambiente, instalar requerimientos:
 ```sh
 pip install -r Aplicacion/requi.txt
 ```

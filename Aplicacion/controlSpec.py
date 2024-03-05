@@ -42,6 +42,15 @@ def imprimir_spec(carpeta,tabla,espectro):
         df=get_df_from_asd(ruta)
     print_spec(df,ruta)
 
+"""
+Método encargado de obtener el espectro de la carpeta y tabla especificada
+    Args:
+        carpeta: carpeta donde se encuentra el espectro
+        tabla: tabla donde se encuentra el espectro
+        espectro: nombre del espectro
+    Returns:
+        Dataframe con el espectro
+"""
 def get_df(carpeta,tabla,espectro):
     ruta=obten_spec(carpeta,tabla,espectro)
     try:
