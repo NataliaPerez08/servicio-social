@@ -24,6 +24,10 @@
 
 11. Estracanholli, E.S. & Nicolodelli, Gustavo & Pratavieira, Sebastião & Kurachi, C. & Bagnato, V.. (2012). Mathematical Methods to Analyze Spectroscopic Data – New Applications. 10.5772/48318. 
 
-12.Fiorucci, Marco & Khoroshiltseva, Marina & Pontil, Massimiliano & Traviglia, Arianna & Del Bue, Alessio & James, Stuart. (2020). Machine Learning for Cultural Heritage: A Survey. Pattern Recognition Letters. 133. 10.1016/j.patrec.2020.02.017. 
+12. Fiorucci, Marco & Khoroshiltseva, Marina & Pontil, Massimiliano & Traviglia, Arianna & Del Bue, Alessio & James, Stuart. (2020). Machine Learning for Cultural Heritage: A Survey. Pattern Recognition Letters. 133. 10.1016/j.patrec.2020.02.017. 
 
-13. Elmasry, Gamal & Sun, Da-Wen. (2010). CHAPTER 1. Principles of Hyperspectral Imaging Technology. 10.1016/B978-0-12-374753-2.10001-2. 
+13. Elmasry, Gamal & Sun, Da-Wen. (2010). CHAPTER 1. Principles of Hyperspectral Imaging Technology. 10.1016/B978-0-12-374753-2.10001-2.
+
+14. Aceto, Maurizio & Agostino, Angelo & Fenoglio, Gaia & Idone, Ambra & Gulmini, Monica & Marcello, Picollo & Ricciardi, Paola & Delaney, John. (2014). Characterisation of colourants on illuminated manuscripts by portable fibre optic UV-visible-NIR reflectance spectrophotometry. Anal. Methods. 6. -. 10.1039/C3AY41904E.
+
+15. Francesco, Mauro & La Russa, Mauro & Ruffolo, Silvestro & Barone, Germana & Crisci, Gino & Mazzoleni, Paolo & Pezzino, A.. (2009). The Use of FTIR and Micro-FTIR Spectroscopy: An Example of Application to Cultural Heritage. Hindawi Publishing Corporation International Journal of Spectroscopy Article ID. 893528. 10.1155/2009/893528. 
